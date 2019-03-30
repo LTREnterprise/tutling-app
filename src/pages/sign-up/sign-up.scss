@@ -1,0 +1,160 @@
+page-sign-up {
+    .content{
+        overflow-y: hidden;
+    }
+    #appName-Top{        
+        color:rgb(231,193,69);
+        font-size: 25px;
+        // border: 2px solid;
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: none;
+        animation: 300ms panUp;
+        animation-timing-function: ease-out;
+    }
+    @keyframes panUp{
+        0%{
+            top: 0 
+        }
+    
+        100%{
+            top: -15px 
+        }
+    }
+    .nav{
+        position: absolute;
+        width: 100vw;
+        background: transparent;
+        transition:200ms;
+        display: flex;
+        button{
+            font-size: 18px;
+            height: 40px;
+        }
+    }
+    
+    .body{
+        // height: 100%;
+        background: rgb(75,75,75);
+        text-align: center;
+        // overflow-y: scroll;
+        transition: 700ms;
+        #appName{
+            color:rgb(231,193,69);
+            font-size: 25px;
+            margin: 0;
+        }
+    }
+    .image{
+        width: 40%;
+        margin: 0 auto;
+        // border: 2px solid;
+        background: rgb(75,75,75)
+    }
+    #icon{
+        width: 150px;
+        // height: 
+        
+    }
+    .myBtn{
+        width: 100%;
+        background: white;
+        height: 50px;
+        border-radius: 50px;
+        display: flex;
+        margin-bottom: 10px;
+        .words{
+            line-height: 50px;
+            text-align: center;
+            // border: 2px solid;
+            width: 80%;
+            font-weight: 500;
+        }
+        .theIcon{
+            width: 50px;
+            // height: 50px;
+            // border: 2px solid red;
+            line-height: 50px;
+        }
+        .myIconFB{
+            height: 20px;
+            margin-top:15px; 
+        }
+        .myIconG{
+            height: 30px;
+            margin-top:10px; 
+        }
+    }
+    .myBtn:active{
+        background: rgb(187, 187, 187);
+    }
+    .inputs{
+        // background: red;
+        padding: 10px;
+        margin-top: 10px;
+        text-align: center;
+        .theLabel{
+            position: absolute;
+        }
+        ion-item{
+            border-radius: 50px;
+            height: 0;
+            padding: 0;
+            margin-top: 20px;
+            position: relative;
+            // .test{
+            //     // width: 60%;
+            //     border: 2px solid red
+            // }
+        }
+        ion-input{
+            // border: 2px solid;
+            width: 100%;
+            margin: 0 auto;
+            // padding-left: 15px;
+            font-size: 18px;
+            font-weight: 500px;
+            // border: 2px solid;
+        }
+        ion-label{
+            // border: 2px solid red;
+            position: absolute;
+            right: 5px;
+            top: -3px;
+        }
+        .texter{
+            border: 2px solid;
+        }
+    }
+    .buttons{
+        // background: red;
+        padding: 10px;
+        margin-top: -20px;
+        text-align: center;
+    .btn{
+        transition: 700ms;
+        margin-bottom: 5px;
+        height: 50px;
+        border-radius: 50px;
+        background: linear-gradient(rgb(231,193,69),rgb(243, 232, 197),rgb(231,193,69), rgb(158, 121, 0), rgb(231,193,69), rgb(248, 222, 134));
+        // font-weight: bold;
+        font-size: 16px;
+    }
+    .btn:active{
+        margin-bottom: 5px;
+        height: 50px;
+        border-radius: 50px;
+        background: linear-gradient(rgb(231,193,69),rgb(231,193,69), rgb(224, 172, 0), rgb(231,193,69), rgb(248, 222, 134));
+    }
+}
+
+.btn2{
+    transition: 700ms;
+    margin-bottom: 5px;
+    height: 50px;
+    border-radius: 50px;
+}
+    
+}

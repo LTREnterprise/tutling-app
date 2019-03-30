@@ -1,0 +1,108 @@
+page-sign-in {
+    
+    .body{
+        height: 100%;
+        background: rgb(75,75,75);
+        text-align: center;
+        overflow: hidden;
+        #appName{
+            color:rgb(231,193,69);
+            font-size: 25px;
+            margin: 0;
+        }
+    }
+    .image{
+        width: 40%;
+        margin: 0 auto;
+        background: rgb(75,75,75)
+    }
+    #icon{
+        width: 150px;
+        // height: 
+        
+    }
+    .myBtn{
+        width: 100%;
+        background: white;
+        height: 50px;
+        border-radius: 50px;
+        display: flex;
+        margin-bottom: 10px;
+        position: relative;
+        .words{
+            line-height: 50px;
+            text-align: center;
+            // border: 2px solid;
+            width: 100%;
+            font-weight: 500;
+        }
+
+        .theIcon{
+            
+            width: 50px;
+            // height: 50px;
+            // border: 2px solid red;
+            line-height: 30px;
+            position: absolute;
+        }
+        .myIconFB{
+            height: 20px;
+            margin-top:15px; 
+        }
+        .myIconG{
+            height: 30px;
+            margin-top:10px; 
+        }
+    }
+    .myBtn:active{
+        background: rgb(187, 187, 187);
+    }
+    .inputs{
+        // background: red;
+        padding: 10px;
+        margin-top: 10px;
+        text-align: center;
+        ion-item{
+            border-radius: 50px;
+            height: 0;
+            padding: 0;
+            margin-top: 20px;
+        }
+        ion-input{
+            // border: 2px solid;
+            width: 100%;
+            margin: 0 auto;
+            padding-left: 15px;
+            font-size: 18px;
+            font-weight: 500px;
+        }
+    }
+    .buttons{
+        // background: red;
+        padding: 10px;
+        margin-top: -20px;
+        text-align: center;
+    .btn{
+        transition: 700ms;
+        margin-bottom: 5px;
+        height: 50px;
+        border-radius: 50px;
+        background: linear-gradient(rgb(231,193,69),rgb(243, 232, 197),rgb(231,193,69), rgb(158, 121, 0), rgb(231,193,69), rgb(248, 222, 134));
+        font-size: 16px;
+    }
+    .btn:active{
+        margin-bottom: 5px;
+        height: 50px;
+        border-radius: 50px;
+        background: linear-gradient(rgb(231,193,69),rgb(231,193,69), rgb(224, 172, 0), rgb(231,193,69), rgb(248, 222, 134));
+    }
+}
+
+.btn2{
+    transition: 700ms;
+    margin-bottom: 5px;
+    height: 50px;
+    border-radius: 50px;
+}
+    
+}

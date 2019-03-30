@@ -1,14 +1,53 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
+<!-- <ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+</ion-header> -->
+
+<ion-content>
+  <div class="head">
+    <button ion-button clear color="light" id="list">
+      <ion-icon ios="ios-list" md="md-list"></ion-icon>
+    </button>
+    <div id="menu">MENU</div>
+    <button ion-button clear color="light" id="search">
+      <ion-icon ios="ios-search" md="md-search"></ion-icon>
+    </button>
+  </div>
+  <div class="body" padding>
+
+
+
+    <ion-list class="buttons">
+      <!-- <button color="light" ion-button block class="btn2">
+          Login with Facebook
+        </button> -->
+
+      <div class="myBtn" (click)="btnClick()">
+
+        <div class="words">Payment</div>
+      </div>
+      <div class="myBtn" (click)="btnClick()">
+
+        <div class="words">Recordings</div>
+      </div>
+      <div class="myBtn" (click)="btnClick()">
+
+        <div class="words">Appointments</div>
+      </div>
+      <div class="myBtn-Last" (click)="btnClick()">
+
+        <div class="words">Profile</div>
+      </div>
+      <br><br>
+      
+
+    </ion-list>
+
+
+  </div>
 </ion-content>
+<ion-footer>
+    <div class="myBtn2" (click)="btnClick()">
+
+        <div class="words">Log Out</div>
+      </div>
+</ion-footer>
