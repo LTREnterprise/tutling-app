@@ -1,0 +1,50 @@
+<ion-header>
+  
+</ion-header>
+
+<ion-content>
+  <div class="body" padding>
+    <div class="image">
+      <img id="icon" src="../../assets/imgs/icon2.JPG" alt="">
+
+    </div>
+    <p id="appName">TUTLING</p>
+    <ion-list class="inputs">
+      <ion-item no-padding>
+        <ion-input type="text" placeholder="Username"></ion-input>
+      </ion-item>
+      <ion-item no-padding>
+        <ion-input type="password" placeholder="Password"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list class="buttons">
+      <button ion-button block class="btn">
+        LOG IN
+      </button>
+      <button ion-button block class="btn" (click)="leadToSignUp()">
+        SIGN UP
+      </button>
+    </ion-list>
+
+     <ion-list class="buttons">
+      <!-- <button color="light" ion-button block class="btn2">
+        Login with Facebook
+      </button> -->
+ 
+      <div class="myBtn" (click)="btnClick()">
+        <div class="theIcon">
+          <img src="../../assets/imgs/facebook.svg" alt="" class="myIconFB">
+        </div>
+        <div class="words">LOGIN WITH FACEBOOK</div>
+      </div>
+      <div class="myBtn" (click)="btnClick()">
+        <div class="theIcon">
+          <img src="../../assets/imgs/google-plus.svg" alt="" class="myIconG">
+        </div>
+        <div class="words">LOGIN WITH GOOGLE+</div>
+      </div>
+      
+    </ion-list>
+
+  </div>
+</ion-content>

@@ -1,3 +1,119 @@
 page-home {
+        
+    .body{
+        height: 85%;
+        width: 100%;
+        background: rgb(75,75,75);
+        text-align: center;
+        overflow-y: hidden;
+        #appName{
+            color:rgb(231,193,69);
+            font-size: 25px;
+        }
+    }
+    .buttons{
+        // border: 2px solid;
+        margin-top: 50%;
+        transform: translateY(-30%);
+        
+    }
+    @media screen and (min-width: 554px){
+        .buttons{
+            
+    margin-top: 40%;
+        }
+    }
+    @media screen and (min-width: 850px){
+        .buttons{
+            
+    margin-top: 30%;
+        }
+    }
+    @media screen and (min-width: 950px){
+        .buttons{
+            
+    margin-top: 25%;
+        }
+    }
+    .head{
+        position: relative;
+        height: 15%;
+        width: 100vw;
+        background: rgb(75,75,75);
+        // padding-top: 5px;
+        // border: 2px solid rgb(75,75,75);
+        #menu{
+            position: absolute;
+            left: 50%;
+            top: 25px;
+            transform: translateX(-50%);
+            color:rgb(231,193,69);
+            font-size: 18px;
+        }
+        #search{
+            float: right;
+            font-size: 18px;
+        }
+        #list{
+            padding-top: 10px;
+            font-size: 18px;
 
+        }
+    }
+    .myBtn2{
+        position: relative;
+        width: 100%;
+        background: white;
+        height: 50px;
+        border-radius: 50px;
+        .words{
+            line-height: 50px;
+            text-align: center;
+            // border: 2px solid;
+            width: 100%;
+            font-weight: 800;
+        }
+    }
+
+    .myBtn{
+        width: 100%;
+        background: white;
+        height: 40px;
+        border-radius: 50px;
+        display: flex;
+        margin: 20% auto;
+        max-width: 350px;
+        .words{
+            line-height: 40px;
+            text-align: center;
+            // border: 2px solid;
+            width: 100%;
+            font-weight: 600;
+        }
+    }
+    .myBtn-Last{
+        width: 100%;
+        background: white;
+        height: 40px;
+        border-radius: 50px;
+        display: flex;
+        margin: 0 auto;
+        max-width: 350px;
+        // margin-bottom: 20%;
+        .words{
+            line-height: 40px;
+            text-align: center;
+            // border: 2px solid;
+            width: 100%;
+            font-weight: 600;
+        }
+    }
+    .myBtn:active{
+        background: rgb(187, 187, 187);
+    }
+    ion-footer{
+        border: 2px solid rgb(75,75,75);
+        padding: 15px;
+        background: rgb(75,75,75);
+    }   
 }

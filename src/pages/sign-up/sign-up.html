@@ -1,0 +1,71 @@
+<ion-header>
+  <div class="nav">
+      <button ion-button clear color="light">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+      <p id="appName-Top">TUTLING</p>
+    </div>
+</ion-header>
+
+<ion-content (ionScrollStart)="logScrollStart()" (ionScroll)="logScrolling($event)" (ionScrollEnd)="logScrollEnd()">
+<div class="body" padding>
+  <div class="image">
+    <img id="icon" src="../../assets/imgs/icon2.png" alt="">
+
+  </div>
+  <p id="appName">TUTLING</p>
+  <ion-list class="inputs">
+    <ion-item no-padding>
+      <ion-label>Full Name</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item no-padding>
+        <ion-label>Email</ion-label>
+      <ion-input type="email"></ion-input>
+    </ion-item>
+    <ion-item no-padding>
+        <ion-label>Birth Date</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item no-padding>
+        <ion-label>ID Number</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item no-padding>
+        <ion-label>Mobile Number</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item no-padding>
+        <ion-label>University</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item no-padding>
+        <ion-label>High School</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item no-padding>
+        <ion-label>Primary</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item no-padding>
+        <ion-label>Level of Education</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item no-padding>
+        <ion-label>Password</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+    <ion-item no-padding>
+        <ion-label>Confirm Password</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-list class="buttons">
+    <button ion-button block class="btn" (click)="leadToNextPage()">
+      SUBMIT
+    </button>
+  </ion-list>
+
+
+</div>
+</ion-content>

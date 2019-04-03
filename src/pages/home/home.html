@@ -1,22 +1,53 @@
-<ion-content padding no-bounce>
-  
-    <ion-list>
-  
-      <ion-item>
-        <ion-input type="text" value=""  placeholder="Enter destination ID"  [(ngModel)]="distantNumber"></ion-input>
-      </ion-item>
-      <ion-item>
-        <button ion-button full large (click)="pushCall($event)" [ngStyle]="{'background-color': buttonColor}">{{buttonLabel}}</button>
-      </ion-item>
-  
+<!-- <ion-header>
+
+</ion-header> -->
+
+<ion-content>
+  <div class="head">
+    <button ion-button clear color="light" id="list">
+      <ion-icon ios="ios-list" md="md-list"></ion-icon>
+    </button>
+    <div id="menu">MENU</div>
+    <button ion-button clear color="light" id="search">
+      <ion-icon ios="ios-search" md="md-search"></ion-icon>
+    </button>
+  </div>
+  <div class="body" padding>
+
+
+
+    <ion-list class="buttons">
+      <!-- <button color="light" ion-button block class="btn2">
+          Login with Facebook
+        </button> -->
+
+      <div class="myBtn" (click)="btnClick()">
+
+        <div class="words">Payment</div>
+      </div>
+      <div class="myBtn" (click)="btnClick()">
+
+        <div class="words">Recordings</div>
+      </div>
+      <div class="myBtn" (click)="btnClick()">
+
+        <div class="words">Appointments</div>
+      </div>
+      <div class="myBtn-Last" (click)="btnClick()">
+
+        <div class="words">Profile</div>
+      </div>
+      <br><br>
+      
+
     </ion-list>
-  
-    <div>
-      <div style="text-align: center">{{infoLabel}}</div>
-      <div id="remote" style="width:100%;"></div>
-      <div id="mini"></div>
-    </div>
-  
-  
-  </ion-content>
-  
+
+
+  </div>
+</ion-content>
+<ion-footer>
+    <div class="myBtn2" (click)="btnClick()">
+
+        <div class="words">Log Out</div>
+      </div>
+</ion-footer>
