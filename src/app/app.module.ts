@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { SignInPage } from '../pages/sign-in/sign-in';
 import { SignUpPage } from '../pages/sign-up/sign-up';
+import { MethodsProvider } from '../providers/methods/methods';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { SignUpPage } from '../pages/sign-up/sign-up';
     StatusBar,
     SplashScreen,
     AndroidPermissions,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    MethodsProvider
   ]
 })
 export class AppModule {}

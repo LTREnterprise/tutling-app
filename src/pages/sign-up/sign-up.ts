@@ -48,6 +48,8 @@ export class SignUpPage {
     // console.log("end");
     
   }
-
+  back(){
+    this.navCtrl.pop();
+  }
 
 }
