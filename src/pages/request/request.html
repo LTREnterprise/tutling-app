@@ -10,12 +10,57 @@
       </button>
     </div>
     <div class="body" padding>
-      <div class="textbar">
+      <ion-item class="textbar">
         <ion-searchbar animated></ion-searchbar>
+      </ion-item>
+      <ion-item>
+        <ion-label>Your Courses</ion-label>
+        <ion-select placeholder="Select One">
+          <ion-option value="Course One">Course One</ion-option>
+          <ion-option value="Course Two">Course Two</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="list">
+        <div class="opt">Financial</div>
+        <div class="opt">Two</div>
+        <div class="opt">Three</div>
+        <div class="opt">Four</div>
+        <div class="opt">Five</div>
+        <div class="opt">Six</div>
+        <div class="opt">Seven</div>
+        <div class="opt">Eight</div>
       </div>
-      <div class="textbar">
-        
+
+      <div class="buttons">
+        <button ion-button block>Video Session</button>
+        <button ion-button block id="spacer">Q&A (Texting)</button>
       </div>
     </div>
+
+    <div class="schedules" padding>
+      <div>
+        <div class="titler"><ion-icon ios="ios-calendar" md="md-calendar"></ion-icon> Date
+        </div>
+        <div class="inp">
+            <ion-item>
+                <ion-datetime displayFormat="MMM DD YYYY"></ion-datetime>
+              </ion-item>
+            </div>
+      </div>
+
+      <div>
+        <div class="titler" id="righter">
+            Time <ion-icon ios="ios-time" md="md-time"></ion-icon> </div>
+        <div class="inp">
+            <ion-item>
+                <ion-datetime displayFormat="hh:mm" pickerFormat="h mm A"></ion-datetime>
+              </ion-item>
+            </div>
+      </div>
+
+      
+    </div>
+    <button ion-button block id="submitter">REQUEST</button>
   </div>
 </ion-content>

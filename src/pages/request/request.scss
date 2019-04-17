@@ -17,6 +17,7 @@ page-request {
       #search {
         float: right;
         font-size: 18px;
+        margin-top: 10px;
       }
       #list {
         padding-top: 10px;
@@ -31,12 +32,75 @@ page-request {
       height: 100%;
       width: 100%;
       background: rgb(75, 75, 75);
+      overflow-y: scroll;
     }
   
     .textbar{
       background: white;
       margin: 10px auto;
+      height: 50px;
     }
   
+    .list{
+      margin: 10px auto;
+      background: white;
+      height: 200px;
+      width: 100%;
+      overflow-y:scroll;
+      border: 2px solid rgb(160, 134, 48);
+      .opt{
+        width: 100%;
+        height: 25px;
+        line-height: 25px;
+        padding-left: 10px;
+        font-size: 18px;
+        color: white;
+        background: gray;
+        margin: 2px 0;
+      }
+    }
+    .buttons{
+      padding-top: 15px;
+      button{
+        background: white;
+        border: 2px solid rgb(160, 134, 48);
+        color: grey;
+        border-radius: 100px;
+        
+      }
+      #spacer{
+        margin-top: 30px;
+      }
+    }
+    .schedules{
+      // border: 2px solid red;
+      display: flex;
+    }
+    .schedules > div{
+      // height: 200px;
+      margin: 0 auto;
+      // border: 2px solid green;
+      width: 48%;
+      padding: 5px;
+  
+      .titler{
+        color: white;
+        height: 40px;
+      }
+      #righter{
+        text-align: right
+      }
+      ion-item{
+        box-shadow: 0 0 10px inset rgba(0,0,0,0.8);
+        border-radius: 5px;
+      }
+    }
+  
+    #submitter{
+      margin: 0 auto;
+      width: 90%;
+      border-radius: 100px;
+      background: linear-gradient(rgb(231,193,69),rgb(243, 232, 197),rgb(231,193,69), rgb(158, 121, 0), rgb(231,193,69), rgb(248, 222, 134));
+    }
   }
   
