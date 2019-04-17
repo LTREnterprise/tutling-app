@@ -1,0 +1,44 @@
+page-page4 {
+    .container{
+        height: 100%;
+        width: 100%;
+        background: rgb(75,75,75);
+        text-align: center;
+        overflow-y: hidden;
+    }
+    .contents{
+        width: 100%;
+        // border: 2px solid red;
+        margin-top: 55%;
+        color: white;
+        font-size: 14px;
+        @media screen and (min-width: 500px){
+
+            margin-top: 40%;
+            
+        font-size: 14px;
+        }
+        #logo{
+            width: 40%;
+            animation: pulsate-anim 3s infinite;
+        }
+
+        @keyframes pulsate-anim {
+            0%{
+                transform: rotate(-10DEG);
+            }
+            25%{
+                transform: rotate(10DEG);
+            }
+            50%{
+                transform: rotate(-10DEG);
+            }
+            75%{
+                transform: rotate(10DEG);
+            }
+            100%{
+                transform: rotate(-10DEG);
+            }
+        }
+    }
+}

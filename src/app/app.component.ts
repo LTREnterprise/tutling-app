@@ -4,13 +4,17 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { SignInPage } from '../pages/sign-in/sign-in';
 import { SignUpPage } from '../pages/sign-up/sign-up';
+import { ClassPage } from '../pages/class/class';
+import { Page4Page } from '../pages/page4/page4';
+import { RequestPage } from '../pages/request/request';
+import { FeedbackPage } from '../pages/feedback/feedback';
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = SignInPage;
+  rootPage:any = RequestPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
@@ -21,4 +25,3 @@ export class MyApp {
     });
   }
 }
-
