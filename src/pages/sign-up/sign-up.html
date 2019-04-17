@@ -1,7 +1,7 @@
 <ion-header>
   <div class="nav">
-      <button ion-button clear color="light">
-        <ion-icon name="arrow-back"></ion-icon>
+      <button ion-button clear color="light" >
+        <ion-icon name="arrow-back" (click)="back()"></ion-icon>
       </button>
       <p id="appName-Top">TUTLING</p>
     </div>
@@ -10,7 +10,7 @@
 <ion-content (ionScrollStart)="logScrollStart()" (ionScroll)="logScrolling($event)" (ionScrollEnd)="logScrollEnd()">
 <div class="body" padding>
   <div class="image">
-    <img id="icon" src="../../assets/imgs/icon2.png" alt="">
+    <img id="icon" src="assets/imgs/icon2.png" alt="">
 
   </div>
   <p id="appName">TUTLING</p>

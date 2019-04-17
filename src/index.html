@@ -10,7 +10,7 @@
   <link rel="icon" type="image/x-icon" href="assets/icon/favicon.ico">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#4e8ef7">
-  
+
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -18,16 +18,89 @@
   <!-- cordova.js required for cordova apps -->
   <script src="cordova.js"></script>
 
-  <!-- un-comment this code to enable service worker
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js')
-        .then(() => console.log('service worker installed'))
-        .catch(err => console.error('Error', err));
-    }
-  </script>-->
-
   <link href="build/main.css" rel="stylesheet">
+
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+  <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyB5K6UBFlB_djF9pIRKaKWyBuvfYEG_oeQ",
+      authDomain: "tutlingapp.firebaseapp.com",
+      databaseURL: "https://tutlingapp.firebaseio.com",
+      projectId: "tutlingapp",
+      storageBucket: "tutlingapp.appspot.com",
+      messagingSenderId: "469748380888"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <style>
+    .remote video {
+      width: 50% !important;
+    }
+  </style>
+
+  <script src="https://cloud.apizee.com/libs/jquery-1.9.0.min.js"></script>
+  <script src="https://cloud.apizee.com/apiRTC/v4.1/apiRTC-latest.min.debug.js"></script>
+  <script>
+    function checkPermissionCallback(status, perm) {
+        var permissions = cordova.plugins.permissions;
+        if (!status.hasPermission) {
+            var errorCallback = function() {
+                console.warn('permission is not turned on', perm);
+            };
+            permissions.requestPermission(
+                perm,
+                function(status) {
+                    if (!status.hasPermission) {
+                        errorCallback();
+                    }
+                },
+                errorCallback
+            );
+        }
+    }
+    var iosrtc = null;
+    document.addEventListener("deviceready", function() {
+      if ((typeof device !== "undefined") && device.platform == 'iOS'){
+        cordova.plugins.iosrtc.registerGlobals();
+        iosrtc = cordova.plugins.iosrtc;
+      }
+    }, false);
+    if (cordova.plugins !== null && typeof cordova.plugins.permissions !== 'undefined' && cordova.plugins.permissions) {
+            var permissions = cordova.plugins.permissions;
+            permissions.hasPermission(
+                permissions.CAMERA,
+                function(status) {
+                    checkPermissionCallback(status, permissions.CAMERA);
+                },
+                null
+            );
+            permissions.hasPermission(
+                permissions.RECORD_AUDIO,
+                function(status) {
+                    checkPermissionCallback(status, permissions.RECORD_AUDIO);
+                },
+                null
+            );
+
+            permissions.hasPermission(
+                permissions.READ_EXTERNAL_STORAGE,
+                function(status) {
+                    checkPermissionCallback(status, permissions.READ_EXTERNAL_STORAGE);
+                },
+                null
+            );
+            permissions.hasPermission(
+                permissions.ACCESS_NETWORK_STATE,
+                function(status) {
+                    checkPermissionCallback(status, permissions.ACCESS_NETWORK_STATE);
+                },
+                null
+            );
+        }    
+  </script>
 
 </head>
 <body>
