@@ -12,6 +12,7 @@ import { Page4Page } from '../pages/page4/page4';
 import { RequestPage } from '../pages/request/request';
 import { FeedbackPage } from '../pages/feedback/feedback';
 import { MethodsProvider } from '../providers/methods/methods';
+import { AppointmentsPage } from '../pages/appointments/appointments';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,8 @@ import { MethodsProvider } from '../providers/methods/methods';
     Page4Page,
     RequestPage,
     FeedbackPage,
+    AppointmentsPage
+    
   ],
   imports: [
     BrowserModule,
@@ -36,6 +39,7 @@ import { MethodsProvider } from '../providers/methods/methods';
     Page4Page,
     RequestPage,
     FeedbackPage,
+    AppointmentsPage
   ],
   providers: [
     StatusBar,

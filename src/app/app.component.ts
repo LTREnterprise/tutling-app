@@ -9,6 +9,8 @@ import { ClassPage } from '../pages/class/class';
 import { Page4Page } from '../pages/page4/page4';
 import { RequestPage } from '../pages/request/request';
 import { FeedbackPage } from '../pages/feedback/feedback';
+import { AppointmentsPage } from '../pages/appointments/appointments';
+
 
 @Component({
   templateUrl: 'app.html'
