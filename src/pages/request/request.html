@@ -33,8 +33,8 @@
       </div>
 
       <div class="buttons">
-        <button ion-button block>Video Session</button>
-        <button ion-button block id="spacer">Q&A (Texting)</button>
+        <button ion-button  [color]="buttonColor" block (click)="comType('video')">Video Session</button>
+        <button ion-button [color]="buttonColor2" block (click)="comType('texting')" id="spacer">Q&A (Texting)</button>
       </div>
     </div>
 

@@ -14,8 +14,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'feedback.html',
 })
 export class FeedbackPage {
-
+  tutors = this.navParams.get('tutors')
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    console.log(this.tutors);
+    
   }
 
   ionViewDidLoad() {

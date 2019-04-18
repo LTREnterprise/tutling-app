@@ -11,12 +11,13 @@
       </button>
     </div>
     <div class="promt" padding>
+      <div *ngFor="let i of tutors">
       <div class="grid-custom">
-            <img src="../../assets/imgs/logo.png" alt="">
+            <img src="{{i.img}}" alt="">
        
           <div id="promt-message">
-            <h2>David John</h2>
-            <p>Lesson with David will cost R250.00, are you sure you want to continue?</p>
+            <h2>{{i.name}}</h2>
+            <p>Lesson with {{i.name}} will cost R250.00, are you sure you want to continue?</p>
           </div>
       </div>
       <div class="buttons">
@@ -28,5 +29,6 @@
         </button>
       </div>
     </div>
+  </div>
   </div>
 </ion-content>
