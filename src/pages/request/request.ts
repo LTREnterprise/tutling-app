@@ -18,12 +18,18 @@ export class RequestPage {
   private buttonColor: string = "primary";
   private buttonColor2: string = "primary";
   channel = null;
+  date = null;
+  time = null;
+  minDate: string = new Date().toISOString();
+  minTime : string = new Date().toLocaleTimeString(); 
+
 
   constructor(public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RequestPage');
+    
   }
   comType(type){
     if (type == "video"){
@@ -59,7 +65,11 @@ export class RequestPage {
   }
 
   request(){
-    if (this.channel != null){
+    console.log(this.date);
+    console.log(this.time);
+    
+    
+    if (this.channel != null && this.date == null && this.time == null){
       const prompt = this.alertCtrl.create({
         message: "Are you sure you want to instantly request a tutor",
         buttons: [
@@ -92,6 +102,38 @@ export class RequestPage {
         ]
       });
       prompt.present();
+    }
+    else if (this.date == null){
+      const prompt = this.alertCtrl.create({
+        message: "Please select the date for the appointment",
+        buttons: [
+          {
+            text: 'Ok',
+            handler: data => {
+              console.log('Saved clicked');
+            }
+          }
+        ]
+      });
+      prompt.present();
+    }
+    else if (this.time ==  null){
+      const prompt = this.alertCtrl.create({
+        message: "Please select the time for the appointment",
+        buttons: [
+          {
+            text: 'Ok',
+            handler: data => {
+              console.log('Saved clicked');
+            }
+          }
+        ]
+      });
+      prompt.present();
+    }
+    else if (this.channel != null && this.date != null && this.time != null){
+      console.log('appointment set');
+      
     }
   }
 }
