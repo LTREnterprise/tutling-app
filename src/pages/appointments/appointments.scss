@@ -1,10 +1,10 @@
 page-appointments {
     .body{
-        height: 85%;
+        height: 100%;
         width: 100%;
         background: rgb(75,75,75);
         text-align: center;
-        overflow-y: hidden;
+        overflow-y: scroll;
         #appName{
             color:rgb(231,193,69);
             font-size: 25px;
@@ -12,8 +12,8 @@ page-appointments {
     }
     
     .head{
-        position: relative;
-        height: 15%;
+        position: absolute;
+        height: 10%;
         width: 100vw;
         background: rgb(75,75,75);
         // padding-top: 5px;
@@ -28,6 +28,7 @@ page-appointments {
         }
         #search{
             float: right;
+            margin-top: 10px;
             font-size: 18px;
         }
         #list{
@@ -37,6 +38,7 @@ page-appointments {
         }
     }
     .date-time{
+        margin-top: 12vh;
         display: flex;
     }
     .date-time > div{
@@ -48,7 +50,7 @@ page-appointments {
     }
     .subject{
         border: 4px solid gold;
-        margin: 10px auto;
+        margin: 0px auto 15px auto;
         width: 98%;
         padding: 10px;
         color: white;
@@ -82,5 +84,57 @@ page-appointments {
         text-align: center;
         color: white;
         font-size: 16px;
+    }
+
+    .time-duration{
+        position: absolute;
+        bottom: 20px;
+        width: 50%;
+        // height: 50px;
+        border: 3px solid gold;
+        color: white;
+        padding: 0;
+        .time{
+            line-height: 18px;
+            // border: 2px solid red;
+            font-size: 18px;
+            margin: 2px;
+        }
+        .remaining{
+            
+            line-height: 18px;
+            // border: 2px solid red;
+            font-size: 14px;
+            margin: 2px;
+        }
+    }
+    @media screen and (max-width: 359px){
+        .date-time{
+            margin-top: 8vh;
+            display: flex;
+        }
+        .time-duration{
+            position: static;
+            margin-top: 5px;
+            // bottom: 20px;
+            width: 50%;
+            // height: 50px;
+            border: 3px solid gold;
+            color: white;
+            padding: 0;
+            .time{
+                line-height: 18px;
+                // border: 2px solid red;
+                font-size: 18px;
+                margin: 2px;
+            }
+            .remaining{
+                
+                line-height: 18px;
+                // border: 2px solid red;
+                font-size: 14px;
+                margin: 2px;
+            }
+        }
     }
 }
