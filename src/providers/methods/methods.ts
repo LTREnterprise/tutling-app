@@ -10,6 +10,7 @@ export class MethodsProvider {
   //variables
   webRTCClient:any;
   infoLabel = 0;
+  resp = null;
 
   //arrays
   onlineTutors = new Array();
@@ -87,7 +88,8 @@ export class MethodsProvider {
               name : details.name,
               id : this.infoLabel,
               img : details. downloadurl,
-              contact : details.contact
+              contact : details.contact,
+              status : false
           })            
          });
       })
@@ -100,6 +102,7 @@ export class MethodsProvider {
         firebase.database().ref("online/").on("value", (data: any) => {
           this.onlineTutors.length = 0;
             if (data.val() != null){
+              console.log('getting online tutors');
               var details = data.val();
               var key =  Object.keys(details);
               for (var i = 0; i < key.length; i++){
@@ -108,15 +111,28 @@ export class MethodsProvider {
                   name :  details[k].name,
                   id : details[k].id,
                   img : details[k].img,
-                  contact :details[k].contact
+                  contact :details[k].contact,
+                  status : details[k].status
               }
               this.onlineTutors.push(onlineDetails)
+            }
+            if (this.onlineTutors[0].status == true){
+              this.navigateToClass();
             }
             resolve(this.onlineTutors)
           }
         })
       })
     })
+  }
+
+  navigateToClass(){
+    console.log('response available');
+    this.resp = true;
+  }
+
+  getResp(){
+    return this.resp;
   }
 
 }

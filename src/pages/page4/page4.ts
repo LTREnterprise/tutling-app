@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FeedbackPage } from '../feedback/feedback';
 import { MethodsProvider } from '../../providers/methods/methods';
 
@@ -17,13 +17,9 @@ import { MethodsProvider } from '../../providers/methods/methods';
 })
 export class Page4Page {
 tutorsArr = new Array();
-
-  constructor(public methods:MethodsProvider, public navCtrl: NavController, public navParams: NavParams) {
-    this.methods.getOnlineUsers().then((data:any) =>{
-      this.tutorsArr = data;
-      console.log(this.tutorsArr);
-      this.ShowTutors();
-    })
+counter = 0;
+  constructor(public alertCtrl: AlertController,public methods:MethodsProvider, public navCtrl: NavController, public navParams: NavParams) {
+  this.getConfirmation();
   }
 
   ionViewDidLoad() {
@@ -34,6 +30,45 @@ tutorsArr = new Array();
     setTimeout(() => {
       this.navCtrl.push(FeedbackPage, {tutors:this.tutorsArr})
     }, 1500);
+  }
+
+  getConfirmation(){
+    this.methods.getOnlineUsers().then((data:any) =>{
+      this.tutorsArr.length = 0;
+      console.log('assign to array');
+      this.tutorsArr = data;
+      console.log(this.tutorsArr);
+      this.listenForResp();
+    })
+  }
+
+  listenForResp(){
+    if (this.counter >= 5){
+      const prompt = this.alertCtrl.create({
+        message: "There is no available tutor at the moment, Please try again after few minutes",
+        buttons: [
+          {
+            text: 'Ok',
+            handler: data => {
+              console.log('Saved clicked');
+              this.navCtrl.pop();
+            }
+          }
+        ]
+      });
+      prompt.present();
+    }
+    else{
+      setTimeout(() => {
+        var resp = this.methods.getResp();
+        if (resp == true)
+          this.ShowTutors();
+          else{
+            this.listenForResp();
+          }
+        }, 4000);
+    }
+      this.counter++;
   }
 
 }

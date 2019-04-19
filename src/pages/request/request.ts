@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Page4Page } from '../page4/page4';
 
 /**
@@ -17,8 +17,9 @@ import { Page4Page } from '../page4/page4';
 export class RequestPage {
   private buttonColor: string = "primary";
   private buttonColor2: string = "primary";
+  channel = null;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
@@ -29,11 +30,13 @@ export class RequestPage {
       if (this.buttonColor == "light"){
         this.buttonColor = "primary"
         this.buttonColor2 = "primary"
+        this.channel = null;
       }
       else{
         this.buttonColor = "light"
         this.buttonColor2 = "primary"
-        this.videoCall();
+        this.channel = "video"
+        // this.videoCall();
       }
 
     }
@@ -41,10 +44,12 @@ export class RequestPage {
       if (this.buttonColor2 == "light"){
         this.buttonColor = "primary"
         this.buttonColor2 = "primary"
+        this.channel = null;
       }
       else{
         this.buttonColor2 = "light"
         this.buttonColor = "primary"
+        this.channel = "texting"
       }
     }
   }
@@ -53,4 +58,40 @@ export class RequestPage {
     this.navCtrl.push(Page4Page)
   }
 
+  request(){
+    if (this.channel != null){
+      const prompt = this.alertCtrl.create({
+        message: "Are you sure you want to instantly request a tutor",
+        buttons: [
+          {
+            text: 'Disagree',
+            handler: data => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Agree',
+            handler: data => {
+              this.videoCall();
+            }
+          }
+        ]
+      });
+      prompt.present();
+    }
+    else if (this.channel ==  null){
+      const prompt = this.alertCtrl.create({
+        message: "Please select the communication type between video and texting",
+        buttons: [
+          {
+            text: 'Ok',
+            handler: data => {
+              console.log('Saved clicked');
+            }
+          }
+        ]
+      });
+      prompt.present();
+    }
+  }
 }
