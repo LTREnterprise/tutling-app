@@ -16,7 +16,7 @@ import { AppointmentsPage } from '../pages/appointments/appointments';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = RequestPage;
+  rootPage:any = HomePage;
 
   constructor( platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

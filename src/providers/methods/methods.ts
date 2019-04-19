@@ -15,8 +15,9 @@ export class MethodsProvider {
   //arrays
   onlineTutors = new Array();
   constructor(private ngzone: NgZone,public loadingCtrl: LoadingController,  public alertCtrl: AlertController,) {
+   
+    
   }
-
   checkstate() {
     return new Promise((resolve, reject) => {
       this.ngzone.run(() => {
@@ -26,7 +27,7 @@ export class MethodsProvider {
           state = 1;
           } else {
             state = 0;
-          }
+          }     
           resolve(state);
         });
       });

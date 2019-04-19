@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { Platform } from 'ionic-angular';
+import { MethodsProvider } from '../../providers/methods/methods';
 declare var iosrtc;
 declare var apiRTC;
 declare var apiCC;
@@ -29,24 +30,23 @@ export class HomePage {
   buttonColor:any;
   state:any;
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public platform: Platform) {
-    // this.distantNumber = this.navParams.get('id');
-    console.log(this.distantNumber);
-    this.incomingCallHandler = this.incomingCallHandler.bind(this);
-    this.userMediaErrorHandler = this.userMediaErrorHandler.bind(this);
-    this.remoteStreamAddedHandler = this.remoteStreamAddedHandler.bind(this);
-    this.hangupHandler = this.hangupHandler.bind(this);
-    this.refreshVideoView = this.refreshVideoView.bind(this);
-    this.sessionReadyHandler = this.sessionReadyHandler.bind(this);
-    this.userMediaSuccessHandler = this.userMediaSuccessHandler.bind(this);
-    apiRTC.init({
-      onReady: this.sessionReadyHandler,
-      apiKey: "myDemoApiKey"
-    });
+  constructor(public methods:MethodsProvider, public navCtrl: NavController, public alertCtrl: AlertController, public platform: Platform) {
+    // console.log(this.distantNumber);
+    // this.incomingCallHandler = this.incomingCallHandler.bind(this);
+    // this.userMediaErrorHandler = this.userMediaErrorHandler.bind(this);
+    // this.remoteStreamAddedHandler = this.remoteStreamAddedHandler.bind(this);
+    // this.hangupHandler = this.hangupHandler.bind(this);
+    // this.refreshVideoView = this.refreshVideoView.bind(this);
+    // this.sessionReadyHandler = this.sessionReadyHandler.bind(this);
+    // this.userMediaSuccessHandler = this.userMediaSuccessHandler.bind(this);
+    // apiRTC.init({
+    //   onReady: this.sessionReadyHandler,
+    //   apiKey: "myDemoApiKey"
+    // });
     
-    this.infoLabel= "Registration Ongoing...";
-    this.buttonLabel = LABEL_CALL;
-    this.buttonColor = COLOR_CALL;
+    // this.infoLabel= "Registration Ongoing...";
+    // this.buttonLabel = LABEL_CALL;
+    // this.buttonColor = COLOR_CALL;
     
   }
 
@@ -136,5 +136,21 @@ export class HomePage {
   initMediaElementState(callId) {
     this.webRTCClient.removeElementFromDiv('mini', 'miniElt-' + callId);
     this.webRTCClient.removeElementFromDiv('remote', 'remoteElt-' + callId);
+  }
+
+  Payment(){
+   
+  }
+
+  Recordings(){
+
+  }
+
+  Appointments(){
+
+  }
+  
+  Profile(){
+
   }
 }
