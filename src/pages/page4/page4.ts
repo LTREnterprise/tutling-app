@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FeedbackPage } from '../feedback/feedback';
 import { MethodsProvider } from '../../providers/methods/methods';
+import { ClassPage } from '../class/class';
+import { AppointmentsPage } from '../appointments/appointments';
 
 /**
  * Generated class for the Page4Page page.
@@ -27,9 +29,8 @@ counter = 0;
   }
 
   ShowTutors(){
-    setTimeout(() => {
-      this.navCtrl.push(FeedbackPage, {tutors:this.tutorsArr})
-    }, 1500);
+    console.log(this.tutorsArr);
+      this.navCtrl.push(ClassPage, {tutors:this.tutorsArr})
   }
 
   getConfirmation(){
@@ -37,7 +38,6 @@ counter = 0;
       this.tutorsArr.length = 0;
       console.log('assign to array');
       this.tutorsArr = data;
-      console.log(this.tutorsArr);
       this.listenForResp();
     })
   }

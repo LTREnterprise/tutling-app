@@ -11,14 +11,14 @@
     <p id="appName">TUTLING</p>
     <ion-list class="inputs">
       <ion-item no-padding>
-        <ion-input type="text" placeholder="Username"></ion-input>
+        <ion-input type="text" placeholder="Email" [(ngModel)]="email"></ion-input>
       </ion-item>
       <ion-item no-padding>
-        <ion-input type="password" placeholder="Password"></ion-input>
+        <ion-input type="password" placeholder="Password" [(ngModel)]="pass"></ion-input>
       </ion-item>
     </ion-list>
     <ion-list class="buttons">
-      <button ion-button block class="btn">
+      <button ion-button block class="btn" (click)="login()">
         LOG IN
       </button>
       <button ion-button block class="btn" (click)="leadToSignUp()">

@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { Platform } from 'ionic-angular';
 import { MethodsProvider } from '../../providers/methods/methods';
+import { SavedAppointmentsPage } from '../saved-appointments/saved-appointments';
 declare var iosrtc;
 declare var apiRTC;
 declare var apiCC;
@@ -147,7 +148,7 @@ export class HomePage {
   }
 
   Appointments(){
-
+    this.navCtrl.push(SavedAppointmentsPage)
   }
   
   Profile(){

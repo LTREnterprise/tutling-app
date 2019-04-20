@@ -10,25 +10,27 @@ import { Page4Page } from '../pages/page4/page4';
 import { RequestPage } from '../pages/request/request';
 import { FeedbackPage } from '../pages/feedback/feedback';
 import { AppointmentsPage } from '../pages/appointments/appointments';
+import { SignInPage } from '../pages/sign-in/sign-in';
+import { MethodsProvider } from '../providers/methods/methods';
 
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage:any;
 
-  constructor( platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(public methods:MethodsProvider, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
-      // androidPermissions.requestPermissions(
-      //   [
-      //     androidPermissions.PERMISSION.CAMERA, 
-      //     androidPermissions.PERMISSION.CALL_PHONE, 
-      //     androidPermissions.PERMISSION.GET_ACCOUNTS, 
-      //     androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE, 
-      //     androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE
-      //   ]
-      // );
+      this.methods.checkstate().then((results:any) =>{
+        if (results == 1) {
+          // this.methods.setUserOnline();
+          this.rootPage = RequestPage;
+        }
+        else {
+          this.rootPage = SignInPage
+        }
+      })
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();

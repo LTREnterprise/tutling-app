@@ -3,7 +3,7 @@ page-feedback {
       height: 100%;
       width: 100%;
       background: rgb(75, 75, 75);
-      overflow-y: hidden;
+      overflow-y: scroll;
     }
     .head {
       position: relative;
@@ -30,11 +30,11 @@ page-feedback {
       }
     }
     .promt {
-      margin-top: 50%;
-      transform: translateY(-20%);
-      @media screen and (min-width: 500px) {
-        transform: translateY(-50%);
-      }
+      margin-top: 10px;
+      // transform: translateY(-20%);
+      // @media screen and (min-width: 500px) {
+      //   transform: translateY(-50%);
+      // }
       // border: 2px solid red;
       .grid-custom {
         display: flex;

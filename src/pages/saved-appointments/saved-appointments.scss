@@ -1,0 +1,130 @@
+page-saved-appointments {
+
+    .body{
+
+        height: 100%;
+
+        width: 100%;
+
+        background: rgb(75,75,75);
+
+        text-align: center;
+
+        overflow-y: scroll;
+
+    }
+
+   
+
+    .head{
+
+        position: absolute;
+
+        height: 10%;
+
+        width: 100vw;
+
+        background: rgb(75,75,75);
+
+        // padding-top: 5px;
+
+        // border: 2px solid rgb(75,75,75);
+
+        #menu{
+
+            position: absolute;
+
+            left: 50%;
+
+            top: 25px;
+
+            transform: translateX(-50%);
+
+            color:rgb(231,193,69);
+
+            font-size: 18px;
+
+        }
+
+        #search{
+
+            float: right;
+
+            margin-top: 10px;
+
+            font-size: 18px;
+
+        }
+
+        #list{
+            padding-top: 10px;
+            font-size: 18px;
+        }
+
+    }
+
+ 
+
+    #list{
+
+ 
+
+        padding-top: 50px;
+
+    }
+
+    .appointment{
+
+        margin: 10px auto;
+
+        display: flex;
+
+        color: white;
+
+        width: 100%;
+
+        // border: 2px solid red;
+
+    }
+
+ 
+
+    .appointment > div{
+
+        border: 3px solid yellow;
+
+        color: black;
+
+        padding: 5px;
+
+        background: white;
+
+        margin: 0 auto;
+
+    }
+
+    .appointment > div:nth-child(1){
+
+        width: 60%;
+
+    }
+
+    .appointment > div:nth-child(2){
+
+        width: 18%;
+
+       
+
+    }
+
+    .appointment > div:nth-child(3){
+
+        width: 18%;
+
+    }
+
+   
+
+}
+
+ 

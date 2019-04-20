@@ -10,8 +10,7 @@
         <ion-icon ios="ios-search" md="md-search"></ion-icon>
       </button>
     </div>
-    <div class="promt" padding>
-      <div *ngFor="let i of tutors">
+    <div class="promt" *ngFor="let i of tutors" padding>
       <div class="grid-custom">
             <img src="{{i.img}}" alt="">
        
@@ -21,14 +20,13 @@
           </div>
       </div>
       <div class="buttons">
-        <button ion-button block id="accept">
+        <button ion-button block id="accept" (click)="accept(i)">
           Confirm
         </button>
-        <button ion-button block clear color="light">
+        <button ion-button block clear color="light" (click)="decline(i)">
           Decline
         </button>
       </div>
-    </div>
   </div>
   </div>
 </ion-content>

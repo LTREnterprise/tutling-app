@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Page4Page } from '../page4/page4';
+import { HomePage } from '../home/home';
+import { MethodsProvider } from '../../providers/methods/methods';
 
 /**
  * Generated class for the RequestPage page.
@@ -24,12 +26,15 @@ export class RequestPage {
   minTime : string = new Date().toLocaleTimeString(); 
 
 
-  constructor(public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public method: MethodsProvider, public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RequestPage');
     
+  }
+  home(){
+    this.navCtrl.push(HomePage)
   }
   comType(type){
     if (type == "video"){
@@ -82,6 +87,7 @@ export class RequestPage {
           {
             text: 'Agree',
             handler: data => {
+            this.method.setRequest();
               this.videoCall();
             }
           }
@@ -132,8 +138,24 @@ export class RequestPage {
       prompt.present();
     }
     else if (this.channel != null && this.date != null && this.time != null){
-      console.log('appointment set');
-      
+      this.method.setAppontment(this.date,this.time," ", " ", this.channel).then(() =>{
+        const prompt = this.alertCtrl.create({
+          message: "Your Appointment has been scheduled",
+          buttons: [
+            {
+              text: 'Ok',
+              handler: data => {
+                this.date = "";
+                this.time = "";
+                this.buttonColor = "primary"
+                this.buttonColor2 = "primary"
+                console.log('Saved clicked');
+              }
+            }
+          ]
+        });
+        prompt.present();
+      })
     }
   }
 }

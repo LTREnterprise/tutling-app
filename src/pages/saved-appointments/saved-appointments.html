@@ -1,0 +1,37 @@
+<ion-content>
+
+  <div class="head">
+
+    <button ion-button clear color="light" id="list">
+
+      <ion-icon ios="ios-list" md="md-list"></ion-icon>
+
+    </button>
+
+    <div id="menu">APPOINTMENTS</div>
+
+    <button ion-button clear color="light" id="search">
+
+      <ion-icon ios="ios-search" md="md-search"></ion-icon>
+
+    </button>
+
+  </div>
+
+  <div class="body" padding>
+
+    <!-- put the for loop on the class=> appointment -->
+
+    <div id="list" *ngFor="let i of appoinmentsArray">
+        <div class="appointment">
+            <div>{{i.date}}</div>
+            <div (click)="edit(i)">Edit</div>
+            <div (click)="cancel(i.key)">Cancel</div>
+          </div>
+    </div>
+
+   
+
+  </div>
+
+</ion-content>

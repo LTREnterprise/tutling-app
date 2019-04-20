@@ -13,6 +13,8 @@ import { RequestPage } from '../pages/request/request';
 import { FeedbackPage } from '../pages/feedback/feedback';
 import { MethodsProvider } from '../providers/methods/methods';
 import { AppointmentsPage } from '../pages/appointments/appointments';
+import { SignInPage } from '../pages/sign-in/sign-in';
+import { SavedAppointmentsPage } from '../pages/saved-appointments/saved-appointments';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { AppointmentsPage } from '../pages/appointments/appointments';
     Page4Page,
     RequestPage,
     FeedbackPage,
-    AppointmentsPage
+    AppointmentsPage,
+    SignInPage,
+    SavedAppointmentsPage
     
   ],
   imports: [
@@ -39,7 +43,9 @@ import { AppointmentsPage } from '../pages/appointments/appointments';
     Page4Page,
     RequestPage,
     FeedbackPage,
-    AppointmentsPage
+    AppointmentsPage,
+    SignInPage,
+    SavedAppointmentsPage
   ],
   providers: [
     StatusBar,
