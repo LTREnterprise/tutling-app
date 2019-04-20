@@ -22,8 +22,8 @@
 
     <!-- put the for loop on the class=> appointment -->
 
-    <div id="list" *ngFor="let i of appoinmentsArray">
-        <div class="appointment">
+    <div id="list" >
+        <div class="appointment" *ngFor="let i of appoinmentsArray">
             <div>{{i.date}}</div>
             <div (click)="edit(i)">Edit</div>
             <div (click)="cancel(i.key)">Cancel</div>
