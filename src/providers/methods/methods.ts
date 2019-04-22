@@ -302,7 +302,7 @@ logout() {
 signIn(email, pass){
   let loading = this.loadingCtrl.create({
     spinner: "bubbles",
-    content: "Sign In....",
+    content: "Signing In....",
     duration: 4000000
   });
   loading.present();

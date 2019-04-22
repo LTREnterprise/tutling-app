@@ -123,7 +123,7 @@ export class ClassPage {
       e.detail.callType,
       "mini",
       'miniElt-' + e.detail.callId,
-      {width : "80px", height : "96px"},
+      {width : "50%", height : "50%"},
       true
     );
   }
