@@ -9,10 +9,15 @@
         <ion-icon ios="ios-search" md="md-search"></ion-icon>
       </button>
     </div>
+
     <div class="body" padding>
-      <ion-item class="textbar">
-        <ion-searchbar animated></ion-searchbar>
-      </ion-item>
+      <!-- <ion-searchbar class="searchBar" animated></ion-searchbar> -->
+      <ion-item id="searcherTxt">
+          <ion-label>
+            <ion-icon name="search"></ion-icon>
+          </ion-label>
+          <ion-input type="text" placeholder="search"></ion-input>
+        </ion-item>
       <ion-item>
         <ion-label>Your Courses</ion-label>
         <ion-select placeholder="Select One">
@@ -61,6 +66,9 @@
 
       
     </div>
-    <button ion-button block id="submitter" (click)="request()">REQUEST</button>
   </div>
 </ion-content>
+<ion-footer>
+    <button ion-button block id="submitter" (click)="request()">REQUEST</button>
+
+</ion-footer>
