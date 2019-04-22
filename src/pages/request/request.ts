@@ -17,8 +17,8 @@ import { MethodsProvider } from '../../providers/methods/methods';
   templateUrl: 'request.html',
 })
 export class RequestPage {
-  private buttonColor: string = "primary";
-  private buttonColor2: string = "primary";
+  private buttonColor: string = "light";
+  private buttonColor2: string = "light";
   channel = null;
   date = null;
   time = null;
@@ -38,28 +38,28 @@ export class RequestPage {
   }
   comType(type){
     if (type == "video"){
-      if (this.buttonColor == "light"){
-        this.buttonColor = "primary"
-        this.buttonColor2 = "primary"
+      if (this.buttonColor == "primary"){
+        this.buttonColor = "light"
+        this.buttonColor2 = "light"
         this.channel = null;
       }
       else{
-        this.buttonColor = "light"
-        this.buttonColor2 = "primary"
+        this.buttonColor = "primary"
+        this.buttonColor2 = "light"
         this.channel = "video"
         // this.videoCall();
       }
 
     }
     else{
-      if (this.buttonColor2 == "light"){
-        this.buttonColor = "primary"
-        this.buttonColor2 = "primary"
+      if (this.buttonColor2 == "primary"){
+        this.buttonColor = "light"
+        this.buttonColor2 = "light"
         this.channel = null;
       }
       else{
-        this.buttonColor2 = "light"
-        this.buttonColor = "primary"
+        this.buttonColor2 = "primary"
+        this.buttonColor = "light"
         this.channel = "texting"
       }
     }
@@ -97,7 +97,7 @@ export class RequestPage {
     }
     else if (this.channel ==  null){
       const prompt = this.alertCtrl.create({
-        message: "Please select the communication type between video and texting",
+        message: "Please select the communication you want between video and texting",
         buttons: [
           {
             text: 'Ok',
@@ -109,7 +109,7 @@ export class RequestPage {
       });
       prompt.present();
     }
-    else if (this.date == null){
+    else if (this.date == null ||  this.date ==""){
       const prompt = this.alertCtrl.create({
         message: "Please select the date for the appointment",
         buttons: [
@@ -123,7 +123,7 @@ export class RequestPage {
       });
       prompt.present();
     }
-    else if (this.time ==  null){
+    else if (this.time ==  null ||  this.time == ""){
       const prompt = this.alertCtrl.create({
         message: "Please select the time for the appointment",
         buttons: [
@@ -145,8 +145,8 @@ export class RequestPage {
             {
               text: 'Ok',
               handler: data => {
-                this.date = "";
-                this.time = "";
+                this.date = null;
+                this.time = null;
                 this.buttonColor = "primary"
                 this.buttonColor2 = "primary"
                 console.log('Saved clicked');

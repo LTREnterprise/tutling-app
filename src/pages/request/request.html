@@ -49,7 +49,7 @@
         </div>
         <div class="inp">
             <ion-item>
-                <ion-datetime displayFormat="MMM DD YYYY" [min]="minDate" max="2025-10-31" [(ngModel)]="date"></ion-datetime>
+                <ion-datetime placeholder="00/00/00" displayFormat="MMM DD YYYY" [min]="minDate" max="2025-10-31" [(ngModel)]="date"></ion-datetime>
               </ion-item>
             </div>
       </div>
@@ -59,7 +59,7 @@
             Time <ion-icon ios="ios-time" md="md-time"></ion-icon> </div>
         <div class="inp">
             <ion-item>
-                <ion-datetime displayFormat="hh:mm" pickerFormat="h mm A" [(ngModel)]="time"></ion-datetime>
+                <ion-datetime placeholder="--:--" displayFormat="hh:mm" pickerFormat="h mm A" [(ngModel)]="time"></ion-datetime>
               </ion-item>
             </div>
       </div>
