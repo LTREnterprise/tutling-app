@@ -247,6 +247,7 @@ getAppointments(){
           resolve(this.appointmentsArr)
         }else{
         reject('')
+        loading.dismiss();
         }
     })
   })

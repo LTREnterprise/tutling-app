@@ -57,7 +57,7 @@ pass = null;
     }
     else{
       this.methods.signIn(this.email, this.pass).then(() =>{
-        this.navCtrl.push(RequestPage)
+        this.navCtrl.setRoot(RequestPage)
       })
     }
   }
