@@ -1,7 +1,7 @@
 page-request {
   .theHead {
     position: relative;
-    height: 60px;
+    height: 50px;
     width: 100vw;
     background: rgb(75, 75, 75);
     // padding-top: 5px;
@@ -36,6 +36,7 @@ ion-footer{
     width: 100%;
     background: rgb(75, 75, 75);
     overflow-y: scroll;
+    overflow-x: hidden;
   }
 
   .textbar{
@@ -47,7 +48,7 @@ ion-footer{
   .list{
     margin: 5px auto;
     background: white;
-    height: 100px;
+    height: 150px;
     width: 100%;
     overflow-y:scroll;
     border: 2px solid rgb(160, 134, 48);
@@ -70,7 +71,10 @@ ion-footer{
       color: black;
       border-radius: 100px;
       height: 30px;
-      
+      @media screen and (min-height: 600px) {
+        
+      height: 45px;
+      }
     }
     #spacer{
       // margin-top: 10px;
@@ -79,12 +83,12 @@ ion-footer{
   .schedules{
     // border: 2px solid red;
     display: flex;
-    margin-top: -25px;
+    margin-top: -35px;
   }
   .schedules > div{
-    // height: 200px;
+    // height: 30px;
     margin: 0 auto;
-    border: 2px solid green;
+    // border: 2px solid green;
     width: 48%;
     padding: 5px;
 
@@ -95,10 +99,12 @@ ion-footer{
     #righter{
       text-align: right
     }
-    ion-item{
-      box-shadow: 0 0 10px inset rgba(0,0,0,0.8);
+    ion-item, ion-datetime{
       border-radius: 5px;
       // margin: 5px auto;
+      height: 35px;
+      line-height: 35px;
+      padding-top: 7px;
     }
   }
   .searchBar{
@@ -108,6 +114,16 @@ ion-footer{
   }
   #searcherTxt{
     margin-bottom: 10px;
+    height: 20px;
+  }
+  @media screen and (min-height: 600px){
+    .body{
+      margin-top: 5%;
+      // transform: translateY(2s0%);
+    }
+  }
+  .body{
+
   }
 
   #submitter{
@@ -115,5 +131,15 @@ ion-footer{
     width: 90%;
     border-radius: 100px;
     background: linear-gradient(rgb(231,193,69),rgb(243, 232, 197),rgb(231,193,69), rgb(158, 121, 0), rgb(231,193,69), rgb(248, 222, 134));
+  }
+  .inp{
+    height: 35px;
+    // border: 2px solid red;
+    position: relative;
+    background: white;
+    text-align: center;
+    border-radius: 5px;
+    line-height: 35px;
+    box-shadow: 0 0 10px inset rgba(0,0,0,0.8);
   }
 }

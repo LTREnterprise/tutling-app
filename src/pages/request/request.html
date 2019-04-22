@@ -48,9 +48,8 @@
         <div class="titler"><ion-icon ios="ios-calendar" md="md-calendar"></ion-icon> Date
         </div>
         <div class="inp">
-            <ion-item>
-                <ion-datetime placeholder="00/00/00" displayFormat="MMM DD YYYY" [min]="minDate" max="2025-10-31" [(ngModel)]="date"></ion-datetime>
-              </ion-item>
+          <ion-datetime placeholder="00/00/00" displayFormat="DD/MM/YYYY" [min]="minDate" max="2025-10-31" [(ngModel)]="date"></ion-datetime>
+
             </div>
       </div>
 
@@ -58,9 +57,8 @@
         <div class="titler" id="righter">
             Time <ion-icon ios="ios-time" md="md-time"></ion-icon> </div>
         <div class="inp">
-            <ion-item>
-                <ion-datetime placeholder="--:--" displayFormat="hh:mm" pickerFormat="h mm A" [(ngModel)]="time"></ion-datetime>
-              </ion-item>
+          <ion-datetime placeholder="--:--" displayFormat="hh:mm" pickerFormat="hh mm" [(ngModel)]="time"></ion-datetime>
+
             </div>
       </div>
 
