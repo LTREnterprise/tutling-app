@@ -4,18 +4,7 @@ import { AlertController } from 'ionic-angular';
 import { Platform } from 'ionic-angular';
 import { MethodsProvider } from '../../providers/methods/methods';
 import { SavedAppointmentsPage } from '../saved-appointments/saved-appointments';
-declare var iosrtc;
-declare var apiRTC;
-declare var apiCC;
-
-const STATE_WAIT = "wait";
-const STATE_INCALL = "incall";
-
-const LABEL_CALL = "Call";
-const LABEL_HANGOUT = "Hangup";
-
-const COLOR_CALL = "#5cb85c";
-const COLOR_HANGOUT = "#d9534f";
+import { SignInPage } from '../sign-in/sign-in';
 
 
 @Component({
@@ -23,13 +12,6 @@ const COLOR_HANGOUT = "#d9534f";
   templateUrl: 'home.html'
 })
 export class HomePage {
-
-  distantNumber:any;
-  webRTCClient:any;
-  infoLabel:any;
-  buttonLabel:any;
-  buttonColor:any;
-  state:any;
 
   constructor(public methods:MethodsProvider, public navCtrl: NavController, public alertCtrl: AlertController, public platform: Platform) {
   
@@ -40,11 +22,33 @@ export class HomePage {
 
 
   Payment(){
-   
+    const prompt = this.alertCtrl.create({
+      message: "This feature is currently unavailable",
+      buttons: [
+        {
+          text: 'Ok',
+          handler: data => {
+            console.log('Saved clicked');
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
   Recordings(){
-
+    const prompt = this.alertCtrl.create({
+      message: "This feature is currently unavailable",
+      buttons: [
+        {
+          text: 'Ok',
+          handler: data => {
+            console.log('Saved clicked');
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
   Appointments(){
@@ -52,6 +56,41 @@ export class HomePage {
   }
   
   Profile(){
+    const prompt = this.alertCtrl.create({
+      message: "This feature is currently unavailable",
+      buttons: [
+        {
+          text: 'Ok',
+          handler: data => {
+            console.log('Saved clicked');
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
 
+  logout(){
+    const confirm = this.alertCtrl.create({
+      message: 'Are you sure you want to logout?',
+      buttons: [
+        {
+          text: 'Disagree',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Agree',
+          handler: () => {
+            this.methods.logout().then(()=>{
+              this.navCtrl.setRoot(SignInPage)
+            })
+            console.log('Agree clicked');
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 }

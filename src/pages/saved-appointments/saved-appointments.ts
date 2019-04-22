@@ -22,7 +22,7 @@ export class SavedAppointmentsPage {
       console.log(this.appoinmentsArray);
     }, Error =>{
       const prompt = this.alertCtrl.create({
-        message: "You do not have any Appointments scheduled",
+        message: "You currently do not have any Appointments scheduled",
         buttons: [
           {
             text: 'Ok',
@@ -39,6 +39,9 @@ export class SavedAppointmentsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SavedAppointmentsPage');
+  }
+  back(){
+    this.navCtrl.pop();
   }
   cancel(key){
     const confirm = this.alertCtrl.create({
@@ -63,7 +66,7 @@ export class SavedAppointmentsPage {
   }
   edit(i){
     const prompt = this.alertCtrl.create({
-      message: "Please note that, the information shown below is the date and time for your appointment",
+      message: "Please enter a new date or time for your appointment",
       inputs: [
         {
           name: 'Date',
