@@ -34,12 +34,15 @@ export class ClassPage {
   buttonColor:any;
   state:any;
   loading ;
+  message;
+  path;
+  test = "my name is"
   constructor(public loadingCtrl: LoadingController,public methods:MethodsProvider,public navCtrl: NavController, public navParams: NavParams, public platform: Platform) {
     this.loading = this.loadingCtrl.create({
       spinner: "bubbles",
       content: "Please wait",
     });
-    this.loading.present();
+    // this.loading.present();
     this.incomingCallHandler = this.incomingCallHandler.bind(this);
     this.userMediaErrorHandler = this.userMediaErrorHandler.bind(this);
     this.remoteStreamAddedHandler = this.remoteStreamAddedHandler.bind(this);
@@ -89,14 +92,35 @@ export class ClassPage {
 
   setID(){
     console.log(this.infoLabel);
-    this.methods.setUserId(parseInt(this.infoLabel));
+    this.methods.setUserId(parseInt(this.infoLabel)).then((data:any) =>{
+      console.log(data);
+      this.setPath(data.path)
+      this.methods.textAreaChat(data.path).then(() =>{
+        console.log('second hellll');
+        this.getText()
+      })
+    });
   }
+
+  getText(){
+    this.methods.getTextArea(this.path).then((chat:any) =>{
+      this.message = "";
+      this.message = chat;
+  })
+  }
+
+setPath(path){
+  this.path = path;
+}
 
   refreshVideoView() {
     if (this.platform.is('ios')) {
       console.log("REFRESH");
       iosrtc.refreshVideos();
     }
+  }
+  typeMessage(event){
+   this.methods.updateTextAreaChat(this.message,this.path);
   }
 
   incomingCallHandler(e) {

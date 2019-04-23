@@ -1,6 +1,7 @@
 import { Injectable, NgZone } from "@angular/core";
 import { LoadingController, AlertController} from "ionic-angular";
 import { dateDataSortValue } from "ionic-angular/umd/util/datetime-util";
+import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 // import { Http } from '@angular/http';
 // import 'rxjs/add/operator/map';
 
@@ -16,6 +17,7 @@ export class MethodsProvider {
   //arrays
   onlineTutors = new Array();
   appointmentsArr =  new Array();
+  textArea =  new Array();
   constructor(private ngzone: NgZone,public loadingCtrl: LoadingController,  public alertCtrl: AlertController,) {
    
     
@@ -100,6 +102,8 @@ export class MethodsProvider {
               id : x,
               img : details. downloadurl,
               contact : details.contact,
+              tutorId: "0000sfsdfsdf",
+              path : "new",
               status : false
           })            
          });
@@ -162,7 +166,9 @@ export class MethodsProvider {
                   img : details.img,
                   contact :details.contact,
                   status : details.status,
-                  key : user.uid
+                  tutorId: " ",
+                  key : user.uid,
+                  path : "new",
               }
               this.onlineTutors.push(onlineDetails)
             }
@@ -186,7 +192,9 @@ export class MethodsProvider {
 
   approveLesson(i){
     return new Promise((accpt, rej) =>{
-      firebase.database().ref("requests/" + i.key).update({status:true})
+      var user = firebase.auth().currentUser;
+      var chatPath = i.key + "/" + user.uid; 
+      firebase.database().ref("requests/" + i.key).update({status:true, tutorId:user.uid,   path : chatPath,})
       accpt('')
     })
   }
@@ -195,10 +203,43 @@ export class MethodsProvider {
     return new Promise((accpt, rej) =>{
       var user = firebase.auth().currentUser;
       firebase.database().ref("requests/" + user.uid).update({id:id})
-      accpt('')
+      firebase.database().ref("requests/"  + user.uid).on("value", (data: any) => {
+        let respObject = {
+          id : data.val().tutorId,
+          path : data.val().path
+        }
+        accpt(respObject)
+      })
     })
   }
 
+  textAreaChat(path){
+    return new Promise((accpt, rej) =>{
+      firebase.database().ref("textAreaChat/" + path).set({
+        text: "hello"
+      })
+      accpt('');
+    })
+  }
+
+  getTextArea(path){
+    return new Promise((accpt, rej) =>{
+    firebase.database().ref("textAreaChat/" + path).on("value", (data: any) => {
+        this.textArea = [];
+        console.log("helllllllllllllllllllllllllllll");
+        this.textArea = data.val().text;
+        accpt(this.textArea)
+      })
+    })
+  }
+
+  updateTextAreaChat(newTExt, path){
+    return new Promise((accpt, rej) =>{
+        var user = firebase.auth().currentUser;
+        firebase.database().ref("textAreaChat/" + path).update({text:newTExt})
+        accpt('')
+    })
+  }
   setAppontment(date,time,subject,course, channel){
     return new Promise((resolve, reject) => {
       this.ngzone.run(() => {
