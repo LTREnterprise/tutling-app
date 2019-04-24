@@ -14,7 +14,7 @@ page-sign-up {
         animation: 300ms panUp;
         animation-timing-function: ease-out;
     }
-    @keyframes panUp{
+    @keyframes panU2p{
         0%{
             top: 0 
         }
@@ -27,7 +27,7 @@ page-sign-up {
         position: absolute;
         width: 100vw;
         background: transparent;
-        transition:200ms;
+        // transition:200ms;
         display: flex;
         button{
             font-size: 18px;
@@ -48,7 +48,7 @@ page-sign-up {
         }
     }
     .image{
-        width: 40%;
+        width: 130px;
         margin: 0 auto;
         // border: 2px solid;
         background: rgb(75,75,75)
@@ -90,44 +90,44 @@ page-sign-up {
     .myBtn:active{
         background: rgb(187, 187, 187);
     }
-    .inputs{
-        // background: red;
-        padding: 10px;
-        margin-top: 10px;
-        text-align: center;
-        .theLabel{
-            position: absolute;
-        }
-        ion-item{
-            border-radius: 50px;
-            height: 0;
-            padding: 0;
-            margin-top: 20px;
-            position: relative;
-            // .test{
-            //     // width: 60%;
-            //     border: 2px solid red
-            // }
-        }
-        ion-input{
-            // border: 2px solid;
-            width: 100%;
-            margin: 0 auto;
-            // padding-left: 15px;
-            font-size: 18px;
-            font-weight: 500px;
-            // border: 2px solid;
-        }
-        ion-label{
-            // border: 2px solid red;
-            position: absolute;
-            right: 5px;
-            top: -3px;
-        }
-        .texter{
-            border: 2px solid;
-        }
-    }
+    // .inputs{
+    //     // background: red;
+    //     padding: 10px;
+    //     margin-top: 10px;
+    //     text-align: center;
+    //     .theLabel{
+    //         position: absolute;
+    //     }
+    //     ion-item{
+    //         border-radius: 50px;
+    //         height: 0;
+    //         padding: 0;
+    //         margin-top: 20px;
+    //         position: relative;
+    //         // .test{
+    //         //     // width: 60%;
+    //         //     border: 2px solid red
+    //         // }
+    //     }
+    //     ion-input{
+    //         // border: 2px solid;
+    //         width: 100%;
+    //         margin: 0 auto;
+    //         // padding-left: 15px;
+    //         font-size: 18px;
+    //         font-weight: 500px;
+    //         // border: 2px solid;
+    //     }
+    //     ion-label{
+    //         // border: 2px solid red;
+    //         position: absolute;
+    //         right: 5px;
+    //         top: -3px;
+    //     }
+    //     .texter{
+    //         border: 2px solid;
+    //     }
+    // }
     .scroll-content {
         padding-bottom: 0 !important;
      }
@@ -138,7 +138,7 @@ page-sign-up {
         text-align: center;
     .btn{
         transition: 700ms;
-        margin-bottom: 5px;
+        // margin-bottom: 5px;
         height: 50px;
         border-radius: 50px;
         background: linear-gradient(rgb(231,193,69),rgb(243, 232, 197),rgb(231,193,69), rgb(158, 121, 0), rgb(231,193,69), rgb(248, 222, 134));
@@ -158,6 +158,34 @@ page-sign-up {
     margin-bottom: 5px;
     height: 50px;
     border-radius: 50px;
+}
+.myInputs{
+    background: white;
+    color: black;
+    display: flex;
+    height: 45px;
+    width: 95%;
+    margin: 15px auto;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.616);
+    ion-input{
+        // border: 2px solid black;
+        padding-left: 10px;
+        font-weight: 600;
+        height: 100%;
+        padding-top: 3px;
+        // background: grey;
+
+    }
+    .placeHolder{
+        // border: 2px solid red;
+        // width:100px;
+        text-align: left;
+        line-height: 40px;
+        padding-right: 15px;
+        color: grey; 
+        font-weight: 600;
+    }
 }
     
 }
