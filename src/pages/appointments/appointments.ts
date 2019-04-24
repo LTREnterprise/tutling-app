@@ -35,12 +35,13 @@ export class AppointmentsPage {
   state:any;
   user;
   loading ;
+  message;
   constructor(public loadingCtrl: LoadingController,public methods:MethodsProvider,public navCtrl: NavController, public navParams: NavParams, public platform: Platform) {
     this.loading = this.loadingCtrl.create({
       spinner: "bubbles",
       content: "Please wait",
     });
-    this.loading.present();
+    // this.loading.present();
     this.user = this.navParams.get('user');
    console.log(this.user);
     this.incomingCallHandler = this.incomingCallHandler.bind(this);
@@ -90,13 +91,34 @@ export class AppointmentsPage {
     this.pushCall(event);
     this.getID();
   }
+path;
+  getText(){
+    this.methods.getTextArea(this.path).then((chat:any) =>{
+      this.message = "";
+      this.message = chat;
+      this.refreshMessages();
+  })
+  }
+
+  refreshMessages(){
+    setTimeout(() => {
+      this.getText();
+    }, 1200);
+  }
+
+  typeMessage(event){
+    this.methods.updateTextAreaChat(this.message,this.path);
+   }
 
   getID(){
     this.methods.getId(this.user.key).then((data:any) =>{
       console.log(data);
       if (data != 0){
+        this.path = this.user.key + "/" + this.user.user;
+        console.log(this.path);
         this.distantNumber = data;
         console.log(this.distantNumber);
+        this.getText();
         this.pushCall(event)
       }
       else{

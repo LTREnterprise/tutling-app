@@ -1,5 +1,5 @@
 import { Injectable, NgZone } from "@angular/core";
-import { LoadingController, AlertController} from "ionic-angular";
+import { LoadingController, AlertController, UrlSerializer} from "ionic-angular";
 import { dateDataSortValue } from "ionic-angular/umd/util/datetime-util";
 import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 // import { Http } from '@angular/http';
@@ -103,19 +103,21 @@ export class MethodsProvider {
               img : details. downloadurl,
               contact : details.contact,
               tutorId: "0000sfsdfsdf",
-              path : "new",
+              path : "",
               status : false
           })            
          });
       })
     })
   }
+
   getOnlineUsers2(){
     return new Promise((resolve, reject) => {
       this.ngzone.run(() => {
         firebase.database().ref("requests/").on("value", (data: any) => {
           this.onlineTutors.length = 0;
           var state = false;
+          var user = firebase.auth().currentUser;
             if (data.val() != null){
               console.log('getting online tutors');
               var details = data.val();
@@ -132,7 +134,9 @@ export class MethodsProvider {
                   img : details[k].img,
                   contact :details[k].contact,
                   status : details[k].status,
-                  key : k
+                  key : k,
+                  path : details[k].path,
+                  user : user.uid
               }
               this.onlineTutors.push(onlineDetails)
             }
@@ -168,7 +172,7 @@ export class MethodsProvider {
                   status : details.status,
                   tutorId: " ",
                   key : user.uid,
-                  path : "new",
+                  path : details.path,
               }
               this.onlineTutors.push(onlineDetails)
             }

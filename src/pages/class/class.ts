@@ -42,7 +42,7 @@ export class ClassPage {
       spinner: "bubbles",
       content: "Please wait",
     });
-    // this.loading.present();
+    this.loading.present();
     this.incomingCallHandler = this.incomingCallHandler.bind(this);
     this.userMediaErrorHandler = this.userMediaErrorHandler.bind(this);
     this.remoteStreamAddedHandler = this.remoteStreamAddedHandler.bind(this);
@@ -106,11 +106,18 @@ export class ClassPage {
     this.methods.getTextArea(this.path).then((chat:any) =>{
       this.message = "";
       this.message = chat;
+      this.refreshMessages();
   })
   }
 
 setPath(path){
   this.path = path;
+}
+
+refreshMessages(){
+  setTimeout(() => {
+    this.getText();
+  }, 1200);
 }
 
   refreshVideoView() {
