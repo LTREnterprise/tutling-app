@@ -39,6 +39,7 @@ counter = 0;
       console.log('assign to array');
       this.tutorsArr = data;
       this.listenForResp();
+      // this.ShowTutors();
     })
   }
 

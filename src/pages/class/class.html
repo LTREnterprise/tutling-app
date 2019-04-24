@@ -24,7 +24,7 @@
       </div>
      
       <div class="callingPromt">
-        <ion-textarea id="equation" rows="7"></ion-textarea>
+        <ion-textarea  id="equation"  rows="7"  (input)="typeMessage($event)" [(ngModel)]="message"></ion-textarea>
       </div>
       <div class="user-bottom">
               <div id="mini"></div>

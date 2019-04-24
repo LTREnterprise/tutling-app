@@ -34,6 +34,9 @@ export class ClassPage {
   buttonColor:any;
   state:any;
   loading ;
+  message;
+  path;
+  test = "my name is"
   constructor(public loadingCtrl: LoadingController,public methods:MethodsProvider,public navCtrl: NavController, public navParams: NavParams, public platform: Platform) {
     this.loading = this.loadingCtrl.create({
       spinner: "bubbles",
@@ -89,14 +92,42 @@ export class ClassPage {
 
   setID(){
     console.log(this.infoLabel);
-    this.methods.setUserId(parseInt(this.infoLabel));
+    this.methods.setUserId(parseInt(this.infoLabel)).then((data:any) =>{
+      console.log(data);
+      this.setPath(data.path)
+      this.methods.textAreaChat(data.path).then(() =>{
+        console.log('second hellll');
+        this.getText()
+      })
+    });
   }
+
+  getText(){
+    this.methods.getTextArea(this.path).then((chat:any) =>{
+      this.message = "";
+      this.message = chat;
+      this.refreshMessages();
+  })
+  }
+
+setPath(path){
+  this.path = path;
+}
+
+refreshMessages(){
+  setTimeout(() => {
+    this.getText();
+  }, 1200);
+}
 
   refreshVideoView() {
     if (this.platform.is('ios')) {
       console.log("REFRESH");
       iosrtc.refreshVideos();
     }
+  }
+  typeMessage(event){
+   this.methods.updateTextAreaChat(this.message,this.path);
   }
 
   incomingCallHandler(e) {
