@@ -15,7 +15,7 @@ import { MethodsProvider } from '../providers/methods/methods';
 import { AppointmentsPage } from '../pages/appointments/appointments';
 import { SignInPage } from '../pages/sign-in/sign-in';
 import { SavedAppointmentsPage } from '../pages/saved-appointments/saved-appointments';
-
+import { LocalNotifications } from '@ionic-native/local-notifications';
 @NgModule({
   declarations: [
     MyApp,
@@ -51,6 +51,7 @@ import { SavedAppointmentsPage } from '../pages/saved-appointments/saved-appoint
     StatusBar,
     SplashScreen,
     // AndroidPermissions,
+    LocalNotifications,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     MethodsProvider
   ]

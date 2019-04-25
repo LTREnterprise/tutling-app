@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import {LoadingController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MethodsProvider } from '../../providers/methods/methods';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 declare var iosrtc;
 declare var apiRTC;
 declare var apiCC;
@@ -36,8 +37,11 @@ export class ClassPage {
   loading ;
   message;
   path;
-  test = "my name is"
-  constructor(public loadingCtrl: LoadingController,public methods:MethodsProvider,public navCtrl: NavController, public navParams: NavParams, public platform: Platform) {
+  minutes = 3;
+  minREf;
+  seconds = 15;
+  secRef;
+  constructor(private localNotifications: LocalNotifications,public loadingCtrl: LoadingController,public methods:MethodsProvider,public navCtrl: NavController, public navParams: NavParams, public platform: Platform) {
     this.loading = this.loadingCtrl.create({
       spinner: "bubbles",
       content: "Please wait",
@@ -58,6 +62,7 @@ export class ClassPage {
     this.infoLabel= "Registration Ongoing...";
     this.buttonLabel = LABEL_CALL;
     this.buttonColor = COLOR_CALL;
+    this.timer();
   }
 
   ionViewDidLoad() {
@@ -128,6 +133,50 @@ refreshMessages(){
   }
   typeMessage(event){
    this.methods.updateTextAreaChat(this.message,this.path);
+  }
+
+  timer(){
+      setTimeout(() => {
+        if (this.seconds == 0){
+          if (this.minutes != 0){
+          if (this.minutes  <= 9)
+            this.minREf = 0;
+          this.seconds = 59;
+          this.secRef = null
+          this.minutes--
+          if (this.minutes == 2){
+            this.showNotification(2, 'minutes')
+          }
+          else  if (this.minutes == 1){
+            this.showNotification(60,'seconds')
+          }
+          }
+          else {
+            console.log('time stopped');
+            
+          }
+        }
+        else{
+          if (this.minutes  <= 9)
+          this.minREf = 0;
+          if (this.seconds <= 10){
+            this.secRef = 0
+          }
+          this.seconds--;
+        }
+        this.timer();
+      }, 1000);
+  
+  }
+
+  showNotification(time, interval){
+    this.localNotifications.schedule([{
+      id: 1,
+      title: 'Education App',
+      text: 'You have less than ' + time + ' ' + interval + ' remaining, top up now?',
+      icon: 'http://example.com/icon.png'
+   }]);
+   
   }
 
   incomingCallHandler(e) {
