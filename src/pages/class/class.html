@@ -22,10 +22,10 @@
     </div>
     <div class="videoFeeds">
         <div class="callingPromt">
-          <div class="closeOpen">
-            <ion-icon></ion-icon>
+          <div class="closeOpen" (click)="showHideText()">
+            <ion-icon name="arrow-up"></ion-icon>
           </div>
-            <ion-textarea  id="equation"  rows="7"  (input)="typeMessage($event)" [(ngModel)]="message"></ion-textarea>
+            <ion-textarea  id="equation" placeholder="Your text here" rows="7"  (input)="typeMessage($event)" [(ngModel)]="message"></ion-textarea>
           </div>
         <div id="remote" (click)="showHideOpts()">
           <p id="connect">
@@ -49,7 +49,7 @@
       </div> -->
 
       
-<div class="time-duration">
+<div class="time-duration" [hidden]="isOpen()">
     <p class="time">{{minREf}}{{minutes}}:{{secRef}}{{seconds}}</p>
   <p class="remaining">Minutes Remaining</p>
 </div>
