@@ -144,11 +144,8 @@ refreshMessages(){
           this.seconds = 59;
           this.secRef = null
           this.minutes--
-          if (this.minutes == 2){
+          if (this.minutes > 2 ){
             this.showNotification(2, 'minutes')
-          }
-          else  if (this.minutes == 1){
-            this.showNotification(60,'seconds')
           }
           }
           else {

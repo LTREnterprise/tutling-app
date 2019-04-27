@@ -220,7 +220,7 @@ export class MethodsProvider {
   textAreaChat(path){
     return new Promise((accpt, rej) =>{
       firebase.database().ref("textAreaChat/" + path).set({
-        text: "hello"
+        text: " "
       })
       accpt('');
     })
