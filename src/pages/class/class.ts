@@ -41,6 +41,8 @@ export class ClassPage {
   minREf;
   seconds = 15;
   secRef;
+  checkState = 0;
+  varTxt = 0;
   constructor(private localNotifications: LocalNotifications,public loadingCtrl: LoadingController,public methods:MethodsProvider,public navCtrl: NavController, public navParams: NavParams, public platform: Platform) {
     this.loading = this.loadingCtrl.create({
       spinner: "bubbles",
@@ -183,6 +185,10 @@ refreshMessages(){
     this.buttonLabel = LABEL_HANGOUT;
     this.loading.dismiss();
     setTimeout(this.refreshVideoView,2000);
+    
+    setTimeout(() => {
+      this.showHideOpts();
+    }, 2000);
   }
 
   hangupHandler(e) {
@@ -227,5 +233,46 @@ refreshMessages(){
   initMediaElementState(callId) {
     this.webRTCClient.removeElementFromDiv('mini', 'miniElt-' + callId);
     this.webRTCClient.removeElementFromDiv('remote', 'remoteElt-' + callId);
+  }
+  showHideOpts() {
+
+    var theNav = document.getElementsByClassName("head") as HTMLCollectionOf<HTMLElement>;
+    var theOpts = document.getElementsByClassName("options") as HTMLCollectionOf<HTMLElement>;
+    if (this.checkState == 0) {
+      this.checkState = 1
+      console.log("show");
+      theNav[0].style.top = "-100px";
+      theOpts[0].style.top = "-110px";
+    }
+    else {
+      this.checkState = 0;
+
+      theNav[0].style.top = "0px";
+      theOpts[0].style.top = "45px";
+      console.log("hide");
+    }
+    // console.log(this.checkState);
+  }
+  showHideText(){
+    var switcherBtn = document.getElementsByClassName("closeOpen") as HTMLCollectionOf<HTMLElement>;
+    var textbox = document.getElementsByClassName("callingPromt") as HTMLCollectionOf<HTMLElement>;
+    if(this.varTxt == 0){
+      this.varTxt = 1
+      this.checkState = 0
+      textbox[0].style.transform = "translateX(0%)";
+      switcherBtn[0].style.transform = " rotate(-90DEG)";
+      this.showHideOpts()
+    }
+    else{
+      this.varTxt = 0;
+      textbox[0].style.transform = "translateX(-105%)";
+      switcherBtn[0].style.transform = " rotate(90DEG)";
+      
+      
+      this.checkState = 1;
+      this.showHideOpts()
+    }
+    console.log(this.varTxt);
+    
   }
 }

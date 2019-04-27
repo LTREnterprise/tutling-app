@@ -15,7 +15,9 @@ page-class {
         position: absolute;
         height: 10%;
         width: 100vw;
-        background: rgb(75,75,75);
+        transition: 300ms;
+        // background: rgb(75,75,75);
+        z-index: 10;
         // padding-top: 5px;
         // border: 2px solid rgb(75,75,75);
         #menu{
@@ -38,11 +40,12 @@ page-class {
         }
     }
     .date-time{
-        margin-top: 12vh;
+        // margin-top: 12vh;
         display: flex;
     }
     .date-time > div{
         border: 4px solid gold;
+        background: rgb(75,75,75);
         margin: 10px auto;
         width: 49%;
         padding: 10px;
@@ -79,16 +82,23 @@ page-class {
         object-fit: cover;
     }
     .callingPromt{
+        position: absolute;
+        left: 10px;
+        bottom: 80px;
         text-align: center;
+        z-index: 10;
         color: white;
         font-size: 16px;
         height: 150px;
-        // border: 2px solid black;
+        transition: 300ms;
+        // border: 2px solid red;
+        border-radius: 10px;
         width:75%;
         margin-top: 10px;
-        margin-bottom: 10px;
-        background: grey;
-        padding: 0;
+        // margin-bottom: 10px;
+        background: rgb(98, 98, 98);
+        // padding: 0;
+        transform: translateX(-105%)
     }
     .user-top{
         // border:2px solid;
@@ -101,7 +111,8 @@ page-class {
 
     .time-duration{
         position: absolute;
-        bottom: 20px;
+        bottom: 10px;
+        left: 10px;
         width: 50%;
         // height: 50px;
         border: 3px solid gold;
@@ -123,11 +134,11 @@ page-class {
     }
     @media screen and (max-width: 359px){
         .date-time{
-            margin-top: 8vh;
+            // margin-top: 8vh;
             display: flex;
         }
         .time-duration{
-            position: static;
+            position: absolute;
             margin-top: 5px;
             // bottom: 20px;
             width: 50%;
@@ -138,24 +149,80 @@ page-class {
             .time{
                 line-height: 18px;
                 // border: 2px solid red;
-                font-size: 18px;
+                font-size: 2rem;
                 margin: 2px;
             }
             .remaining{
                 
                 line-height: 18px;
                 // border: 2px solid red;
-                font-size: 14px;
+                font-size: .5rem;
                 margin: 2px;
             }
         }
     }
     #equation{
-        background: grey;
+        background: rgb(98, 98, 98);
         padding: 0 10px 0 10px;
-        border: 4px solid black;
+        // border: 4px solid black;
+        border-radius: 10px;
     }
-    .scroll-content {
-        padding-bottom: 0 !important;
-     }
+    #mini{
+        border: 2px solid white;
+        background: black;
+        height: 20vh;
+        width: 30%;
+        border-radius: 10px;
+        object-fit: cover;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+    }
+    #remote{
+        // border: 2px solid black;
+        background: rgb(0, 0, 0);
+        width:100%;
+        height: 100%;
+    }
+    .options{
+        position: absolute;
+        width: 95%;
+        transition: 500ms;
+        top: 45px;
+        // border: 2px solid red;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+    }
+    .videoFeeds{
+        width: 100%;
+        height: 100%;
+        border: 2px solid grey;
+        position: relative;
+        z-index: 0;
+    }
+    #connect{
+        color: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%)
+    }
+    .closeOpen{
+        width: 30px;
+        height: 30px;
+        border: 2px solid rgba(255, 255, 255, 0.733);
+        border-radius: 50px;
+        background: rgba(0, 0, 0, 0.582);
+        position: absolute;
+        right: -40px;
+        transform: rotate(90DEG);
+        transition: 500ms;
+        ion-icon{
+            line-height: 23px;
+            padding: 0;
+            // border: 2px solid black;
+            height: 30px
+        }
+    }
 }
