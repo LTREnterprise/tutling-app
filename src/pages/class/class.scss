@@ -16,7 +16,7 @@ page-class {
         height: 10%;
         width: 100vw;
         transition: 300ms;
-        // background: rgb(75,75,75);
+        background: rgb(75,75,75);
         z-index: 10;
         // padding-top: 5px;
         // border: 2px solid rgb(75,75,75);
@@ -169,7 +169,7 @@ page-class {
     }
     #mini{
         border: 2px solid white;
-        background: black;
+        background: rgb(75,75,75);
         height: 20vh;
         width: 30%;
         border-radius: 10px;
@@ -180,7 +180,7 @@ page-class {
     }
     #remote{
         // border: 2px solid black;
-        background: rgb(0, 0, 0);
+        background: rgb(75,75,75);
         width:100%;
         height: 100%;
     }

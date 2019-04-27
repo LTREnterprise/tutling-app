@@ -64,7 +64,7 @@ export class ClassPage {
     this.infoLabel= "Registration Ongoing...";
     this.buttonLabel = LABEL_CALL;
     this.buttonColor = COLOR_CALL;
-    this.timer();
+  
   }
 
   ionViewDidLoad() {
@@ -146,8 +146,11 @@ refreshMessages(){
           this.seconds = 59;
           this.secRef = null
           this.minutes--
-          if (this.minutes > 2 ){
+          if (this.minutes == 1 ){
             this.showNotification(2, 'minutes')
+          }
+          else if (this.minutes == 0){
+            this.showNotification(60,'seconds')
           }
           }
           else {
@@ -184,8 +187,8 @@ refreshMessages(){
     this.buttonColor = COLOR_HANGOUT;
     this.buttonLabel = LABEL_HANGOUT;
     this.loading.dismiss();
+    this.timer();
     setTimeout(this.refreshVideoView,2000);
-    
     setTimeout(() => {
       this.showHideOpts();
     }, 2000);
