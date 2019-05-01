@@ -147,8 +147,8 @@ export class RequestPage {
               handler: data => {
                 this.date = null;
                 this.time = null;
-                this.buttonColor = "primary"
-                this.buttonColor2 = "primary"
+                this.buttonColor = "light"
+                this.buttonColor2 = "light xZ"
                 console.log('Saved clicked');
               }
             }
