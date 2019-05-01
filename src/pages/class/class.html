@@ -9,6 +9,10 @@
     </button>
   </div>
   <div class="body">
+    <div class="time-duration" (click)="showHideOpts()">
+      <p class="time">{{minREf}}{{minutes}}:{{secRef}}{{seconds}}</p>
+      <p class="remaining">Minutes Remaining</p>
+    </div>
     <div class="options">
       <div class="date-time">
         <div>
@@ -21,21 +25,24 @@
       </div>
     </div>
     <div class="videoFeeds">
-        <div class="callingPromt">
-          <div class="closeOpen" (click)="showHideText()">
-            <ion-icon name="arrow-up"></ion-icon>
-          </div>
-            <ion-textarea  id="equation" placeholder="Your text here" rows="7"  (input)="typeMessage($event)" [(ngModel)]="message"></ion-textarea>
-          </div>
-        <div id="remote" (click)="showHideOpts()">
-          <p id="connect">
-            Connecting...
-          </p>
+      <div class="callingPromt">
+          <p class="timeCanvas">{{minREf}}{{minutes}}:{{secRef}}{{seconds}}</p>
+
+
+
+        <div class="closeOpen" style="transform: rotate(90DEG)" (click)="showHideText()">
+          <ion-icon name="arrow-up"></ion-icon>
         </div>
-        <div id="mini" (click)="showHideOpts()"></div>
+        <canvas-draw id="equation"></canvas-draw>
+      </div>
+      <div id="remote" (click)="showHideOpts()">
+        <p id="connect">
+        </p>
+      </div>
+      <div id="mini" (click)="showHideOpts()"></div>
     </div>
 
-      <!-- <div class="user-top">
+    <!-- <div class="user-top">
         <img src="assets/imgs/personico.png" class="person-icon" alt="">
         <div id="remote" (click)="showHideOpts()"></div>
       </div>
@@ -48,10 +55,7 @@
           <img src="assets/imgs/personico.png" class="person-icon" alt="">
       </div> -->
 
-      
-<div class="time-duration" [hidden]="isOpen()">
-    <p class="time">{{minREf}}{{minutes}}:{{secRef}}{{seconds}}</p>
-  <p class="remaining">Minutes Remaining</p>
-</div>
+
+
   </div>
 </ion-content>
