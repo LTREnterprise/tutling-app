@@ -1,0 +1,53 @@
+page-recordings {
+    .container{
+        width: 100%;
+        height: 100%;
+        background: rgb(75, 75, 75);
+        overflow: hidden;
+    }
+    .nav{
+        height: 50px;
+        color: gold;
+        button{
+            position: absolute;
+            top: 0;
+        }
+        p{
+            text-align: center;
+        }
+        #searcher{
+            right: 0;
+        }
+    }
+    #labelRec{
+        position: absolute;
+        color: white;
+        left: 20px;
+        top: 50px;
+    }
+    #labelTexts{
+        color: black;
+        font-weight: 700;
+        margin-left: 20px;
+    }
+    #videos{
+        height: 30%;
+    }
+    .slide{
+        padding-left: 5px;
+        padding-right: 5px;
+        border-radius: 5px;
+        p{
+            font-size: 14px;
+            // border: 2px solid red;
+            margin: 0;
+        }
+    }
+    .textRecordings{
+        background: white;
+        margin: 0px auto;
+        padding-top: 10px;
+        padding-bottom: 10px;
+
+    }
+}

@@ -1,4 +1,5 @@
-<!-- <ion-content>
+<ion-content>
+
   <div class="head">
     <button ion-button clear color="light" id="list">
       <ion-icon ios="ios-list" md="md-list"></ion-icon>
@@ -8,74 +9,48 @@
       <ion-icon ios="ios-search" md="md-search"></ion-icon>
     </button>
   </div>
+
+
   <div class="body" padding>
-      <div class="date-time">
-        <div>
-          03/04/2019
-        </div>
-        <div>08:00 AM</div>
-      </div>
-      <div class="subject">
-        English Lecture 32:B
-      </div>
-      <div class="user-top">
-        <img src="assets/imgs/personico.png" class="person-icon" alt="">
-      </div>
-      <div class="callingPromt">
-        <img src="assets/imgs/Calling icon.png" alt="" class="dialing">
-        <br>
-        Calling
-      </div>
-      <div><div id="remote" style="width:100%;"></div>
-      <div id="mini"></div></div>
-      <div class="user-bottom">
-          <img src="assets/imgs/personico.png" class="person-icon" alt="">
-      </div>
+    <div class="canvasPart">
+      <p class="timeCanvas">{{minREf}}{{minutes}}:{{secRef}}{{seconds}}</p>
 
 
-<div class="time-duration">
-  <p class="time">09:03</p>
-  <p class="remaining">Minutes Remaining</p>
-</div>
-  </div>
-</ion-content> -->
 
-<ion-content>
-  <div class="head">
-    <button ion-button clear color="light" id="list">
-      <ion-icon ios="ios-list" md="md-list"></ion-icon>
-    </button>
-    <div id="menu">CLASS</div>
-    <button ion-button clear color="light" id="search">
-      <ion-icon ios="ios-search" md="md-search"></ion-icon>
-    </button>
-  </div>
-  <div class="body" padding>
-      <div class="date-time">
-        <div>
-          03/04/2019
-        </div>
-        <div>08:00 AM</div>
+      <div class="closeOpen" style="transform: rotate(90DEG)" (click)="showHideText()">
+        <ion-icon name="arrow-up"></ion-icon>
       </div>
-      <div class="subject">
-        English Lecture 32:B
+      <canvas-draw id="equation"></canvas-draw>
+    </div>
+    <div class="date-time">
+      <div>
+        03/04/2019
       </div>
-      <div class="user-top">
-        <img src="assets/imgs/personico.png" class="person-icon" alt="">
-        <div id="remote" style="width:50%; height: 50%;"></div>
-      </div>
-     
-      <div class="callingPromt">
-        <ion-textarea  id="equation"  rows="7"  (input)="typeMessage($event)" [(ngModel)]="message"></ion-textarea>
-      </div>
-      <div class="user-bottom">
-              <div id="mini"></div>
-          <img src="assets/imgs/personico.png" class="person-icon" alt="">
-      </div>
-      
-<div class="time-duration">
-  <p class="time">09:03</p>
-  <p class="remaining">Minutes Remaining</p>
-</div>
+      <div>08:00 AM</div>
+    </div>
+    <div class="subject">
+      English Lecture 32:B
+    </div>
+    <div class="user-top">
+      <img src="assets/imgs/personico.png" class="person-icon" alt="">
+    </div>
+    <div class="callingPromt">
+      <img src="assets/imgs/Calling icon.png" alt="" class="dialing">
+      <br>
+      Calling
+    </div>
+    <div>
+      <div id="remote" style="width:100%;"></div>
+      <div id="mini"></div>
+    </div>
+    <div class="user-bottom">
+      <img src="assets/imgs/personico.png" class="person-icon" alt="">
+    </div>
+
+
+    <div class="time-duration">
+      <p class="time">09:03</p>
+      <p class="remaining">Minutes Remaining</p>
+    </div>
   </div>
 </ion-content>
