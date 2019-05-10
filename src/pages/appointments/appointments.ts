@@ -36,6 +36,12 @@ export class AppointmentsPage {
   user;
   loading ;
   message;
+  checkState=0;
+  varTxt=0;
+  minREf = 0;
+  minutes = 0;
+  secRef =0;
+  seconds =0;
   constructor(public loadingCtrl: LoadingController,public methods:MethodsProvider,public navCtrl: NavController, public navParams: NavParams, public platform: Platform) {
     this.loading = this.loadingCtrl.create({
       spinner: "bubbles",
@@ -187,5 +193,51 @@ path;
     this.webRTCClient.removeElementFromDiv('mini', 'miniElt-' + callId);
     this.webRTCClient.removeElementFromDiv('remote', 'remoteElt-' + callId);
   }
+  showHideOpts() {
 
+    var theNav = document.getElementsByClassName("head") as HTMLCollectionOf<HTMLElement>;
+    var theOpts = document.getElementsByClassName("options") as HTMLCollectionOf<HTMLElement>;
+    if (this.checkState == 0) {
+      this.checkState = 1
+      console.log("show");
+      theNav[0].style.top = "-100px";
+      theOpts[0].style.top = "-110px";
+    }
+    else {
+      this.checkState = 0;
+
+      theNav[0].style.top = "0px";
+      theOpts[0].style.top = "45px";
+      console.log("hide");
+    }
+  }
+  showHideText() {
+    var switcherBtn = document.getElementsByClassName("closeOpen") as HTMLCollectionOf<HTMLElement>;
+    var textbox = document.getElementsByClassName("canvasPart") as HTMLCollectionOf<HTMLElement>;
+    var timeRem = document.getElementsByClassName("time-duration") as HTMLCollectionOf<HTMLElement>;
+    if (this.varTxt == 0) {
+      this.varTxt = 1
+      this.checkState = 0
+      textbox[0].style.transform = "translateX(0%)";
+      switcherBtn[0].style.transform = " rotate(-90DEG)";
+      switcherBtn[0].style.right = "5px";
+      switcherBtn[0].style.top = "5px";
+      timeRem[0].style.display = "none"
+      // this.showHideOpts()
+    }
+    else {
+      this.varTxt = 0;
+      textbox[0].style.transform = "translateX(-105%)";
+      switcherBtn[0].style.transform = " rotate(90DEG)";
+      switcherBtn[0].style.right = "-50px";
+      switcherBtn[0].style.top = "50%";
+      timeRem[0].style.display = "block"
+
+
+      this.checkState = 1;
+      // this.showHideOpts()
+    }
+    console.log(this.varTxt);
+
+  }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, Renderer  } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import {LoadingController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MethodsProvider } from '../../providers/methods/methods';
@@ -34,16 +34,16 @@ export class ClassPage {
   buttonLabel:any;
   buttonColor:any;
   state:any;
-  loading ;
+  loading;
   message;
   path;
-  minutes = 3;
-  minREf;
-  seconds = 15;
-  secRef;
+  minutes = 0;
+  minREf = 0;
+  seconds = 0;
+  secRef = 0;
   checkState = 0;
   varTxt = 0;
-  constructor(private localNotifications: LocalNotifications,public loadingCtrl: LoadingController,public methods:MethodsProvider,public navCtrl: NavController, public navParams: NavParams, public platform: Platform) {
+  constructor(private localNotifications: LocalNotifications,public loadingCtrl: LoadingController,public methods:MethodsProvider,public navCtrl: NavController, public navParams: NavParams, public platform: Platform, public renderer: Renderer) {
     this.loading = this.loadingCtrl.create({
       spinner: "bubbles",
       content: "Please wait",
@@ -209,7 +209,7 @@ refreshMessages(){
       e.detail.callType,
       "mini",
       'miniElt-' + e.detail.callId,
-      {width : "50%", height : "50%"},
+      { width: "30%", height: "20vh" },
       true
     );
   }
@@ -254,28 +254,34 @@ refreshMessages(){
       theOpts[0].style.top = "45px";
       console.log("hide");
     }
-    // console.log(this.checkState);
   }
-  showHideText(){
+  showHideText() {
     var switcherBtn = document.getElementsByClassName("closeOpen") as HTMLCollectionOf<HTMLElement>;
     var textbox = document.getElementsByClassName("callingPromt") as HTMLCollectionOf<HTMLElement>;
-    if(this.varTxt == 0){
+    var timeRem = document.getElementsByClassName("time-duration") as HTMLCollectionOf<HTMLElement>;
+    if (this.varTxt == 0) {
       this.varTxt = 1
       this.checkState = 0
       textbox[0].style.transform = "translateX(0%)";
       switcherBtn[0].style.transform = " rotate(-90DEG)";
+      switcherBtn[0].style.right = "5px";
+      switcherBtn[0].style.top = "5px";
+      timeRem[0].style.display = "none"
       this.showHideOpts()
     }
-    else{
+    else {
       this.varTxt = 0;
       textbox[0].style.transform = "translateX(-105%)";
       switcherBtn[0].style.transform = " rotate(90DEG)";
-      
-      
+      switcherBtn[0].style.right = "-50px";
+      switcherBtn[0].style.top = "50%";
+      timeRem[0].style.display = "block"
+
+
       this.checkState = 1;
       this.showHideOpts()
     }
     console.log(this.varTxt);
-    
+
   }
 }
