@@ -30,7 +30,7 @@ counter = 0;
 
   ShowTutors(){
     console.log(this.tutorsArr);
-      this.navCtrl.push(ClassPage, {tutors:this.tutorsArr})
+      this.navCtrl.push(FeedbackPage, {tutors:this.tutorsArr})
   }
 
   getConfirmation(){

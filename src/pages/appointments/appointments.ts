@@ -41,7 +41,7 @@ export class AppointmentsPage {
       spinner: "bubbles",
       content: "Please wait",
     });
-    // this.loading.present();
+    this.loading.present();
     this.user = this.navParams.get('user');
    console.log(this.user);
     this.incomingCallHandler = this.incomingCallHandler.bind(this);
