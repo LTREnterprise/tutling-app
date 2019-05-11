@@ -1,0 +1,83 @@
+<ion-content>
+
+  <div class="head">
+    <button ion-button clear color="light" id="list">
+      <ion-icon ios="ios-list" md="md-list"></ion-icon>
+    </button>
+    <div id="menu">APPOINTMENTS</div>
+    <button ion-button clear color="light" id="search">
+      <ion-icon ios="ios-search" md="md-search"></ion-icon>
+    </button>
+  </div>
+
+
+  <div class="body" padding>
+
+    <div class="date-time">
+      <div>
+        03/04/2019
+      </div>
+      <div>08:00 AM</div>
+    </div>
+    <div class="subject">
+      English Lecture 32:B
+    </div>
+
+    <!-- <div *ngIf="i.senderID === currentUserId"> -->
+
+
+    <div class="chats" >
+      <div class="message" *ngFor = "let i of Messages">
+        <div class="sent">
+          <span class="sent-received">
+            {{i.message}}
+          </span><br>
+          <span class="timeStamp">{{i.Date}}</span>
+        </div>
+        <img src="assets/imgs/personico.png" alt="" class="dp">
+      </div>
+      <!-- <div class="message"> <img src="../../assets/imgs/personico.png" alt="" class="dp-friend">
+
+        <div class="received">
+
+          <span class="sent-received">
+            Lorem
+          </span><br>
+          <span class="timeStamp">19:20</span>
+        </div>
+      </div> -->
+      <!-- <div class="message">
+        <div class="sent">
+          <span class="sent-received">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi quisquam sequi ad reprehenderit quod beatae
+            adipisci odio debitis. Distinctio deserunt commodi beatae possimus dicta dolores aliquam, ab impedit
+            laudantium labore.
+          </span><br>
+          <span class="timeStamp">19:20</span>
+        </div>
+        <img src="../../assets/imgs/personico.png" alt="" class="dp">
+      </div> -->
+      <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
+          <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+       
+    </div>
+    <div id="textbox">
+      <div class="txt">
+        <input type="text" [(ngModel)]="mssg">
+      </div>
+      <div class="btn">
+        <button clear color="dark" ion-button id="sender" (click)="sendMessage()">
+          <ion-icon name="send"></ion-icon>
+        </button>
+      </div>
+    </div>
+
+
+    <div class="time-duration">
+      <p class="time">09:03</p>
+      <p class="remaining">Minutes Remaining</p>
+    </div>
+  </div>
+</ion-content>
+

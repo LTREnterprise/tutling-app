@@ -18,6 +18,7 @@ import { SavedAppointmentsPage } from '../pages/saved-appointments/saved-appoint
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import {CanvasDraw} from '../components/canvas-draw/canvas-draw'
 import { RecordingsPage } from '../pages/recordings/recordings';
+import { ChattingPage } from '../pages/chatting/chatting';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { RecordingsPage } from '../pages/recordings/recordings';
     SignInPage,
     SavedAppointmentsPage,
     RecordingsPage,
-    CanvasDraw
+    CanvasDraw,
+    ChattingPage
     
   ],
   imports: [
@@ -51,7 +53,8 @@ import { RecordingsPage } from '../pages/recordings/recordings';
     AppointmentsPage,
     SignInPage,
     SavedAppointmentsPage,
-    RecordingsPage
+    RecordingsPage,
+    ChattingPage
   ],
   providers: [
     StatusBar,

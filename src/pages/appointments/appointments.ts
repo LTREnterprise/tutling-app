@@ -48,7 +48,7 @@ export class AppointmentsPage {
       content: "Please wait",
     });
     this.loading.present();
-    this.user = this.navParams.get('user');
+    this.user = this.navParams.get('tutors');
    console.log(this.user);
     this.incomingCallHandler = this.incomingCallHandler.bind(this);
     this.userMediaErrorHandler = this.userMediaErrorHandler.bind(this);

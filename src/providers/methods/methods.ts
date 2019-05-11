@@ -18,6 +18,7 @@ export class MethodsProvider {
   onlineTutors = new Array();
   appointmentsArr =  new Array();
   textArea =  new Array();
+  messages = new Array();
   constructor(private ngzone: NgZone,public loadingCtrl: LoadingController,  public alertCtrl: AlertController,) {
    
     
@@ -90,7 +91,7 @@ export class MethodsProvider {
     });
   }
 
-  setRequest(){
+  setRequest(type){
     return new Promise((resolve, reject) => {
       this.ngzone.run(() => {
         var user = firebase.auth().currentUser;
@@ -104,6 +105,7 @@ export class MethodsProvider {
               contact : details.contact,
               tutorId: "0000sfsdfsdf",
               path : "",
+              channel : type,
               status : false
           })            
          });
@@ -111,7 +113,7 @@ export class MethodsProvider {
     })
   }
 
-  getOnlineUsers(){
+  getOnlineUsers2(){
     return new Promise((resolve, reject) => {
       this.ngzone.run(() => {
         firebase.database().ref("requests/").on("value", (data: any) => {
@@ -136,7 +138,8 @@ export class MethodsProvider {
                   status : details[k].status,
                   key : k,
                   path : details[k].path,
-                  user : user.uid
+                  user : user.uid,
+                  channel: details[k].channel
               }
               this.onlineTutors.push(onlineDetails)
             }
@@ -149,7 +152,7 @@ export class MethodsProvider {
       })
     })
   }
-  getOnlineUsers2(){
+  getOnlineUsers(){
     return new Promise((resolve, reject) => {
       this.ngzone.run(() => {
         var user = firebase.auth().currentUser;
@@ -173,6 +176,7 @@ export class MethodsProvider {
                   tutorId: " ",
                   key : user.uid,
                   path : details.path,
+                  channel: details.channel
               }
               this.onlineTutors.push(onlineDetails)
             }
@@ -185,6 +189,54 @@ export class MethodsProvider {
     })
   }
 
+  setPath(path){
+        return new Promise((accpt, rej) =>{
+          firebase.database().ref("Chats/" + path).push({
+            message: "",
+            Date: "",
+            senderID: "",
+            receiverID : ""
+        })
+       accpt('')
+    })
+  }
+
+  getMessages(path){
+    return new Promise((accpt, rej) =>{
+      firebase.database().ref("Chats/" + path).on("value", (data: any) => {
+        this.messages.length = 0;
+        if (data.val() != null || data.val() != undefined){
+          var msges = data.val();
+          var key = Object.keys(msges);
+          for (var x = 1; x < key.length; x++){
+            var k = key[x];
+            let msObject = {
+              message : msges[k].message,
+              Date: msges[k].Date,
+              senderID: msges[k].senderID,
+              receiverID : msges[k].receiverID
+            } 
+            this.messages.push(msObject) 
+          }
+          accpt(this.messages)
+        }
+      })
+    })
+  }
+
+  sendMessage(path, text){
+    return new Promise((accpt, rej) =>{
+      var user = firebase.auth().currentUser;
+      firebase.database().ref("Chats/" + path).push({
+        message: text,
+        Date: "",
+        senderID: user.uid,
+        receiverID : ""
+    })
+   accpt('')
+})
+  }
+
   navigateToClass(){
     console.log('response available');
     this.resp = true;
@@ -194,12 +246,16 @@ export class MethodsProvider {
     return this.resp;
   }
 
+  getUserID(){
+    return firebase.auth().currentUser.uid
+  }
+
   approveLesson(i){
     return new Promise((accpt, rej) =>{
       var user = firebase.auth().currentUser;
       var chatPath = i.key + "/" + user.uid; 
       firebase.database().ref("requests/" + i.key).update({status:true, tutorId:user.uid,   path : chatPath,})
-      accpt('')
+      accpt(chatPath)
     })
   }
 

@@ -1,5 +1,5 @@
 import { Component, ViewChild, Renderer  } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform, Content } from 'ionic-angular';
 import {LoadingController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MethodsProvider } from '../../providers/methods/methods';
 import { LocalNotifications } from '@ionic-native/local-notifications';
@@ -28,6 +28,22 @@ const COLOR_HANGOUT = "#d9534f";
   templateUrl: 'class.html',
 })
 export class ClassPage {
+  @ViewChild('imageCanvas') canvas: any;
+  canvasElement: any;
+ 
+  saveX: number;
+  saveY: number;
+ 
+  storedImages = [];
+ 
+  // Make Canvas sticky at the top stuff
+  @ViewChild(Content) content: Content;
+  @ViewChild('fixedContainer') fixedContainer: any;
+ 
+  // Color Stuff
+  selectedColor = '#9e2956';
+ 
+  colors = [ '#9e2956', '#c2281d', '#de722f', '#edbf4c', '#5db37e', '#459cde', '#4250ad', '#802fa3' ];
   distantNumber:any;
   webRTCClient:any;
   infoLabel:any;
@@ -43,12 +59,12 @@ export class ClassPage {
   secRef = 0;
   checkState = 0;
   varTxt = 0;
-  constructor(private localNotifications: LocalNotifications,public loadingCtrl: LoadingController,public methods:MethodsProvider,public navCtrl: NavController, public navParams: NavParams, public platform: Platform, public renderer: Renderer) {
+  constructor(private plt:Platform, private localNotifications: LocalNotifications,public loadingCtrl: LoadingController,public methods:MethodsProvider,public navCtrl: NavController, public navParams: NavParams, public platform: Platform, public renderer: Renderer) {
     this.loading = this.loadingCtrl.create({
       spinner: "bubbles",
       content: "Please wait",
     });
-    this.loading.present();
+    // this.loading.present();
     this.incomingCallHandler = this.incomingCallHandler.bind(this);
     this.userMediaErrorHandler = this.userMediaErrorHandler.bind(this);
     this.remoteStreamAddedHandler = this.remoteStreamAddedHandler.bind(this);
@@ -66,10 +82,24 @@ export class ClassPage {
     this.buttonColor = COLOR_CALL;
   
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ClassPage');
+  ionViewDidEnter() {
+    // https://github.com/ionic-team/ionic/issues/9071#issuecomment-362920591
+    // Get the height of the fixed item
+    let itemHeight = this.fixedContainer.nativeElement.offsetHeight;
+    let scroll = this.content.getScrollElement();
+ 
+    // Add preexisting scroll margin to fixed container size
+    itemHeight = Number.parseFloat(scroll.style.marginTop.replace("px", "")) + itemHeight;
+    scroll.style.marginTop = itemHeight + 'px';
   }
+ 
+  ionViewDidLoad() {
+    // Set the Canvas Element and its size
+    this.canvasElement = this.canvas.nativeElement;
+    this.canvasElement.width = this.plt.width() + '';
+    this.canvasElement.height = 500;
+  }
+ 
   pushCall(event) {
     console.log("Push, callState="+this.state);
     if(this.distantNumber && this.state == STATE_WAIT) {
@@ -94,7 +124,7 @@ export class ClassPage {
     this.infoLabel = apiCC.session.apiCCId;
     this.state = STATE_WAIT;
     this.pushCall(event);
-    this.setID();
+    // this.setID();
   }
 
   setID(){
@@ -232,13 +262,13 @@ refreshMessages(){
     );
     setTimeout(this.refreshVideoView,1000);
   }
-
+testCanvas;
   initMediaElementState(callId) {
     this.webRTCClient.removeElementFromDiv('mini', 'miniElt-' + callId);
     this.webRTCClient.removeElementFromDiv('remote', 'remoteElt-' + callId);
   }
-  showHideOpts() {
 
+  showHideOpts() {
     var theNav = document.getElementsByClassName("head") as HTMLCollectionOf<HTMLElement>;
     var theOpts = document.getElementsByClassName("options") as HTMLCollectionOf<HTMLElement>;
     if (this.checkState == 0) {
@@ -255,6 +285,8 @@ refreshMessages(){
       console.log("hide");
     }
   }
+
+
   showHideText() {
     var switcherBtn = document.getElementsByClassName("closeOpen") as HTMLCollectionOf<HTMLElement>;
     var textbox = document.getElementsByClassName("callingPromt") as HTMLCollectionOf<HTMLElement>;
@@ -276,12 +308,94 @@ refreshMessages(){
       switcherBtn[0].style.right = "-50px";
       switcherBtn[0].style.top = "50%";
       timeRem[0].style.display = "block"
-
-
       this.checkState = 1;
       this.showHideOpts()
+      var canvas : any =  document.getElementById("equation") as HTMLCanvasElement;
+      var ctx = canvas.toDataURL("image/jpeg");
+      console.log(ctx);
+      
+     
     }
     console.log(this.varTxt);
 
   }
+
+
+selectColor(color) {
+  this.selectedColor = color;
+}
+ 
+startDrawing(ev) {
+  var canvasPosition = this.canvasElement.getBoundingClientRect();
+ 
+  this.saveX = ev.touches[0].pageX - canvasPosition.x;
+  this.saveY = ev.touches[0].pageY - canvasPosition.y;
+}
+ 
+moved(ev) {
+  var canvasPosition = this.canvasElement.getBoundingClientRect();
+  let ctx = this.canvasElement.getContext('2d');
+  let currentX = ev.touches[0].pageX - canvasPosition.x;
+  let currentY = ev.touches[0].pageY - canvasPosition.y;
+ 
+  ctx.lineJoin = 'round';
+  ctx.strokeStyle = this.selectedColor;
+  ctx.lineWidth = 5;
+ 
+  ctx.beginPath();
+  ctx.moveTo(this.saveX, this.saveY);
+  ctx.lineTo(currentX, currentY);
+  ctx.closePath();
+ 
+  ctx.stroke();
+ 
+  this.saveX = currentX;
+  this.saveY = currentY;
+}
+
+saveCanvasImage() {
+  var dataUrl = this.canvasElement.toDataURL();
+ 
+  let ctx = this.canvasElement.getContext('2d');
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Clears the canvas
+ 
+  // let name = new Date().getTime() + '.png';
+  console.log(dataUrl);
+  
+  // let path = this.file.dataDirectory;
+  // let options: IWriteOptions = { replace: true };
+ 
+  // var data = dataUrl.split(',')[1];
+  // let blob = this.b64toBlob(data, 'image/png');
+ 
+  // this.file.writeFile(path, name, blob, options).then(res => {
+  //   this.storeImage(name);
+  // }, err => {
+  //   console.log('error: ', err);
+  // });
+}
+ 
+// https://forum.ionicframework.com/t/save-base64-encoded-image-to-specific-filepath/96180/3
+b64toBlob(b64Data, contentType) {
+  contentType = contentType || '';
+  var sliceSize = 512;
+  var byteCharacters = atob(b64Data);
+  var byteArrays = [];
+ 
+  for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+    var slice = byteCharacters.slice(offset, offset + sliceSize);
+ 
+    var byteNumbers = new Array(slice.length);
+    for (var i = 0; i < slice.length; i++) {
+      byteNumbers[i] = slice.charCodeAt(i);
+    }
+ 
+    var byteArray = new Uint8Array(byteNumbers);
+ 
+    byteArrays.push(byteArray);
+  }
+ 
+  var blob = new Blob(byteArrays, { type: contentType });
+  return blob;
+}
 }

@@ -4,6 +4,7 @@ import { FeedbackPage } from '../feedback/feedback';
 import { MethodsProvider } from '../../providers/methods/methods';
 import { ClassPage } from '../class/class';
 import { AppointmentsPage } from '../appointments/appointments';
+import { ChattingPage } from '../chatting/chatting';
 
 /**
  * Generated class for the Page4Page page.
@@ -20,8 +21,11 @@ import { AppointmentsPage } from '../appointments/appointments';
 export class Page4Page {
 tutorsArr = new Array();
 counter = 0;
+channel;
   constructor(public alertCtrl: AlertController,public methods:MethodsProvider, public navCtrl: NavController, public navParams: NavParams) {
-  this.getConfirmation();
+  this.channel =  this.navParams.get('channel');
+  console.log(this.channel);
+    this.getConfirmation();
   }
 
   ionViewDidLoad() {
@@ -30,7 +34,19 @@ counter = 0;
 
   ShowTutors(){
     console.log(this.tutorsArr);
-      this.navCtrl.push(FeedbackPage, {tutors:this.tutorsArr})
+    if (this.channel == 'texting'){
+      setTimeout(() => {
+        this.navCtrl.push(ChattingPage, {tutors:this.tutorsArr})
+      }, 200);
+
+    }
+    else if (this.channel == 'video'){
+      setTimeout(() => {
+        this.navCtrl.push(ClassPage, {tutors:this.tutorsArr})
+      }, 200);
+
+    }
+   
   }
 
   getConfirmation(){

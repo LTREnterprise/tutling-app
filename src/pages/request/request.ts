@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { Page4Page } from '../page4/page4';
 import { HomePage } from '../home/home';
 import { MethodsProvider } from '../../providers/methods/methods';
+import { ChattingPage } from '../chatting/chatting';
 
 /**
  * Generated class for the RequestPage page.
@@ -65,8 +66,8 @@ export class RequestPage {
     }
   }
 
-  videoCall(){
-    this.navCtrl.push(Page4Page)
+  requestTutor(){
+    this.navCtrl.push(Page4Page, {channel:this.channel})
   }
 
   request(){
@@ -87,8 +88,12 @@ export class RequestPage {
           {
             text: 'Agree',
             handler: data => {
-            this.method.setRequest();
-              this.videoCall();
+            this.method.setRequest(this.channel);
+            if (this.channel == 'video')
+              this. requestTutor();
+              else if (this.channel == 'texting')
+              this.method.setRequest(this.channel);
+              this. requestTutor()
             }
           }
         ]

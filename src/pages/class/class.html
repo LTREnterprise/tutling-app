@@ -27,14 +27,25 @@
     <div class="videoFeeds">
       <div class="callingPromt">
           <p class="timeCanvas">{{minREf}}{{minutes}}:{{secRef}}{{seconds}}</p>
-
-
-
         <div class="closeOpen" style="transform: rotate(90DEG)" (click)="showHideText()">
           <ion-icon name="arrow-up"></ion-icon>
         </div>
-        <canvas-draw id="equation"></canvas-draw>
-      </div>
+        
+        <div #fixedContainer ion-fixed>
+          <ion-row>
+            <ion-col *ngFor="let color of colors" [style.background]="color" class="color-block" tappable (click)="selectColor(color)"></ion-col>
+          </ion-row>
+       
+          <ion-row radio-group [(ngModel)]="selectedColor">
+            <ion-col *ngFor="let color of colors" text-center>
+              <ion-radio [value]="color"></ion-radio>
+            </ion-col>
+          </ion-row>
+       
+          <canvas #imageCanvas (touchstart)="startDrawing($event)" (touchmove)="moved($event)"></canvas>
+       
+          <button ion-button full (click)="saveCanvasImage()">Clear</button>
+        </div>      </div>
       <div id="remote" (click)="showHideOpts()">
         <p id="connect">
         </p>
