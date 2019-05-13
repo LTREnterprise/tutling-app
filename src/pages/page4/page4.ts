@@ -83,7 +83,7 @@ channel;
           else{
             this.listenForResp();
           }
-        }, 4000);
+        }, 4300);
     }
       this.counter++;
   }
