@@ -25,7 +25,7 @@ export class MyApp {
       this.methods.checkstate().then((results:any) =>{
         if (results == 1) {
           // this.methods.setUserOnline();
-          this.rootPage = RequestPage;
+          this.rootPage =AppointmentsPage;
         }
         else {
           this.rootPage = SignInPage

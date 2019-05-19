@@ -1,56 +1,72 @@
 <ion-content>
-
   <div class="head">
     <button ion-button clear color="light" id="list">
       <ion-icon ios="ios-list" md="md-list"></ion-icon>
     </button>
-    <div id="menu">APPOINTMENTS</div>
+    <div id="menu">CLASS</div>
     <button ion-button clear color="light" id="search">
       <ion-icon ios="ios-search" md="md-search"></ion-icon>
     </button>
   </div>
-
-
-  <div class="body" padding>
-    <div class="canvasPart">
-      <p class="timeCanvas">{{minREf}}{{minutes}}:{{secRef}}{{seconds}}</p>
-
-
-
-      <div class="closeOpen" style="transform: rotate(90DEG)" (click)="showHideText()">
-        <ion-icon name="arrow-up"></ion-icon>
-      </div>
-      <canvas-draw id="equation"></canvas-draw>
-    </div>
-    <div class="date-time">
-      <div>
-        03/04/2019
-      </div>
-      <div>08:00 AM</div>
-    </div>
-    <div class="subject">
-      English Lecture 32:B
-    </div>
-    <div class="user-top">
-      <img src="assets/imgs/personico.png" class="person-icon" alt="">
-    </div>
-    <div class="callingPromt">
-      <img src="assets/imgs/Calling icon.png" alt="" class="dialing">
-      <br>
-      Calling
-    </div>
-    <div>
-      <div id="remote" style="width:100%;"></div>
-      <div id="mini"></div>
-    </div>
-    <div class="user-bottom">
-      <img src="assets/imgs/personico.png" class="person-icon" alt="">
-    </div>
-
-
-    <div class="time-duration">
-      <p class="time">09:03</p>
+  <div class="body">
+    <div class="time-duration" (click)="showHideOpts()">
+      <p class="time">{{minREf}}{{minutes}}:{{secRef}}{{seconds}}</p>
       <p class="remaining">Minutes Remaining</p>
     </div>
+    <div class="options">
+      <div class="date-time">
+        <div>
+          03/04/2019
+        </div>
+        <div>08:00 AM</div>
+      </div>
+      <div class="subject">
+        English Lecture 32:B
+      </div>
+    </div>
+    <div class="videoFeeds">
+      <div class="callingPromt">
+          <p class="timeCanvas">{{minREf}}{{minutes}}:{{secRef}}{{seconds}}</p>
+        <div class="closeOpen" style="transform: rotate(90DEG)" (click)="showHideText()">
+          <ion-icon name="arrow-up"></ion-icon>
+        </div>
+        
+        <div #fixedContainer ion-fixed>
+          <ion-row>
+            <ion-col *ngFor="let color of colors" [style.background]="color" class="color-block" tappable (click)="selectColor(color)"></ion-col>
+          </ion-row>
+       
+          <ion-row radio-group [(ngModel)]="selectedColor">
+            <ion-col *ngFor="let color of colors" text-center>
+              <ion-radio [value]="color"></ion-radio>
+            </ion-col>
+          </ion-row>
+         
+          <canvas #imageCanvas (touchstart)="startDrawing($event)" (touchmove)="moved($event)"  (touchend)="endDrawing($event)"></canvas>
+       
+          <button ion-button full (click)="saveCanvasImage()">Clear</button>
+        </div>      </div>
+      <div id="remote" (click)="showHideOpts()">
+        <p id="connect">
+        </p>
+      </div>
+      <div id="mini" (click)="showHideOpts()"></div>
+    </div>
+
+    <!-- <div class="user-top">
+        <img src="assets/imgs/personico.png" class="person-icon" alt="">
+        <div id="remote" (click)="showHideOpts()"></div>
+      </div>
+     
+      <div class="callingPromt">
+        <ion-textarea id="equation" rows="7"></ion-textarea>
+      </div>
+      <div class="user-bottom">
+              <div id="mini" (click)="showHideOpts()"></div>
+          <img src="assets/imgs/personico.png" class="person-icon" alt="">
+      </div> -->
+
+
+
   </div>
 </ion-content>

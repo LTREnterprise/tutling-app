@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Component, ViewChild, Renderer  } from '@angular/core';
+import { Platform, Content } from 'ionic-angular';
 import { LoadingController,IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MethodsProvider } from '../../providers/methods/methods';
 declare var iosrtc;
@@ -27,6 +27,22 @@ const COLOR_HANGOUT = "#d9534f";
   templateUrl: 'appointments.html',
 })
 export class AppointmentsPage {
+  @ViewChild('imageCanvas') canvas: any;
+  canvasElement: any;
+ 
+  saveX: number;
+  saveY: number;
+ 
+  storedImages = [];
+ 
+  // Make Canvas sticky at the top stuff
+  @ViewChild(Content) content: Content;
+  @ViewChild('fixedContainer') fixedContainer: any;
+ 
+  // Color Stuff
+  selectedColor = '#9e2956';
+ 
+  colors = [ '#9e2956', '#c2281d', '#de722f', '#edbf4c', '#5db37e', '#459cde', '#4250ad', '#802fa3' ];
   distantNumber:any;
   webRTCClient:any;
   infoLabel:any;
@@ -41,13 +57,14 @@ export class AppointmentsPage {
   minREf = 0;
   minutes = 0;
   secRef =0;
+  img = "assets/imgs/personico.png"
   seconds =0;
-  constructor(public loadingCtrl: LoadingController,public methods:MethodsProvider,public navCtrl: NavController, public navParams: NavParams, public platform: Platform) {
+  constructor(private plt:Platform, public loadingCtrl: LoadingController,public methods:MethodsProvider,public navCtrl: NavController, public navParams: NavParams, public platform: Platform) {
     this.loading = this.loadingCtrl.create({
       spinner: "bubbles",
       content: "Please wait",
     });
-    this.loading.present();
+    // this.loading.present();
     this.user = this.navParams.get('tutors');
    console.log(this.user);
     this.incomingCallHandler = this.incomingCallHandler.bind(this);
@@ -67,9 +84,146 @@ export class AppointmentsPage {
     this.buttonColor = COLOR_CALL;
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ClassPage');
+  ionViewDidEnter() {
+    // https://github.com/ionic-team/ionic/issues/9071#issuecomment-362920591
+    // Get the height of the fixed item
+    let itemHeight = this.fixedContainer.nativeElement.offsetHeight;
+    let scroll = this.content.getScrollElement();
+ 
+    // Add preexisting scroll margin to fixed container size
+    itemHeight = Number.parseFloat(scroll.style.marginTop.replace("px", "")) + itemHeight;
+    scroll.style.marginTop = itemHeight + 'px';
   }
+ 
+  ionViewDidLoad() {
+    // Set the Canvas Element and its size
+    this.canvasElement = this.canvas.nativeElement;
+    this.canvasElement.width = this.plt.width() + '';
+    this.canvasElement.height = 500;
+    // setTimeout(() => {
+    //   this.startDrawing(event);
+    // }, 2500);
+  }
+
+
+  selectColor(color) {
+    this.selectedColor = color;
+  }
+   
+  startDrawing(ev) {
+    var canvasPosition = this.canvasElement.getBoundingClientRect();
+  //  console.log(canvasPosition);
+  //  console.log('money');
+  //  console.log(ev.touches[0]);
+   
+   
+
+    this.saveX = ev.touches[0].pageX - canvasPosition.x;
+    this.saveY = ev.touches[0].pageY - canvasPosition.y;
+    
+    // this.saveX = 70.14925384521484;
+    // this.saveY = 147.3880615234375;
+    // this.moved()
+  }
+   x = 0;
+  moved(ev) {
+    var canvasPosition = this.canvasElement.getBoundingClientRect();
+    let ctx = this.canvasElement.getContext('2d');
+    // console.log('moved');
+ 
+    let currentX = ev.touches[0].pageX - canvasPosition.x;
+    let currentY = ev.touches[0].pageY - canvasPosition.y;
+    // setTimeout(() => {
+    // var numbers = [20,50,100,150,70,20,80,200,90,60,70]
+    //  let currentX = 70.14925384521484 + numbers[this.x];
+    // let currentY = 147.3880615234375 + numbers[this.x];
+    
+    ctx.lineJoin = 'round';
+    ctx.strokeStyle = this.selectedColor;
+    ctx.lineWidth = 5;
+   
+    ctx.beginPath();
+    ctx.moveTo(this.saveX, this.saveY);
+    ctx.lineTo(currentX, currentY);
+    ctx.closePath();
+   
+    ctx.stroke();
+    
+    this.saveX = currentX;
+    this.saveY = currentY;
+    this.x++;
+    // this.moved();
+    // }, 2000);
+    
+    // console.log(this.saveX);
+    // console.log(this.saveY);
+    // console.log(currentX);
+    // console.log(currentY);
+    this.storeCoordinates(currentX,currentY)
+  }
+  
+  position =  new Array();
+
+  storeCoordinates(x,y){
+    let obj = {x : x,
+              y: y
+        }
+        this.position.push(obj)
+      console.log('store');
+      
+  }
+
+  endDrawing(ev){
+    console.log(this.position);
+    
+  }
+  saveCanvasImage() {
+    var dataUrl = this.canvasElement.toDataURL();
+    this.methods.storePosition(this.position,"");
+   this.position.length = 0;
+    let ctx = this.canvasElement.getContext('2d');
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Clears the canvas
+   
+    // let name = new Date().getTime() + '.png';
+    console.log(dataUrl);
+    
+    // let path = this.file.dataDirectory;
+    // let options: IWriteOptions = { replace: true };
+   
+    // var data = dataUrl.split(',')[1];
+    // let blob = this.b64toBlob(data, 'image/png');
+   
+    // this.file.writeFile(path, name, blob, options).then(res => {
+    //   this.storeImage(name);
+    // }, err => {
+    //   console.log('error: ', err);
+    // });
+  }
+   
+  // https://forum.ionicframework.com/t/save-base64-encoded-image-to-specific-filepath/96180/3
+  b64toBlob(b64Data, contentType) {
+    contentType = contentType || '';
+    var sliceSize = 512;
+    var byteCharacters = atob(b64Data);
+    var byteArrays = [];
+   
+    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      var slice = byteCharacters.slice(offset, offset + sliceSize);
+   
+      var byteNumbers = new Array(slice.length);
+      for (var i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+   
+      var byteArray = new Uint8Array(byteNumbers);
+   
+      byteArrays.push(byteArray);
+    }
+   
+    var blob = new Blob(byteArrays, { type: contentType });
+    return blob;
+  }
+
   pushCall(event) {
     console.log("Push, callState="+this.state);
     if(this.distantNumber && this.state == STATE_WAIT) {
@@ -95,7 +249,7 @@ export class AppointmentsPage {
     this.infoLabel = apiCC.session.apiCCId;
     this.state = STATE_WAIT;
     this.pushCall(event);
-    this.getID();
+    // this.getID();
   }
 path;
   getText(){
@@ -194,7 +348,6 @@ path;
     this.webRTCClient.removeElementFromDiv('remote', 'remoteElt-' + callId);
   }
   showHideOpts() {
-
     var theNav = document.getElementsByClassName("head") as HTMLCollectionOf<HTMLElement>;
     var theOpts = document.getElementsByClassName("options") as HTMLCollectionOf<HTMLElement>;
     if (this.checkState == 0) {
@@ -211,9 +364,11 @@ path;
       console.log("hide");
     }
   }
+
+
   showHideText() {
     var switcherBtn = document.getElementsByClassName("closeOpen") as HTMLCollectionOf<HTMLElement>;
-    var textbox = document.getElementsByClassName("canvasPart") as HTMLCollectionOf<HTMLElement>;
+    var textbox = document.getElementsByClassName("callingPromt") as HTMLCollectionOf<HTMLElement>;
     var timeRem = document.getElementsByClassName("time-duration") as HTMLCollectionOf<HTMLElement>;
     if (this.varTxt == 0) {
       this.varTxt = 1
@@ -223,7 +378,7 @@ path;
       switcherBtn[0].style.right = "5px";
       switcherBtn[0].style.top = "5px";
       timeRem[0].style.display = "none"
-      // this.showHideOpts()
+      this.showHideOpts()
     }
     else {
       this.varTxt = 0;
@@ -232,10 +387,13 @@ path;
       switcherBtn[0].style.right = "-50px";
       switcherBtn[0].style.top = "50%";
       timeRem[0].style.display = "block"
-
-
       this.checkState = 1;
-      // this.showHideOpts()
+      this.showHideOpts()
+      var canvas : any =  document.getElementById("equation") as HTMLCanvasElement;
+      var ctx = canvas.toDataURL("image/jpeg");
+      console.log(ctx);
+      
+     
     }
     console.log(this.varTxt);
 

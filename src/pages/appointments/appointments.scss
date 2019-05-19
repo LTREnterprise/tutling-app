@@ -1,5 +1,5 @@
 page-appointments {
-    .body{
+     .body{
         height: 100%;
         width: 100%;
         background: rgb(75,75,75);
@@ -15,9 +15,11 @@ page-appointments {
         position: absolute;
         height: 10%;
         width: 100vw;
+        transition: 300ms;
         background: rgb(75,75,75);
+        z-index: 10;
         // padding-top: 5px;
-        // border: 2px solid red;
+        // border: 2px solid rgb(75,75,75);
         #menu{
             position: absolute;
             left: 50%;
@@ -38,11 +40,12 @@ page-appointments {
         }
     }
     .date-time{
-        margin-top: 12vh;
+        // margin-top: 12vh;
         display: flex;
     }
     .date-time > div{
         border: 4px solid gold;
+        background: rgb(75,75,75);
         margin: 10px auto;
         width: 49%;
         padding: 10px;
@@ -79,21 +82,45 @@ page-appointments {
         object-fit: cover;
     }
     .callingPromt{
-        padding-top: 40px;
-        padding-bottom: 40px;
+        position: absolute;
+        left: 10px;
+        top: 0;
         text-align: center;
+        z-index: 10;
         color: white;
         font-size: 16px;
+        height: 100%;
+        transition: 100ms;
+        // border: 2px solid red;
+        border-radius: 10px;
+        width:100vw;
+        margin-top: 0px;
+        // margin-bottom: 10px;
+        background: rgb(98, 98, 98);
+        // padding: 0;
+        transform: translateX(-105%);
+        margin-left: -10px;
+    }
+    .user-top{
+        // border:2px solid;
+        text-align: right;
+    }
+    .user-bottom{
+        // border:2px solid;
+        text-align: right;
     }
 
     .time-duration{
         position: absolute;
-        bottom: 20px;
+        bottom: 10px;
+        left: 10px;
         width: 50%;
         // height: 50px;
         border: 3px solid gold;
         color: white;
         padding: 0;
+        z-index: 1;
+        display: block;
         .time{
             line-height: 18px;
             // border: 2px solid red;
@@ -110,11 +137,11 @@ page-appointments {
     }
     @media screen and (max-width: 359px){
         .date-time{
-            margin-top: 8vh;
+            // margin-top: 8vh;
             display: flex;
         }
         .time-duration{
-            position: static;
+            position: absolute;
             margin-top: 5px;
             // bottom: 20px;
             width: 50%;
@@ -125,46 +152,77 @@ page-appointments {
             .time{
                 line-height: 18px;
                 // border: 2px solid red;
-                font-size: 18px;
+                font-size: 2rem;
                 margin: 2px;
             }
             .remaining{
                 
                 line-height: 18px;
                 // border: 2px solid red;
-                font-size: 14px;
+                font-size: .5rem;
                 margin: 2px;
             }
         }
     }
-
-    .canvasPart{
-        z-index: 100;
+    canvas {
+        display: block;
+        border: 1px solid rgb(187, 178, 178);
+        height: 100%;
+    }
+    .color-block {
+        height: 40px;
+    }
+    #equation{
+        background: rgb(98, 98, 98);
+        padding: 0;
+        // border: 4px solid green;
+        border-radius: 10px;
         position: absolute;
         width: 100%;
-        height: 99.9%;
+        height: 100%;
         left: 0;
-        top: 0;
-        transform: translateX(-105%);
-        transition: 100ms;
     }
-
-    .timeCanvas{
+    #mini{
+        border: 2px solid white;
+        background: rgb(75,75,75);
+        height: 20vh;
+        width: 30%;
+        border-radius: 10px;
+        object-fit: cover;
         position: absolute;
-        bottom: -5px;
-        right: 15px;
-        z-index: 10;
-        color: white;
-        font-size: 14px;
-        font-weight: 700;
-        // text-shadow: 0px 0px 5px black;
-
-        /* Width and color values */
--webkit-text-stroke: 1px black; 
-
-/* Global values */
+        bottom: 10px;
+        right: 10px;
     }
-    
+    #remote{
+        // border: 2px solid black;
+        background: rgb(75,75,75);
+        width:100%;
+        height: 100%;
+    }
+    .options{
+        position: absolute;
+        width: 95%;
+        transition: 500ms;
+        top: 45px;
+        // border: 2px solid red;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+    }
+    .videoFeeds{
+        width: 100%;
+        height: 100%;
+        // border: 2px solid grey;
+        position: relative;
+        z-index: 0;
+    }
+    #connect{
+        color: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%)
+    }
     .closeOpen{
         width: 30px;
         height: 30px;
@@ -180,21 +238,15 @@ page-appointments {
         ion-icon{
             
             line-height: 23px;
-            color: white;
             padding: 0;
             // border: 2px solid black;
             height: 30px
         }
     }
-    #equation{
-        background: rgb(98, 98, 98);
-        padding: 0;
-        // border: 4px solid green;
-        border-radius: 10px;
+    .timeCanvas{
         position: absolute;
-        width: 100%;
-        height: 100%;
-        left: 0;
+        bottom: -10px;
+        right: 10px;
+        z-index: 10;
     }
-
 }

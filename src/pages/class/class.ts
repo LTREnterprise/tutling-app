@@ -351,6 +351,10 @@ moved(ev) {
  
   this.saveX = currentX;
   this.saveY = currentY;
+  console.log(this.saveX);
+  console.log(this.saveY);
+  console.log(currentX);
+  console.log(currentY);
 }
 
 saveCanvasImage() {
