@@ -100,9 +100,14 @@ export class AppointmentsPage {
     this.canvasElement = this.canvas.nativeElement;
     this.canvasElement.width = this.plt.width() + '';
     this.canvasElement.height = 500;
-    // setTimeout(() => {
-    //   this.startDrawing(event);
-    // }, 2500);
+    this.startDrawing(event);
+    this.methods.getPosition().then((data:any) =>{
+      console.log(data);
+          setTimeout(() => {
+            this.test(data)
+    }, 2500);
+    })
+
   }
 
 
@@ -111,20 +116,47 @@ export class AppointmentsPage {
   }
    
   startDrawing(ev) {
-    var canvasPosition = this.canvasElement.getBoundingClientRect();
+    // var canvasPosition = this.canvasElement.getBoundingClientRect();
   //  console.log(canvasPosition);
   //  console.log('money');
   //  console.log(ev.touches[0]);
    
    
 
-    this.saveX = ev.touches[0].pageX - canvasPosition.x;
-    this.saveY = ev.touches[0].pageY - canvasPosition.y;
+    // this.saveX = ev.touches[0].pageX - canvasPosition.x;
+    // this.saveY = ev.touches[0].pageY - canvasPosition.y;
+    // console.log(this.saveX);
+    // console.log(this.saveY);
     
-    // this.saveX = 70.14925384521484;
-    // this.saveY = 147.3880615234375;
-    // this.moved()
+    this.saveX = 16.417909622192383;
+    this.saveY = 51.86566925048828;
+    // this.moved(event)
   }
+
+  test(data){
+
+    for(var x = 0; x < data.length; x++){
+      let ctx = this.canvasElement.getContext('2d');
+    let currentX = data[x].x;
+    let currentY = data[x].y;
+console.log(x);
+
+      ctx.lineJoin = 'round';
+      ctx.strokeStyle = this.selectedColor;
+      ctx.lineWidth = 5;
+     
+      ctx.beginPath();
+      ctx.moveTo(this.saveX, this.saveY);
+      ctx.lineTo(currentX, currentY);
+      ctx.closePath();
+     
+      ctx.stroke();
+      
+      this.saveX = currentX;
+      this.saveY = currentY;
+    }
+  }
+
    x = 0;
   moved(ev) {
     var canvasPosition = this.canvasElement.getBoundingClientRect();

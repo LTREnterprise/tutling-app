@@ -120,6 +120,15 @@ export class MethodsProvider {
     })
   }
 
+  getPosition(){
+    return new Promise((resolve, reject) => {
+      var user = firebase.auth().currentUser;
+      firebase.database().ref("position/" + user.uid + "/position").on("value", (data: any) => {
+        resolve(data.val())
+      })
+    })
+  }
+
   getOnlineUsers(){
     return new Promise((resolve, reject) => {
       this.ngzone.run(() => {
