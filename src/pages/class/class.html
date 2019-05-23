@@ -42,7 +42,7 @@
             </ion-col>
           </ion-row>
        
-          <canvas #imageCanvas (touchstart)="startDrawing($event)" (touchmove)="moved($event)"></canvas>
+          <canvas #imageCanvas (touchstart)="startDrawing($event)" (touchmove)="moved($event)"  (touchend)="endDrawing($event)"></canvas>
        
           <button ion-button full (click)="saveCanvasImage()">Clear</button>
         </div>      </div>

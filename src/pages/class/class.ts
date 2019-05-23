@@ -33,7 +33,9 @@ export class ClassPage {
  
   saveX: number;
   saveY: number;
- 
+  saveX2: number;
+  saveY2: number;
+
   storedImages = [];
  
   // Make Canvas sticky at the top stuff
@@ -98,8 +100,73 @@ export class ClassPage {
     this.canvasElement = this.canvas.nativeElement;
     this.canvasElement.width = this.plt.width() + '';
     this.canvasElement.height = 500;
+    this.updatePosition();
   }
  
+  updatePosition(){    
+    setTimeout(() => {
+      this.methods.getPosition().then((data:any) =>{
+    this.setStart(data)
+  })
+  console.log('update position');
+  
+  this.updatePosition();
+}, 4000);
+
+}
+
+
+
+setStart(data){
+  if (data != null){
+    // var len = data.length;
+    // this.saveY2 = data[len-1].y
+    // this.saveX2 = data[len-1].x;
+    this.test(data)
+  }
+  // this.test(data)
+}
+
+trackNumber = 0;
+test(data){
+  var keys = Object.keys(data)
+  console.log(this.trackNumber);
+  console.log(keys);
+  
+  for(var i = this.trackNumber; i < keys.length; i++){
+    var position = data[keys[i]];
+    var cordnats = position.position
+    var len = cordnats.length;
+    this.saveY2 = cordnats[len-1].y
+    this.saveX2 = cordnats[len-1].x;
+    console.log(this.saveX2);
+    console.log(this.saveY2);
+    
+    
+// console.log(this.trackNumber);
+  for(var x = 0; x < cordnats.length - 2; x++){
+  let ctx = this.canvasElement.getContext('2d');
+  let currentX = cordnats[x].x;
+  let currentY = cordnats[x].y;
+
+    ctx.lineJoin = 'round';
+    ctx.strokeStyle = this.selectedColor;
+    ctx.lineWidth = 5;
+   
+    ctx.beginPath();
+    ctx.moveTo(this.saveX2, this.saveY2);
+    ctx.lineTo(currentX, currentY);
+    ctx.closePath();
+    ctx.stroke();
+
+    this.saveX2 = currentX;
+    this.saveY2 = currentY;
+  }
+  this.trackNumber = this.trackNumber + 1;
+  }
+}
+
+
   pushCall(event) {
     console.log("Push, callState="+this.state);
     if(this.distantNumber && this.state == STATE_WAIT) {
@@ -327,17 +394,33 @@ selectColor(color) {
  
 startDrawing(ev) {
   var canvasPosition = this.canvasElement.getBoundingClientRect();
+//  console.log(canvasPosition);
+//  console.log('money');
+//  console.log(ev.touches[0]);
  
+ 
+
   this.saveX = ev.touches[0].pageX - canvasPosition.x;
   this.saveY = ev.touches[0].pageY - canvasPosition.y;
+     
+
+  this.start = ev.touches[0].pageX - canvasPosition.x;
+  this.end = ev.touches[0].pageY - canvasPosition.y;
+
+  
+  // this.saveX = 16.417909622192383;
+  // this.saveY = 51.86566925048828;
+  // this.moved(event)
 }
- 
+ x = 0;
 moved(ev) {
   var canvasPosition = this.canvasElement.getBoundingClientRect();
   let ctx = this.canvasElement.getContext('2d');
+  // console.log('moved');
   let currentX = ev.touches[0].pageX - canvasPosition.x;
   let currentY = ev.touches[0].pageY - canvasPosition.y;
- 
+  
+  
   ctx.lineJoin = 'round';
   ctx.strokeStyle = this.selectedColor;
   ctx.lineWidth = 5;
@@ -348,18 +431,42 @@ moved(ev) {
   ctx.closePath();
  
   ctx.stroke();
- 
+  
   this.saveX = currentX;
   this.saveY = currentY;
-  console.log(this.saveX);
-  console.log(this.saveY);
-  console.log(currentX);
-  console.log(currentY);
+  this.x++;
+
+  this.storeCoordinates(currentX,currentY)
 }
 
+storeCoordinates(x,y){
+  let obj = {x : x,
+            y: y
+      }
+      this.position.push(obj)
+    console.log('store');
+    
+}
+endDrawing(ev){
+  console.log(this.position);
+  this.saveToCloud();
+  
+}
+start;
+end;
+saveToCloud(){
+  let obj = {x : this.start,
+    y: this.end
+    }
+    this.position.push(obj)
+    console.log(this.position);
+    this.methods.storePosition(this.position,this.path );
+    this.position.length = 0;
+}
+position =  new Array();
 saveCanvasImage() {
   var dataUrl = this.canvasElement.toDataURL();
- 
+  this.saveToCloud();
   let ctx = this.canvasElement.getContext('2d');
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Clears the canvas
  
@@ -378,7 +485,6 @@ saveCanvasImage() {
   //   console.log('error: ', err);
   // });
 }
- 
 // https://forum.ionicframework.com/t/save-base64-encoded-image-to-specific-filepath/96180/3
 b64toBlob(b64Data, contentType) {
   contentType = contentType || '';

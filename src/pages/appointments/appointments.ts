@@ -32,7 +32,8 @@ export class AppointmentsPage {
  
   saveX: number;
   saveY: number;
- 
+  saveX2: number;
+  saveY2: number;
   storedImages = [];
  
   // Make Canvas sticky at the top stuff
@@ -59,6 +60,7 @@ export class AppointmentsPage {
   secRef =0;
   img = "assets/imgs/personico.png"
   seconds =0;
+  trackNumber = 0;
   constructor(private plt:Platform, public loadingCtrl: LoadingController,public methods:MethodsProvider,public navCtrl: NavController, public navParams: NavParams, public platform: Platform) {
     this.loading = this.loadingCtrl.create({
       spinner: "bubbles",
@@ -100,60 +102,90 @@ export class AppointmentsPage {
     this.canvasElement = this.canvas.nativeElement;
     this.canvasElement.width = this.plt.width() + '';
     this.canvasElement.height = 500;
-    this.startDrawing(event);
-    this.methods.getPosition().then((data:any) =>{
-      console.log(data);
-          setTimeout(() => {
-            this.test(data)
-    }, 2500);
-    })
-
+    this.updatePosition();
   }
 
+
+  updatePosition(){    
+        setTimeout(() => {
+          this.methods.getPosition().then((data:any) =>{
+        this.setStart(data)
+      })
+      console.log('update position');
+      this.updatePosition();
+    }, 4000);
+    
+  }
 
   selectColor(color) {
     this.selectedColor = color;
   }
-   
+   start;
+   end;
   startDrawing(ev) {
-    // var canvasPosition = this.canvasElement.getBoundingClientRect();
+    var canvasPosition = this.canvasElement.getBoundingClientRect();
   //  console.log(canvasPosition);
   //  console.log('money');
   //  console.log(ev.touches[0]);
    
    
 
-    // this.saveX = ev.touches[0].pageX - canvasPosition.x;
-    // this.saveY = ev.touches[0].pageY - canvasPosition.y;
-    // console.log(this.saveX);
-    // console.log(this.saveY);
+    this.saveX = ev.touches[0].pageX - canvasPosition.x;
+    this.saveY = ev.touches[0].pageY - canvasPosition.y;
+       
+
+    this.start = ev.touches[0].pageX - canvasPosition.x;
+    this.end = ev.touches[0].pageY - canvasPosition.y;
+
     
-    this.saveX = 16.417909622192383;
-    this.saveY = 51.86566925048828;
+    // this.saveX = 16.417909622192383;
+    // this.saveY = 51.86566925048828;
     // this.moved(event)
   }
 
-  test(data){
+  setStart(data){
+    if (data != null){
+      // var len = data.length;
+      // this.saveY2 = data[len-1].y
+      // this.saveX2 = data[len-1].x;
+      this.test(data)
+    }
+    // this.test(data)
+  }
 
-    for(var x = 0; x < data.length; x++){
-      let ctx = this.canvasElement.getContext('2d');
-    let currentX = data[x].x;
-    let currentY = data[x].y;
-console.log(x);
+  test(data){
+    var keys = Object.keys(data)
+    console.log(keys);
+    for(var i = this.trackNumber; i < keys.length; i++){
+      var position = data[keys[i]];
+      var cordnats = position.position
+            var len = cordnats.length;
+      this.saveY2 = cordnats[len-1].y
+      this.saveX2 = cordnats[len-1].x;
+      console.log(this.saveX2);
+      console.log(this.saveY2);
+      
+      
+// console.log(this.trackNumber);
+    for(var x = 0; x < cordnats.length - 1; x++){
+    let ctx = this.canvasElement.getContext('2d');
+    let currentX = cordnats[x].x;
+    let currentY = cordnats[x].y;
 
       ctx.lineJoin = 'round';
       ctx.strokeStyle = this.selectedColor;
       ctx.lineWidth = 5;
      
       ctx.beginPath();
-      ctx.moveTo(this.saveX, this.saveY);
+      ctx.moveTo(this.saveX2, this.saveY2);
       ctx.lineTo(currentX, currentY);
       ctx.closePath();
-     
       ctx.stroke();
-      
-      this.saveX = currentX;
-      this.saveY = currentY;
+
+      this.saveX2 = currentX;
+      this.saveY2 = currentY;
+    }
+    this.trackNumber = data.length + 2;
     }
   }
 
@@ -162,13 +194,9 @@ console.log(x);
     var canvasPosition = this.canvasElement.getBoundingClientRect();
     let ctx = this.canvasElement.getContext('2d');
     // console.log('moved');
- 
     let currentX = ev.touches[0].pageX - canvasPosition.x;
     let currentY = ev.touches[0].pageY - canvasPosition.y;
-    // setTimeout(() => {
-    // var numbers = [20,50,100,150,70,20,80,200,90,60,70]
-    //  let currentX = 70.14925384521484 + numbers[this.x];
-    // let currentY = 147.3880615234375 + numbers[this.x];
+    
     
     ctx.lineJoin = 'round';
     ctx.strokeStyle = this.selectedColor;
@@ -184,13 +212,7 @@ console.log(x);
     this.saveX = currentX;
     this.saveY = currentY;
     this.x++;
-    // this.moved();
-    // }, 2000);
-    
-    // console.log(this.saveX);
-    // console.log(this.saveY);
-    // console.log(currentX);
-    // console.log(currentY);
+
     this.storeCoordinates(currentX,currentY)
   }
   
@@ -207,12 +229,22 @@ console.log(x);
 
   endDrawing(ev){
     console.log(this.position);
+    this.saveToCloud();
     
   }
+
+  saveToCloud(){
+    let obj = {x : this.start,
+      y: this.end
+      }
+      this.position.push(obj)
+      console.log(this.position);
+      this.methods.storePosition(this.position,"");
+  }
+
   saveCanvasImage() {
     var dataUrl = this.canvasElement.toDataURL();
-    this.methods.storePosition(this.position,"");
-   this.position.length = 0;
+    this.saveToCloud();
     let ctx = this.canvasElement.getContext('2d');
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Clears the canvas
    

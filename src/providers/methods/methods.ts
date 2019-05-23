@@ -115,7 +115,7 @@ export class MethodsProvider {
 
   storePosition(position, mainPosition){
     var user = firebase.auth().currentUser;
-    firebase.database().ref("position/" + user.uid).set({
+    firebase.database().ref("position/" + user.uid).push({
       position :position
     })
   }
@@ -123,7 +123,7 @@ export class MethodsProvider {
   getPosition(){
     return new Promise((resolve, reject) => {
       var user = firebase.auth().currentUser;
-      firebase.database().ref("position/" + user.uid + "/position").on("value", (data: any) => {
+      firebase.database().ref("position/" + user.uid).on("value", (data: any) => {
         resolve(data.val())
       })
     })
