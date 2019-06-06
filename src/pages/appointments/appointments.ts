@@ -102,13 +102,12 @@ export class AppointmentsPage {
     this.canvasElement = this.canvas.nativeElement;
     this.canvasElement.width = this.plt.width() + '';
     this.canvasElement.height = 500;
-    this.updatePosition();
   }
 
 
   updatePosition(){    
         setTimeout(() => {
-          this.methods.getPosition().then((data:any) =>{
+          this.methods.getPosition(this.path).then((data:any) =>{
         this.setStart(data)
       })
       console.log('update position');
@@ -159,13 +158,12 @@ export class AppointmentsPage {
     for(var i = this.trackNumber; i < keys.length; i++){
       var position = data[keys[i]];
       var cordnats = position.position
-            var len = cordnats.length;
+      var len = cordnats.length;
       this.saveY2 = cordnats[len-1].y
       this.saveX2 = cordnats[len-1].x;
       console.log(this.saveX2);
       console.log(this.saveY2);
-      
-      
+          
 // console.log(this.trackNumber);
     for(var x = 0; x < cordnats.length - 1; x++){
     let ctx = this.canvasElement.getContext('2d');
@@ -181,7 +179,6 @@ export class AppointmentsPage {
       ctx.lineTo(currentX, currentY);
       ctx.closePath();
       ctx.stroke();
-
       this.saveX2 = currentX;
       this.saveY2 = currentY;
     }
@@ -239,7 +236,8 @@ export class AppointmentsPage {
       }
       this.position.push(obj)
       console.log(this.position);
-      this.methods.storePosition(this.position,"");
+      this.methods.storePosition(this.position,this.path);
+      this.position.length = 0;
   }
 
   saveCanvasImage() {
@@ -292,6 +290,7 @@ export class AppointmentsPage {
     console.log("Push, callState="+this.state);
     if(this.distantNumber && this.state == STATE_WAIT) {
       this.loading.dismiss();
+      this.updatePosition();
       setTimeout(this.refreshVideoView,4000);
       this.webRTCClient.call(this.distantNumber);
     } else if(this.state == STATE_INCALL) {
@@ -313,7 +312,7 @@ export class AppointmentsPage {
     this.infoLabel = apiCC.session.apiCCId;
     this.state = STATE_WAIT;
     this.pushCall(event);
-    // this.getID();
+    this.getID();
   }
 path;
   getText(){

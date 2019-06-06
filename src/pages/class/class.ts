@@ -66,7 +66,7 @@ export class ClassPage {
       spinner: "bubbles",
       content: "Please wait",
     });
-    // this.loading.present();
+    this.loading.present();
     this.incomingCallHandler = this.incomingCallHandler.bind(this);
     this.userMediaErrorHandler = this.userMediaErrorHandler.bind(this);
     this.remoteStreamAddedHandler = this.remoteStreamAddedHandler.bind(this);
@@ -100,12 +100,12 @@ export class ClassPage {
     this.canvasElement = this.canvas.nativeElement;
     this.canvasElement.width = this.plt.width() + '';
     this.canvasElement.height = 500;
-    this.updatePosition();
+  
   }
  
   updatePosition(){    
     setTimeout(() => {
-      this.methods.getPosition().then((data:any) =>{
+      this.methods.getPosition(this.path).then((data:any) =>{
     this.setStart(data)
   })
   console.log('update position');
@@ -191,7 +191,7 @@ test(data){
     this.infoLabel = apiCC.session.apiCCId;
     this.state = STATE_WAIT;
     this.pushCall(event);
-    // this.setID();
+    this.setID();
   }
 
   setID(){
@@ -216,6 +216,8 @@ test(data){
 
 setPath(path){
   this.path = path;
+  console.log(this.path);
+  
 }
 
 refreshMessages(){
@@ -284,6 +286,7 @@ refreshMessages(){
     this.buttonColor = COLOR_HANGOUT;
     this.buttonLabel = LABEL_HANGOUT;
     this.loading.dismiss();
+    this.updatePosition();
     this.timer();
     setTimeout(this.refreshVideoView,2000);
     setTimeout(() => {

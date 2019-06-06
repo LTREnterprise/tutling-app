@@ -34,8 +34,10 @@ export class FeedbackPage {
       });
       loading.present();
       setTimeout(() => {
-        if (i.channel == 'video')
+        if (i.channel == 'video'){
+          loading.dismiss()
         this.navCtrl.push(AppointmentsPage, {tutors:i})
+        }
         else if (i.channel == 'texting'){
           console.log(i);
           i.path = path

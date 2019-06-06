@@ -11,13 +11,18 @@
     </div>
 
     <div class="body" padding>
+        <ion-searchbar [(ngModel)]="searchItem" placeholder="Search by Course  name" (ionInput)="getItems($event)">
+          </ion-searchbar>
+         
+           
+            <br>
       <!-- <ion-searchbar class="searchBar" animated></ion-searchbar> -->
-      <ion-item id="searcherTxt">
+      <!-- <ion-item id="searcherTxt">
           <ion-label>
             <ion-icon name="search"></ion-icon>
           </ion-label>
           <ion-input type="text" placeholder="search"></ion-input>
-        </ion-item>
+        </ion-item> -->
       <ion-item>
         <ion-label>Your Courses</ion-label>
         <ion-select placeholder="Select One">
@@ -27,14 +32,9 @@
       </ion-item>
 
       <div class="list">
-        <div class="opt">Financial</div>
-        <div class="opt">Two</div>
-        <div class="opt">Three</div>
-        <div class="opt">Four</div>
-        <div class="opt">Five</div>
-        <div class="opt">Six</div>
-        <div class="opt">Seven</div>
-        <div class="opt">Eight</div>
+          <ion-item  class="opt" [class.highlight]="itemSelected == i" *ngFor="let item of items; let i=index" (click)="selectCP(i)">
+              {{item}}
+             </ion-item>
       </div>
 
       <div class="buttons">

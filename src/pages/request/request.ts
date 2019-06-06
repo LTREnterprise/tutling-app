@@ -25,14 +25,42 @@ export class RequestPage {
   time = null;
   minDate: string = new Date().toISOString();
   minTime : string = new Date().toLocaleTimeString(); 
-
-
+  public items: any = [];
+  modules = ["DSO24T","CGS17AT", "CMK17BT", "TPG117", 
+  "Accounting", "Computer", "TLPD", "Business",
+  "Computer", "Business", "Manangement", "Office"];
+  lengthCourse = []
+  cources = ["I.T", "HR", "Office Management"]
+  searchItem;
   constructor(public method: MethodsProvider, public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RequestPage');
-    
+    this.intializeItems();
+  }
+
+  intializeItems(){
+    this.items = this.cources
+  }
+  itemSelected;
+  selectCP(item){
+this.itemSelected = item;
+console.log(this.items[item]);
+
+  }
+  getItems(ev){
+    this.intializeItems();
+   var val = this.searchItem
+    if (val && val.trim() != '') {
+      this.items = this.items.filter((item) => {
+        console.log(val);
+
+        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
+    else if (val == "" || val == null) {
+      this.items = [];
+    }
   }
   home(){
     this.navCtrl.push(HomePage)
@@ -91,9 +119,9 @@ export class RequestPage {
             this.method.setRequest(this.channel);
             if (this.channel == 'video')
               this. requestTutor();
-              else if (this.channel == 'texting')
+              else if (this.channel == 'texting'){
               this.method.setRequest(this.channel);
-              this. requestTutor()
+              this. requestTutor()}
             }
           }
         ]

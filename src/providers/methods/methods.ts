@@ -113,23 +113,23 @@ export class MethodsProvider {
     })
   }
 
-  storePosition(position, mainPosition){
+  storePosition(position, path){
     var user = firebase.auth().currentUser;
-    firebase.database().ref("position/" + user.uid).push({
+    firebase.database().ref("position/" + path).push({
       position :position
     })
   }
 
-  getPosition(){
+  getPosition(path){
     return new Promise((resolve, reject) => {
       var user = firebase.auth().currentUser;
-      firebase.database().ref("position/" + user.uid).on("value", (data: any) => {
+      firebase.database().ref("position/" + path).on("value", (data: any) => {
         resolve(data.val())
       })
     })
   }
 
-  getOnlineUsers(){
+  getOnlineUsers2(){
     return new Promise((resolve, reject) => {
       this.ngzone.run(() => {
         firebase.database().ref("requests/").on("value", (data: any) => {
@@ -168,7 +168,7 @@ export class MethodsProvider {
       })
     })
   }
-  getOnlineUsers2(){
+  getOnlineUsers(){
     return new Promise((resolve, reject) => {
       this.ngzone.run(() => {
         var user = firebase.auth().currentUser;

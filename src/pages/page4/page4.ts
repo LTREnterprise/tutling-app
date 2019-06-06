@@ -36,13 +36,13 @@ channel;
     console.log(this.tutorsArr);
     if (this.channel == 'texting'){
       setTimeout(() => {
-        this.navCtrl.push(FeedbackPage, {tutors:this.tutorsArr})
+        this.navCtrl.push(ChattingPage, {tutors:this.tutorsArr})
       }, 200);
 
     }
     else if (this.channel == 'video'){
       setTimeout(() => {
-        this.navCtrl.push(FeedbackPage, {tutors:this.tutorsArr})
+        this.navCtrl.push(ClassPage, {tutors:this.tutorsArr})
       }, 200);
 
     }
@@ -79,6 +79,7 @@ channel;
       setTimeout(() => {
         var resp = this.methods.getResp();
         if (resp == true)
+        // console.log('please wait');
           this.ShowTutors();
           else{
             this.listenForResp();
