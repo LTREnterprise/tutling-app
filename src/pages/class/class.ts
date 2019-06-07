@@ -61,11 +61,13 @@ export class ClassPage {
   secRef = 0;
   checkState = 0;
   varTxt = 0;
+  sub;
   constructor(private plt:Platform, private localNotifications: LocalNotifications,public loadingCtrl: LoadingController,public methods:MethodsProvider,public navCtrl: NavController, public navParams: NavParams, public platform: Platform, public renderer: Renderer) {
     this.loading = this.loadingCtrl.create({
       spinner: "bubbles",
       content: "Please wait",
     });
+    this.sub =  this.navParams.get('sub');
     this.loading.present();
     this.incomingCallHandler = this.incomingCallHandler.bind(this);
     this.userMediaErrorHandler = this.userMediaErrorHandler.bind(this);

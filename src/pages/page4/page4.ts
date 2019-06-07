@@ -22,8 +22,14 @@ export class Page4Page {
 tutorsArr = new Array();
 counter = 0;
 channel;
+sub; 
+course;
   constructor(public alertCtrl: AlertController,public methods:MethodsProvider, public navCtrl: NavController, public navParams: NavParams) {
   this.channel =  this.navParams.get('channel');
+  this.sub =  this.navParams.get('sub');
+  this.course =  this.navParams.get('course')
+  console.log(this.sub);
+  console.log(this.course);
   console.log(this.channel);
     this.getConfirmation();
   }
@@ -42,7 +48,7 @@ channel;
     }
     else if (this.channel == 'video'){
       setTimeout(() => {
-        this.navCtrl.push(ClassPage, {tutors:this.tutorsArr})
+        this.navCtrl.push(ClassPage, {tutors:this.tutorsArr, sub:this.sub})
       }, 200);
 
     }

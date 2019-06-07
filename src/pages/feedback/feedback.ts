@@ -36,7 +36,7 @@ export class FeedbackPage {
       setTimeout(() => {
         if (i.channel == 'video'){
           loading.dismiss()
-        this.navCtrl.push(AppointmentsPage, {tutors:i})
+        this.navCtrl.push(ClassPage, {tutors:i})
         }
         else if (i.channel == 'texting'){
           console.log(i);

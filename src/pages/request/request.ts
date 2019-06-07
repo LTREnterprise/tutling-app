@@ -25,41 +25,84 @@ export class RequestPage {
   time = null;
   minDate: string = new Date().toISOString();
   minTime : string = new Date().toLocaleTimeString(); 
-  public items: any = [];
+  public items: any = [0,4,8];
+  items2  = [4,8,12]
   modules = ["DSO24T","CGS17AT", "CMK17BT", "TPG117", 
   "Accounting", "Computer", "TLPD", "Business",
   "Computer", "Business", "Manangement", "Office"];
   lengthCourse = []
-  cources = ["I.T", "HR", "Office Management"]
+  cources = ["Information Technology", "HR", "Office Management"]
   searchItem;
+  tempModules = new Array();
+  tempCourses = new Array();
   constructor(public method: MethodsProvider, public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    this.intializeItems();
+    // this.intializeItems();
+ this.initializeModules();
+  }
+
+  initializeModules(){
+    this.tempModules =  this.modules;
   }
 
   intializeItems(){
-    this.items = this.cources
+    // this.items = this.cources
+    this.tempCourses = this.cources
   }
+
   itemSelected;
-  selectCP(item){
-this.itemSelected = item;
-console.log(this.items[item]);
+  courseSeleted = null;
+  selectCP(item,i){
+    this.searchItem
+    this.courseSeleted = item;
+    console.log(item);
+    this.itemSelected = i;
+// console.log(this.items[item]);
 
   }
+
+ currentCourse = "";
+ courseSearched(item){
+   console.log(item);
+   this.searchItem =  item;
+   this.currentCourse = item;
+   this.tempCourses = [];
+   this.selectCourse(event);
+   
+ }
+  selectCourse(ev){
+    var index = 0;
+   for (var i = 0; i < this.cources.length; i++){
+    if (this.currentCourse == this.cources[i]){
+      index = i;
+      break;
+    }
+   }
+   console.log(index);
+    this.filterCourses(index)
+  }
+
+  filterCourses(indx){
+    this.tempModules = []
+    for (var x = this.items[indx]; x < this.items2[indx]; x++){
+      this.tempModules.push(this.modules[x])
+    }
+  }
+
   getItems(ev){
     this.intializeItems();
    var val = this.searchItem
     if (val && val.trim() != '') {
-      this.items = this.items.filter((item) => {
+      this.tempCourses = this.tempCourses.filter((item) => {
         console.log(val);
-
         return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
     else if (val == "" || val == null) {
-      this.items = [];
+      this.tempCourses = [];
+      this.searchItem = "";
     }
   }
   home(){
@@ -94,15 +137,15 @@ console.log(this.items[item]);
     }
   }
 
-  requestTutor(){
-    this.navCtrl.push(Page4Page, {channel:this.channel})
+  requestTutor(){ 
+   this.navCtrl.push(Page4Page, {channel:this.channel, sub:this.courseSeleted, course:this.currentCourse})
   }
 
   request(){
     console.log(this.date);
     console.log(this.time);
     
-    
+    if (this.courseSeleted != null){
     if (this.channel != null && this.date == null && this.time == null){
       const prompt = this.alertCtrl.create({
         message: "Are you sure you want to instantly request a tutor",
@@ -116,11 +159,11 @@ console.log(this.items[item]);
           {
             text: 'Agree',
             handler: data => {
-            this.method.setRequest(this.channel);
+            this.method.setRequest(this.channel, this.courseSeleted, this.currentCourse);
             if (this.channel == 'video')
               this. requestTutor();
               else if (this.channel == 'texting'){
-              this.method.setRequest(this.channel);
+              this.method.setRequest(this.channel,this.courseSeleted, this.currentCourse);
               this. requestTutor()}
             }
           }
@@ -171,7 +214,7 @@ console.log(this.items[item]);
       prompt.present();
     }
     else if (this.channel != null && this.date != null && this.time != null){
-      this.method.setAppontment(this.date,this.time," ", " ", this.channel).then(() =>{
+      this.method.setAppontment(this.date,this.time, this.courseSeleted, this.currentCourse, this.channel).then(() =>{
         const prompt = this.alertCtrl.create({
           message: "Your Appointment has been scheduled",
           buttons: [
@@ -190,5 +233,18 @@ console.log(this.items[item]);
         prompt.present();
       })
     }
+  }else{
+    const prompt = this.alertCtrl.create({
+      message: "Please select a Module",
+      buttons: [
+        {
+          text: 'Ok',
+          handler: data => {
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
   }
 }

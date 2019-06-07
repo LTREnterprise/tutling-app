@@ -91,7 +91,7 @@ export class MethodsProvider {
     });
   }
 
-  setRequest(type){
+  setRequest(type, sub, course){
     return new Promise((resolve, reject) => {
       this.ngzone.run(() => {
         var user = firebase.auth().currentUser;
@@ -101,6 +101,8 @@ export class MethodsProvider {
             firebase.database().ref("requests/" + user.uid).set({
               name : details.name,
               id : x,
+              sub: sub,
+              course: course,
               img : details. downloadurl,
               contact : details.contact,
               tutorId: "0000sfsdfsdf",
