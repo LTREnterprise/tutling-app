@@ -42,13 +42,13 @@ course;
     console.log(this.tutorsArr);
     if (this.channel == 'texting'){
       setTimeout(() => {
-        this.navCtrl.push(ChattingPage, {tutors:this.tutorsArr})
+        this.navCtrl.push(FeedbackPage, {tutors:this.tutorsArr,sub:this.sub})
       }, 200);
 
     }
     else if (this.channel == 'video'){
       setTimeout(() => {
-        this.navCtrl.push(ClassPage, {tutors:this.tutorsArr, sub:this.sub})
+        this.navCtrl.push(FeedbackPage, {tutors:this.tutorsArr, sub:this.sub})
       }, 200);
 
     }

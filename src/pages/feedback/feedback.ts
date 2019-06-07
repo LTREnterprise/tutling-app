@@ -17,10 +17,12 @@ import { ChattingPage } from '../chatting/chatting';
   selector: 'page-feedback',
   templateUrl: 'feedback.html',
 })
+
 export class FeedbackPage {
   tutors = this.navParams.get('tutors')
+  sub;
   constructor(public loadingCtrl: LoadingController, public methods: MethodsProvider, public navCtrl: NavController, public navParams: NavParams) {
-    
+    this.sub =  this.navParams.get('sub');
   }
 
   ionViewDidLoad() {
@@ -43,7 +45,7 @@ export class FeedbackPage {
           i.path = path
           console.log(i);
           this.methods.setPath(path).then(() =>{
-            this.navCtrl.push(ChattingPage, {tutors:i})
+            this.navCtrl.push(ChattingPage, {tutors:i, sub:this.sub})
             loading.dismiss();
           })
         }

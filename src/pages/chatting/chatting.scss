@@ -142,7 +142,7 @@ page-chatting {
         height       : 250px;
         width        : 100%;
         // left      : 50%;
-        transform    : rotateX(180deg);
+        // transform    : rotateX(180deg);
         // background: red;
         overflow-y   : scroll;
 
@@ -159,7 +159,7 @@ page-chatting {
             margin-top   : 5px;
             display      : flex;
 
-            transform: rotateX(-180deg);
+            // transform: rotateX(-180deg);
         }
 
         .dp,

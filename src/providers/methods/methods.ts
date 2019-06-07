@@ -131,7 +131,7 @@ export class MethodsProvider {
     })
   }
 
-  getOnlineUsers2(){
+  getOnlineUsers(){
     return new Promise((resolve, reject) => {
       this.ngzone.run(() => {
         firebase.database().ref("requests/").on("value", (data: any) => {
@@ -170,7 +170,7 @@ export class MethodsProvider {
       })
     })
   }
-  getOnlineUsers(){
+  getOnlineUsers2(){
     return new Promise((resolve, reject) => {
       this.ngzone.run(() => {
         var user = firebase.auth().currentUser;

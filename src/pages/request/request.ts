@@ -73,6 +73,7 @@ export class RequestPage {
    
  }
   selectCourse(ev){
+    this.searchItem = "";
     var index = 0;
    for (var i = 0; i < this.cources.length; i++){
     if (this.currentCourse == this.cources[i]){
@@ -148,7 +149,7 @@ export class RequestPage {
     if (this.courseSeleted != null){
     if (this.channel != null && this.date == null && this.time == null){
       const prompt = this.alertCtrl.create({
-        message: "Are you sure you want to instantly request a tutor",
+        message: "Are you sure you want to instantly request a tutor for " + this.courseSeleted,
         buttons: [
           {
             text: 'Disagree',
