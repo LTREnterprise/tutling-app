@@ -5,6 +5,8 @@ import { Platform } from 'ionic-angular';
 import { MethodsProvider } from '../../providers/methods/methods';
 import { SavedAppointmentsPage } from '../saved-appointments/saved-appointments';
 import { SignInPage } from '../sign-in/sign-in';
+import { RecordingsPage } from '../recordings/recordings';
+import { PaymentPage } from '../payment/payment';
 
 
 @Component({
@@ -22,33 +24,11 @@ export class HomePage {
 
 
   Payment(){
-    const prompt = this.alertCtrl.create({
-      message: "This feature is currently unavailable",
-      buttons: [
-        {
-          text: 'Ok',
-          handler: data => {
-            console.log('Saved clicked');
-          }
-        }
-      ]
-    });
-    prompt.present();
+      this.navCtrl.push(PaymentPage)
   }
 
   Recordings(){
-    const prompt = this.alertCtrl.create({
-      message: "This feature is currently unavailable",
-      buttons: [
-        {
-          text: 'Ok',
-          handler: data => {
-            console.log('Saved clicked');
-          }
-        }
-      ]
-    });
-    prompt.present();
+    this.navCtrl.push(RecordingsPage)
   }
 
   Appointments(){

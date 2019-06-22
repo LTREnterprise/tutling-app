@@ -5,7 +5,7 @@
     <button ion-button clear color="light" id="list">
       <ion-icon ios="ios-list" md="md-list"></ion-icon>
     </button>
-    <div id="menu">APPOINTMENTS</div>
+    <div id="menu">Q&A Recording</div>
     <button ion-button clear color="light" id="search">
       <ion-icon ios="ios-search" md="md-search"></ion-icon>
     </button>
@@ -16,9 +16,9 @@
 
     <div class="date-time">
       <div>
-        03/04/2019
+       {{date}}
       </div>
-      <div>08:00 AM</div>
+      <div>{{time}}</div>
     </div>
     <div class="subject">
     {{sub}}
@@ -62,7 +62,7 @@
         
     <div class="chats" >
       <div *ngFor = "let i of Messages">
-        <div *ngIf="i.senderID === currentUserId">
+        <div *ngIf="i.senderID != currentUserId">
         <div class="message">
           <div class="sent">
             <span class="sent-received">
@@ -74,7 +74,7 @@
         </div>
       </div>
   
-      <div *ngIf="i.senderID != currentUserId">
+      <div *ngIf="i.senderID === currentUserId">
         <div class="message"> 
           <img src="../../assets/imgs/personico.png" alt="" class="dp-friend">
     
@@ -93,21 +93,5 @@
           <ion-infinite-scroll-content></ion-infinite-scroll-content>
         </ion-infinite-scroll>
     </div>
-    <div id="textbox">
-      <div class="txt">
-        <input type="text" [(ngModel)]="mssg">
-      </div>
-      <div class="btn">
-        <button clear color="dark" ion-button id="sender" (click)="sendMessage()">
-          <ion-icon name="send"></ion-icon>
-        </button>
-      </div>
-    </div>
-
-    <div [hidden]="keyboard.isOpen()" class="time-duration" >
-      <p class="time">{{minREf}}{{minutes}}:{{secRef}}{{seconds}}</p>
-      <p class="remaining">Minutes Remaining</p>
-    </div>
   </div>
 </ion-content> 
-

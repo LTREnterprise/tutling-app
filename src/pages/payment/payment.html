@@ -1,0 +1,45 @@
+<ion-content>
+  <div class="container">
+    <div class="head">
+      <button ion-button clear color="light" id="list">
+        <ion-icon name="list"></ion-icon>
+      </button>
+      <div id="menu">PAYMENT</div>
+      <button ion-button clear color="light" id="search">
+        <ion-icon ios="ios-search" md="md-search"></ion-icon>
+      </button>
+    </div>
+    <div class="inputs">
+      <ion-list padding>
+        <div class="entries">Add Payment</div>
+        <ion-input type="number" placeholder="Account Number"></ion-input>
+        <ion-input type="text" placeholder="Name"></ion-input>
+        <ion-input type="text" placeholder="Bank"></ion-input>
+        <ion-input type="number" placeholder="Branch Code"></ion-input>
+        <ion-input type="number" placeholder="CVV"></ion-input>
+      </ion-list>
+      <div class="paymentMethods">
+        <div class="payment-choices">
+          <div>
+            <img src="assets/imgs/mastercard.png" alt="">
+          </div>
+          <div>
+            <img src="assets/imgs/American Express.png" alt="">
+          </div>
+          <div>
+            <img src="assets/imgs/Visa.png" alt="">
+          </div>
+        </div>
+        <div class="payment-choices">
+          <div>
+            <img src="assets/imgs/mastercard.png" alt="">
+          </div>
+          <div>
+            <img src="assets/imgs/American Express.png" alt="">
+          </div>
+        </div>
+      </div>
+      <button id="submitter" ion-button block>SUBMIT</button>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,120 @@
+page-payment {
+    .container {
+        height    : 100%;
+        width     : 100%;
+        background: white;
+        overflow-y: scroll;
+      }
+    
+      .head {
+        position      : relative;
+        height        : 12%;
+        width         : 100vw;
+        background    : rgb(75, 75, 75);
+        // padding-top: 5px;
+        // border     : 2px solid red;
+    
+        #menu {
+          position : absolute;
+          left     : 50%;
+          top      : 20px;
+          transform: translateX(-50%);
+          color    : rgb(231, 193, 69);
+          font-size: 18px;
+        }
+    
+        #search {
+          float    : right;
+          font-size: 18px;
+        }
+    
+        #list {
+          // margin-top: -2px;
+          font-size    : 18px;
+        }
+      }
+    
+      #accept {
+        transition   : 700ms;
+        border-radius: 100px;
+        height       : 50px;
+        background   : linear-gradient(rgb(231, 193, 69),
+            rgb(243, 232, 197),
+            rgb(231, 193, 69),
+            rgb(158, 121, 0),
+            rgb(231, 193, 69),
+            rgb(248, 222, 134));
+      }
+    
+      .inputs {
+        width        : 100%;
+        height       : 88%;
+        // background: rgb(223, 223, 223);
+        text-align   : center;
+        overflow-y   : scroll;
+      }
+    
+      ion-input {
+        width        : 100%;
+        height       : 40px;
+        background   : white;
+        font-weight  : bolder;
+        margin-bottom: 20px;
+        border       : 2px solid rgb(75, 75, 75);
+        text-align   : center;
+        padding-left : 5px;
+        padding-right: 5px;
+    
+        ::placeholder {
+          text-align: center;
+        }
+    
+        ion-list {
+          border-bottom: 2px solid white;
+        }
+      }
+    
+      .entries {
+        background   : rgb(196, 196, 196);
+        border       : 2px solid rgb(75, 75, 75);
+        color        : rgb(75, 75, 75);
+        // width     : 95%;
+        // margin    : 10px auto 20px auto;
+        margin       : 5px auto 20px auto;
+        height       : 40px;
+        line-height  : 35px;
+        font-weight  : 700;
+      }
+    
+      .paymentMethods {
+        // border: 2px solid green;
+        margin   : -50px auto;
+    
+        img {
+          height: 80px;
+        }
+      }
+    
+      .payment-choices {
+        display: flex;
+    
+        div {
+          // border: 2px solid red;
+          margin   : 0 auto;
+        }
+      }
+      .scroll-content {
+        padding-bottom: 0 !important;
+     }
+      #submitter {
+        width        : 95%;
+        margin       : 50px auto 10px auto;
+        border-radius: 40px;
+        background   : linear-gradient(rgb(231, 193, 69),
+            rgb(243, 232, 197),
+            rgb(231, 193, 69),
+            rgb(158, 121, 0),
+            rgb(231, 193, 69),
+            rgb(248, 222, 134));
+      }
+    }

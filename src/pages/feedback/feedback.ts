@@ -44,7 +44,7 @@ export class FeedbackPage {
           console.log(i);
           i.path = path
           console.log(i);
-          this.methods.setPath(path).then(() =>{
+          this.methods.setPath(path, this.sub, i.key).then(() =>{
             this.navCtrl.push(ChattingPage, {tutors:i, sub:this.sub})
             loading.dismiss();
           })

@@ -19,6 +19,10 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 import {CanvasDraw} from '../components/canvas-draw/canvas-draw'
 import { RecordingsPage } from '../pages/recordings/recordings';
 import { ChattingPage } from '../pages/chatting/chatting';
+import { SqlProvider } from '../providers/sql/sql';
+import { SQLite } from '../../node_modules/@ionic-native/sqlite';
+import { ChatsRecordingsPage } from '../pages/chats-recordings/chats-recordings';
+import { PaymentPage } from '../pages/payment/payment';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,9 @@ import { ChattingPage } from '../pages/chatting/chatting';
     SavedAppointmentsPage,
     RecordingsPage,
     CanvasDraw,
-    ChattingPage
+    ChattingPage,
+    ChatsRecordingsPage,
+    PaymentPage
     
   ],
   imports: [
@@ -54,15 +60,20 @@ import { ChattingPage } from '../pages/chatting/chatting';
     SignInPage,
     SavedAppointmentsPage,
     RecordingsPage,
-    ChattingPage
+    ChattingPage,
+    ChatsRecordingsPage,
+    PaymentPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     // AndroidPermissions,
     LocalNotifications,
+    
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    MethodsProvider
+    MethodsProvider,
+    SqlProvider,
+    SQLite
   ]
 })
 export class AppModule {}

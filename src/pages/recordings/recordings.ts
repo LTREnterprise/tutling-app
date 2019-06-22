@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { SqlProvider } from '../../providers/sql/sql';
+import { ChatsRecordingsPage } from '../chats-recordings/chats-recordings';
 
 /**
  * Generated class for the RecordingsPage page.
@@ -14,12 +16,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'recordings.html',
 })
 export class RecordingsPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  chats = new Array();
+  constructor(public sql:SqlProvider, public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
     console.log('ionViewDidLoad RecordingsPage');
+    this.sql.getAllConvo().then((data:any) =>{
+     this.chats = data;
+    })
   }
-
+  viewMore(convo, date,sub, time, key){
+    this.navCtrl.push(ChatsRecordingsPage, {id:convo, date:date, sub:sub, time:time, key:key})
+  }
 }

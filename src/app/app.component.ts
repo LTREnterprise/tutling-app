@@ -12,6 +12,8 @@ import { FeedbackPage } from '../pages/feedback/feedback';
 import { AppointmentsPage } from '../pages/appointments/appointments';
 import { SignInPage } from '../pages/sign-in/sign-in';
 import { MethodsProvider } from '../providers/methods/methods';
+import { ChatsRecordingsPage } from '../pages/chats-recordings/chats-recordings';
+import { PaymentPage } from '../pages/payment/payment';
 
 
 @Component({
@@ -25,7 +27,7 @@ export class MyApp {
       this.methods.checkstate().then((results:any) =>{
         if (results == 1) {
           // this.methods.setUserOnline();
-          this.rootPage = RequestPage;
+          this.rootPage = PaymentPage;
         }
         else {
           this.rootPage = SignInPage

@@ -2,6 +2,8 @@ import { Injectable, NgZone } from "@angular/core";
 import { LoadingController, AlertController, UrlSerializer} from "ionic-angular";
 import { dateDataSortValue } from "ionic-angular/umd/util/datetime-util";
 import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
+import { SqlProvider } from "../sql/sql";
+import moment from "moment";
 // import { Http } from '@angular/http';
 // import 'rxjs/add/operator/map';
 
@@ -19,7 +21,7 @@ export class MethodsProvider {
   appointmentsArr =  new Array();
   textArea =  new Array();
   messages = new Array();
-  constructor(private ngzone: NgZone,public loadingCtrl: LoadingController,  public alertCtrl: AlertController,) {
+  constructor(public sql:SqlProvider, private ngzone: NgZone,public loadingCtrl: LoadingController,  public alertCtrl: AlertController,) {
    
     
   }
@@ -131,7 +133,7 @@ export class MethodsProvider {
     })
   }
 
-  getOnlineUsers(){
+  getOnlineUsers2(){
     return new Promise((resolve, reject) => {
       this.ngzone.run(() => {
         firebase.database().ref("requests/").on("value", (data: any) => {
@@ -170,7 +172,7 @@ export class MethodsProvider {
       })
     })
   }
-  getOnlineUsers2(){
+  getOnlineUsers(){
     return new Promise((resolve, reject) => {
       this.ngzone.run(() => {
         var user = firebase.auth().currentUser;
@@ -207,18 +209,23 @@ export class MethodsProvider {
     })
   }
 
-  setPath(path){
+  setPath(path, sub, key){
         return new Promise((accpt, rej) =>{
+          var date = new Date();
+          var timestamp = date.getTime();
+          this.sql.initializeConvo(moment().format('l'),timestamp,sub,moment().format('LTS'), key)
           firebase.database().ref("Chats/" + path).push({
             message: "",
-            Date: "",
+            Date: moment().format('l'),
             senderID: "",
-            receiverID : ""
+            receiverID : "",
+            convo : timestamp
         })
        accpt('')
     })
   }
 
+  messagesCounter = 0;
   getMessages(path){
     return new Promise((accpt, rej) =>{
       firebase.database().ref("Chats/" + path).on("value", (data: any) => {
@@ -226,30 +233,40 @@ export class MethodsProvider {
         if (data.val() != null || data.val() != undefined){
           var msges = data.val();
           var key = Object.keys(msges);
-          for (var x = 1; x < key.length; x++){
+          if (this.messagesCounter >= 1)
+          this.messagesCounter = 1;
+          console.log('getting messagessasasas');
+          
+          for (var x = this.messagesCounter; x < key.length; x++){
             var k = key[x];
             let msObject = {
               message : msges[k].message,
               Date: msges[k].Date,
               senderID: msges[k].senderID,
-              receiverID : msges[k].receiverID
+              receiverID : msges[k].receiverID,
+              convo : msges[k].convo
             } 
             this.messages.push(msObject) 
           }
+          this.messagesCounter++;
+          var length =  this.messages.length;
+          console.log(this.messages[length - 1].message);
+          this.sql.storefavourite(this.messages[length - 1].message,this.messages[length - 1].Date,this.messages[length - 1].senderID,"",this.messages[length - 1].convo)
           accpt(this.messages)
         }
       })
     })
   }
 
-  sendMessage(path, text){
+  sendMessage(path, text, convo){
     return new Promise((accpt, rej) =>{
       var user = firebase.auth().currentUser;
       firebase.database().ref("Chats/" + path).push({
         message: text,
-        Date: "",
+        Date: moment().format('l'),
         senderID: user.uid,
-        receiverID : ""
+        receiverID : "",
+        convo: convo
     })
    accpt('')
 })

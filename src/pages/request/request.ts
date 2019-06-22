@@ -40,6 +40,7 @@ export class RequestPage {
 
   ionViewDidLoad() {
     // this.intializeItems();
+
  this.initializeModules();
   }
 
