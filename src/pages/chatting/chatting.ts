@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { AlertController,IonicPage, NavController, NavParams, LoadingController, Keyboard } from 'ionic-angular';
 import { MethodsProvider } from '../../providers/methods/methods';
+import moment from "moment";
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { SqlProvider } from '../../providers/sql/sql';
 /**
  * Generated class for the ChattingPage page.
  *
@@ -27,7 +29,7 @@ minREf = 0;
 seconds = 0;
 secRef = 0;
 convo;
-  constructor(  private keyboard: Keyboard, private localNotifications: LocalNotifications,public loadingCtrl: LoadingController,public methods: MethodsProvider, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public sql:SqlProvider,  private keyboard: Keyboard, private localNotifications: LocalNotifications,public loadingCtrl: LoadingController,public methods: MethodsProvider, public navCtrl: NavController, public navParams: NavParams) {
     let loading = this.loadingCtrl.create({
       spinner: "bubbles",
       content: "Please wait....",
@@ -40,12 +42,13 @@ convo;
     this.user = this.navParams.get('tutors');
 //tutor
 
-    //  this.path =  this.user.path;
-    // console.log(this.user);
-    // console.log(this.user.path);
+     this.path =  this.user.path;
+    console.log(this.user);
+    console.log(this.user.path);
 
     //student
-    this.path =  this.user[0].path;
+    // this.path =  this.user[0].path;
+
     this.methods.getMessages(this.path).then((data:any) =>{
       console.log('get messages');
       if (this.counter == 0){
@@ -55,6 +58,7 @@ convo;
       this.Messages = data;
       this.Messages.splice(0)
       this.counter++;
+      //student this
      setTimeout(() => {
       loading.dismiss();
      }, 2300);
@@ -65,6 +69,13 @@ convo;
 
   setConvo(conv){
     this.convo = conv
+    //student 
+    // this.initSql();
+  }
+
+  initSql(){
+    this.sql.initializeConvo(moment().format('l'),this.convo,this.sub,moment().format('LTS'), this.currentUserId)
+
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChattingPage');

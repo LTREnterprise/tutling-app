@@ -23,6 +23,7 @@ export class RecordingsPage {
   ionViewDidEnter() {
     console.log('ionViewDidLoad RecordingsPage');
     this.sql.getAllConvo().then((data:any) =>{
+      console.log(data);
      this.chats = data;
     })
   }

@@ -13,7 +13,9 @@ import { AppointmentsPage } from '../pages/appointments/appointments';
 import { SignInPage } from '../pages/sign-in/sign-in';
 import { MethodsProvider } from '../providers/methods/methods';
 import { ChatsRecordingsPage } from '../pages/chats-recordings/chats-recordings';
-import { PaymentPage } from '../pages/payment/payment';
+import { TutorRegisterPage } from '../pages/tutor-register/tutor-register';
+import { ProfilePage } from '../pages/profile/profile';
+import { Tutorregister2Page } from '../pages/tutorregister2/tutorregister2';
 
 
 @Component({
@@ -27,7 +29,7 @@ export class MyApp {
       this.methods.checkstate().then((results:any) =>{
         if (results == 1) {
           // this.methods.setUserOnline();
-          this.rootPage = PaymentPage;
+          this.rootPage = Tutorregister2Page;
         }
         else {
           this.rootPage = SignInPage

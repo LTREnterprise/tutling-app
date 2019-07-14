@@ -25,17 +25,17 @@ export class ChatsRecordingsPage {
   }
 
   ionViewDidLoad() {
-    // let loading = this.loadingCtrl.create({
-    //   spinner: "bubbles",
-    //   content: "Please wait....",
-    // });
-    // loading.present();
-    // this.sql.GetAllFavourite(this.id).then((data:any) =>{
-    //   this.Messages = data
-    //   setTimeout(() => {
-    //     loading.dismiss()
-    //   }, 2000);
-    // })
+    let loading = this.loadingCtrl.create({
+      spinner: "bubbles",
+      content: "Please wait....",
+    });
+    loading.present();
+    this.sql.GetAllFavourite(this.id).then((data:any) =>{
+      this.Messages = data
+      setTimeout(() => {
+        loading.dismiss()
+      }, 2000);
+    })
   }
 
 }

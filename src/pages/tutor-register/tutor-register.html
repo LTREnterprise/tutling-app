@@ -1,0 +1,71 @@
+<ion-header>
+  <div class="nav">
+      <button ion-button clear color="light" >
+        <ion-icon name="arrow-back" (click)="back()"></ion-icon>
+      </button>
+      <p id="appName-Top">Create Account</p>
+    </div>
+</ion-header>
+
+<ion-content (ionScrollStart)="logScrollStart()" (ionScroll)="logScrolling($event)" (ionScrollEnd)="logScrollEnd()">
+<div class="body" padding>
+  <div class="image">
+    <img id="icon" src="assets/imgs/icon2.png" alt="">
+
+  </div>
+  <p id="appName">Create Account</p>
+
+  <div class="myInputs">
+    <ion-input type="text" [(ngModel)]="name"></ion-input>
+    <div class="placeHolder">Full Name</div>
+  </div>
+  <div class="myInputs">
+    <ion-input type="email" [(ngModel)]="email"></ion-input>
+    <div class="placeHolder">Email</div>
+  </div>
+  <div class="myInputs">
+    <ion-input type="text" [(ngModel)]="bDate"></ion-input>
+    <div class="placeHolder">Birth Date</div>
+  </div>
+  <div class="myInputs">
+    <ion-input  type="number" [(ngModel)]="idNum"></ion-input>
+    <div class="placeHolder">ID Number</div>
+  </div>
+  <div class="myInputs">
+    <ion-input type="number" [(ngModel)]="cellNum"></ion-input>
+    <div class="placeHolder">Mobile Number</div>
+  </div>
+  <div class="myInputs">
+    <ion-input type="text" [(ngModel)]="University"></ion-input>
+    <div class="placeHolder">University</div>
+  </div>
+  <div class="myInputs">
+    <ion-input type="text" [(ngModel)]="highScll"></ion-input>
+    <div class="placeHolder">High School</div>
+  </div>
+  <div class="myInputs">
+    <ion-input type="text" [(ngModel)]="Primary"></ion-input>
+    <div class="placeHolder">Primary</div>
+  </div>
+  <div class="myInputs">
+    <ion-input type="text" [(ngModel)]="eduLevel"></ion-input>
+    <div class="placeHolder">Level of Education</div>
+  </div><div class="split"></div>
+  <div class="myInputs">
+    <ion-input type="password" [(ngModel)]="pass"></ion-input>
+    <div class="placeHolder">Password</div>
+  </div>
+  <div class="myInputs">
+    <ion-input type="password" [(ngModel)]="confmPass"></ion-input>
+    <div class="placeHolder">Confirm Password</div>
+  </div>
+
+  <ion-list class="buttons">
+    <button ion-button block class="btn" (click)="leadToNextPage()">
+      SUBMIT
+    </button>
+  </ion-list>
+
+
+</div>
+</ion-content>

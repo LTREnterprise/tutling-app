@@ -23,6 +23,9 @@ import { SqlProvider } from '../providers/sql/sql';
 import { SQLite } from '../../node_modules/@ionic-native/sqlite';
 import { ChatsRecordingsPage } from '../pages/chats-recordings/chats-recordings';
 import { PaymentPage } from '../pages/payment/payment';
+import { TutorRegisterPage } from '../pages/tutor-register/tutor-register';
+import { ProfilePage } from '../pages/profile/profile';
+import { Tutorregister2Page } from '../pages/tutorregister2/tutorregister2';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import { PaymentPage } from '../pages/payment/payment';
     CanvasDraw,
     ChattingPage,
     ChatsRecordingsPage,
-    PaymentPage
+    PaymentPage,
+    TutorRegisterPage,
+    ProfilePage,
+    Tutorregister2Page
     
   ],
   imports: [
@@ -62,7 +68,10 @@ import { PaymentPage } from '../pages/payment/payment';
     RecordingsPage,
     ChattingPage,
     ChatsRecordingsPage,
-    PaymentPage
+    PaymentPage,
+    TutorRegisterPage,
+    ProfilePage,
+    Tutorregister2Page
   ],
   providers: [
     StatusBar,

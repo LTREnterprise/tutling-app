@@ -22,7 +22,7 @@ export class SqlProvider {
   ){
     if (!this.isOpen) {
       this.storage = new SQLite();
-      this.storage.create({ name: "data.db", location: "default" }).then((db: SQLiteObject) => {
+      this.storage.create({ name: "tutling.db", location: "default" }).then((db: SQLiteObject) => {
         this.db = db;
         db.executeSql("CREATE TABLE IF NOT EXISTS convo (id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, convo TEXT, sub TEXT, time TEXT, key TEXT) ", []);
         db.executeSql("CREATE TABLE IF NOT EXISTS messages (id INTEGER PRIMARY KEY AUTOINCREMENT, message TEXT, date TEXT, userId TEXT, image TEXT, convo TEXT) ", []);

@@ -133,7 +133,7 @@ export class MethodsProvider {
     })
   }
 
-  getOnlineUsers2(){
+  getOnlineUsers(){
     return new Promise((resolve, reject) => {
       this.ngzone.run(() => {
         firebase.database().ref("requests/").on("value", (data: any) => {
@@ -172,7 +172,7 @@ export class MethodsProvider {
       })
     })
   }
-  getOnlineUsers(){
+  getOnlineUsers2(){
     return new Promise((resolve, reject) => {
       this.ngzone.run(() => {
         var user = firebase.auth().currentUser;
@@ -213,7 +213,6 @@ export class MethodsProvider {
         return new Promise((accpt, rej) =>{
           var date = new Date();
           var timestamp = date.getTime();
-          this.sql.initializeConvo(moment().format('l'),timestamp,sub,moment().format('LTS'), key)
           firebase.database().ref("Chats/" + path).push({
             message: "",
             Date: moment().format('l'),
@@ -249,9 +248,9 @@ export class MethodsProvider {
             this.messages.push(msObject) 
           }
           this.messagesCounter++;
-          var length =  this.messages.length;
-          console.log(this.messages[length - 1].message);
-          this.sql.storefavourite(this.messages[length - 1].message,this.messages[length - 1].Date,this.messages[length - 1].senderID,"",this.messages[length - 1].convo)
+        // var length =  this.messages.length;
+       //  console.log(this.messages[length - 1].message);
+       //  this.sql.storefavourite(this.messages[length - 1].message,this.messages[length - 1].Date,this.messages[length - 1].senderID,"",this.messages[length - 1].convo)
           accpt(this.messages)
         }
       })
