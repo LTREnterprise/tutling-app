@@ -4,13 +4,13 @@
       <button ion-button clear color="light" id="list">
         <ion-icon name="list"></ion-icon>
       </button>
-      <div id="menu">PAYMENT</div>
+      <div id="menu">PICK SUBJECTS</div>
       <button ion-button clear color="light" id="search">
         <ion-icon ios="ios-search" md="md-search"></ion-icon>
       </button>
     </div>
     <div class="rest-of-content" padding>
-      <ion-searchbar></ion-searchbar>
+      <ion-searchbar icon-end></ion-searchbar>
       <ion-item id="the-select-item">
         <ion-label>Your Subjects</ion-label>
         <ion-select>
@@ -62,9 +62,10 @@
           </label>
           <label for="user-transcript">
               <ion-icon ios="ios-attach" md="md-attach" id="attachment-icon"></ion-icon> <br>
-              ID Document
+              Transcript
           </label>
       </div>
+      <button ion-button block id="submitter">SUBMIT</button>
     </div>
   </div>
 </ion-content>
