@@ -1,4 +1,12 @@
 page-profile {
+    input[type=file]{
+        width: 0;
+        height: 0;
+        z-index: 1;
+        position: absolute;
+        overflow: hidden;
+        opacity: 0;
+    }
     .container {
         height    : 100%;
         width     : 100%;
@@ -115,6 +123,10 @@ page-profile {
             font-weight: bold;
             margin: 5px;
         }
+        .quals2{
+            float: right;
+            // display: grid;
+        }
         .quals{
             height: calc(100% - 30px);
             width: 100%;
@@ -124,6 +136,7 @@ page-profile {
                 height: 30px;
             }
             #adder{
+                float: left;
                 width: 30px;
                 height: 30px;
                 border-radius: 20px;

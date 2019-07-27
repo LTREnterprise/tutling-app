@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { Tutorregister2Page } from '../tutorregister2/tutorregister2';
+import { MethodsProvider } from '../../providers/methods/methods';
+import { FormGroupDirective } from '@angular/forms';
+
 
 /**
  * Generated class for the TutorRegisterPage page.
@@ -15,7 +19,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class TutorRegisterPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  name = "";
+  email = "";
+  bDate = "";
+  idNum = "";
+  cellNum = "";
+  University = "";
+  highScll = "";
+  Primary = "";
+  eduLevel = "";
+  pass = "";
+  confmPass = "";
+
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public methods:MethodsProvider, public alertCtrl:AlertController) {
   }
 
   ionViewDidLoad() {
@@ -41,6 +58,28 @@ export class TutorRegisterPage {
   }
   logScrollEnd(){
     // console.log("end");
-    
+  }
+
+  leadToNextPage(){
+    if (this.confmPass != this.pass){
+        const alert = this.alertCtrl.create({
+          subTitle:'passwords do not match',
+          buttons: [
+            {
+              text: "OK",
+              handler: data => {
+                console.log("Cancel clicked");
+              }
+            }
+          ]
+        });
+        alert.present();
+    }else{
+      this.methods.registerTutor(this.name,this.email,this.idNum,this.bDate,this.cellNum,this.eduLevel,this.highScll,this.Primary,this.University,this.pass).then(() =>{
+        this.navCtrl.push(Tutorregister2Page)
+      })
+    }
+ 
+  
   }
 }

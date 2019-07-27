@@ -17,7 +17,10 @@ export class PaymentPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
-
+  home(){
+    this.navCtrl.pop();
+  }
+  
   ionViewDidLoad() {
     console.log('ionViewDidLoad PaymentPage');
   }

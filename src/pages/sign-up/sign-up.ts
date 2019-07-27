@@ -207,7 +207,7 @@ export class SignUpPage {
     }
     else{
         this.methods.register(this.name, this.email, this.idNum, this.bDate, this.cellNum, this.eduLevel, this.highScll, this.Primary, this.University, this.pass).then(() =>{
-         this.navCtrl.setRoot(RequestPage)
+         this.navCtrl.setRoot(SignUpPage)
         })
     }
     

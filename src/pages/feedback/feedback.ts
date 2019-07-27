@@ -4,6 +4,8 @@ import { MethodsProvider } from '../../providers/methods/methods';
 import { ClassPage } from '../class/class';
 import { AppointmentsPage } from '../appointments/appointments';
 import { ChattingPage } from '../chatting/chatting';
+import { TutorChatPage } from '../tutor-chat/tutor-chat';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the FeedbackPage page.
@@ -19,15 +21,29 @@ import { ChattingPage } from '../chatting/chatting';
 })
 
 export class FeedbackPage {
-  tutors = this.navParams.get('tutors')
+  tutors = new Array();
   sub;
   constructor(public loadingCtrl: LoadingController, public methods: MethodsProvider, public navCtrl: NavController, public navParams: NavParams) {
-    this.sub =  this.navParams.get('sub');
+    this.getConfirmation();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FeedbackPage');
   }
+
+  getConfirmation(){
+    this.methods.getOnlineUsers().then((data:any) =>{
+      this.tutors.length = 0;
+      console.log('assign to array');
+      this.tutors = data;
+      // this.ShowTutors();
+    })
+  }
+
+  home(){
+    this.navCtrl.push(HomePage)
+  }
+
   accept(i){
     this.methods.approveLesson(i).then((path) =>{
       let loading = this.loadingCtrl.create({
@@ -38,14 +54,14 @@ export class FeedbackPage {
       setTimeout(() => {
         if (i.channel == 'video'){
           loading.dismiss()
-        this.navCtrl.push(ClassPage, {tutors:i})
+        this.navCtrl.push( AppointmentsPage, {tutors:i})
         }
         else if (i.channel == 'texting'){
           console.log(i);
           i.path = path
           console.log(i);
           this.methods.setPath(path, this.sub, i.key).then(() =>{
-            this.navCtrl.push(ChattingPage, {tutors:i, sub:this.sub})
+            this.navCtrl.push(TutorChatPage, {tutors:i, sub:this.sub})
             loading.dismiss();
           })
         }

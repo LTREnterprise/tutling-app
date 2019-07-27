@@ -1,32 +1,36 @@
 <ion-content>
   <div class="container">
     <div class="head">
-      <button ion-button clear color="light" id="list">
+      <button ion-button clear color="light" id="list" (click)="home()">
         <ion-icon name="list"></ion-icon>
       </button>
       <div id="menu">Profile</div>
-      <button ion-button clear color="light" id="search">
+      <!-- <button ion-button clear color="light" id="search">
         <ion-icon ios="ios-search" md="md-search"></ion-icon>
-      </button>
+      </button> -->
     </div>
+  
     <div class="theProfilePic">
-      <img src="assets/imgs/user78.png" alt="">
-      <button color="default" ion-button>Edit</button>
+      <img src="{{downloadurl}}" alt="">
+      <input id="file" type="file" accept="image/*" (change)="insertpic($event)">
+      <button for="file" color="default" ion-button><label for="file">Edit</label> </button>
     </div>
     <div class="content-body">
       <div class="flex-box">
-        <input type="text" value="John">
-        <input type="text" value="Doe">
+        <input type="text" [(ngModel)]="name" disabled>
+        <input type="text" [(ngModel)]="bdate" disabled>
       </div>
       <div class="more-info">
-        <input type="email" value="john@doe.com">
-        <input type="number" value="0813917127">
+        <input type="email" [(ngModel)]="email" disabled>
+        <input type="number" [(ngModel)]="contacts" disabled>
       </div>
       <div class="degrees">
         <p>Degrees</p>
         <div class="quals">
-          <button ion-button outline color="default">BCom</button>
-          <button id="adder" ion-button outline color="default">
+          <div class="quals2" *ngFor="let i of profile; let x = index">
+              <button ion-button outline color="default" (click)="delete(x)">{{i.degree}}</button>
+          </div>
+          <button id="adder" ion-button outline color="default" (click)="addQ()">
             <ion-icon name="add"></ion-icon>
           </button>
         </div>

@@ -28,8 +28,12 @@ export class MyApp {
     platform.ready().then(() => {
       this.methods.checkstate().then((results:any) =>{
         if (results == 1) {
-          // this.methods.setUserOnline();
-          this.rootPage = Tutorregister2Page;
+          this.methods.checkUserType().then((data:any) =>{
+            if (data == 1)
+               this.rootPage = FeedbackPage;
+            else
+                this.rootPage = RequestPage;
+          })
         }
         else {
           this.rootPage = SignInPage

@@ -7,6 +7,7 @@ import { SavedAppointmentsPage } from '../saved-appointments/saved-appointments'
 import { SignInPage } from '../sign-in/sign-in';
 import { RecordingsPage } from '../recordings/recordings';
 import { PaymentPage } from '../payment/payment';
+import { ProfilePage } from '../profile/profile';
 
 
 @Component({
@@ -36,18 +37,7 @@ export class HomePage {
   }
   
   Profile(){
-    const prompt = this.alertCtrl.create({
-      message: "This feature is currently unavailable",
-      buttons: [
-        {
-          text: 'Ok',
-          handler: data => {
-            console.log('Saved clicked');
-          }
-        }
-      ]
-    });
-    prompt.present();
+  this.navCtrl.push(ProfilePage)
   }
 
   logout(){

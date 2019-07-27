@@ -42,12 +42,12 @@ convo;
     this.user = this.navParams.get('tutors');
 //tutor
 
-     this.path =  this.user.path;
-    console.log(this.user);
-    console.log(this.user.path);
+    //  this.path =  this.user.path;
+    // console.log(this.user);
+    // console.log(this.user.path);
 
     //student
-    // this.path =  this.user[0].path;
+    this.path =  this.user[0].path;
 
     this.methods.getMessages(this.path).then((data:any) =>{
       console.log('get messages');
@@ -70,7 +70,7 @@ convo;
   setConvo(conv){
     this.convo = conv
     //student 
-    // this.initSql();
+    this.initSql();
   }
 
   initSql(){

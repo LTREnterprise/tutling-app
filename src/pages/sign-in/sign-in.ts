@@ -3,6 +3,8 @@ import { AlertController,IonicPage, NavController, NavParams } from 'ionic-angul
 import { SignUpPage } from '../sign-up/sign-up';
 import { MethodsProvider } from '../../providers/methods/methods';
 import { RequestPage } from '../request/request';
+import { TutorRegisterPage } from '../tutor-register/tutor-register';
+import { FeedbackPage } from '../feedback/feedback';
 
 /**
  * Generated class for the SignInPage page.
@@ -56,8 +58,11 @@ pass = null;
       prompt.present();
     }
     else{
-      this.methods.signIn(this.email, this.pass).then(() =>{
-        this.navCtrl.setRoot(RequestPage)
+      this.methods.signIn(this.email, this.pass).then((data:any) =>{
+        if (data == 1)
+          this.navCtrl.setRoot(FeedbackPage)
+        else
+         this.navCtrl.setRoot(RequestPage)
       })
     }
   }
@@ -67,7 +72,26 @@ pass = null;
   }
 
   leadToSignUp(){
-    this.navCtrl.push(SignUpPage)
+    const confirm = this.alertCtrl.create({
+      message: 'Please select the type of user you want to register as!',
+      buttons: [
+        {
+          text: 'Tutor',
+          handler: () => {
+            this.navCtrl.push(TutorRegisterPage)
+          }
+        },
+        {
+          text: 'Student',
+          handler: () => {
+            this.navCtrl.push(SignUpPage)
+            console.log('Agree clicked');
+          }
+        }
+      ]
+    });
+    confirm.present();
+    
   }
 
 }

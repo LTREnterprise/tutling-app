@@ -20,6 +20,10 @@ export class RecordingsPage {
   constructor(public sql:SqlProvider, public navCtrl: NavController, public navParams: NavParams) {
   }
 
+  home(){
+    this.navCtrl.pop();
+  }
+
   ionViewDidEnter() {
     console.log('ionViewDidLoad RecordingsPage');
     this.sql.getAllConvo().then((data:any) =>{

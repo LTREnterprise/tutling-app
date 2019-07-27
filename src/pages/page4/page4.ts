@@ -32,6 +32,7 @@ course;
   console.log(this.course);
   console.log(this.channel);
     this.getConfirmation();
+    // this.listenForResp();
   }
 
   ionViewDidLoad() {
@@ -42,13 +43,13 @@ course;
     console.log(this.tutorsArr);
     if (this.channel == 'texting'){
       setTimeout(() => {
-        this.navCtrl.push(FeedbackPage, {tutors:this.tutorsArr,sub:this.sub})
+        this.navCtrl.push(ChattingPage, {tutors:this.tutorsArr,sub:this.sub})
       }, 200);
 
     }
     else if (this.channel == 'video'){
       setTimeout(() => {
-        this.navCtrl.push(FeedbackPage, {tutors:this.tutorsArr, sub:this.sub})
+        this.navCtrl.push(ClassPage, {tutors:this.tutorsArr, sub:this.sub})
       }, 200);
 
     }
@@ -56,7 +57,7 @@ course;
   }
 
   getConfirmation(){
-    this.methods.getOnlineUsers().then((data:any) =>{
+    this.methods.getOnlineUsers2().then((data:any) =>{
       this.tutorsArr.length = 0;
       console.log('assign to array');
       this.tutorsArr = data;
@@ -84,6 +85,7 @@ course;
     else{
       setTimeout(() => {
         var resp = this.methods.getResp();
+        console.log(resp);
         if (resp == true)
         // console.log('please wait');
           this.ShowTutors();

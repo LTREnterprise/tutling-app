@@ -4,23 +4,23 @@
       <button ion-button clear color="light" id="list">
         <ion-icon name="list"></ion-icon>
       </button>
-      <div id="menu">PICK SUBJECTS</div>
+      <div id="menu">PAYMENT</div>
       <button ion-button clear color="light" id="search">
         <ion-icon ios="ios-search" md="md-search"></ion-icon>
       </button>
     </div>
     <div class="rest-of-content" padding>
-      <ion-searchbar icon-end></ion-searchbar>
+      <ion-searchbar  [(ngModel)]="name2"></ion-searchbar>
       <ion-item id="the-select-item">
         <ion-label>Your Subjects</ion-label>
-        <ion-select>
+        <ion-select  [(ngModel)]="name">
           <ion-option>1</ion-option>
           <ion-option>2</ion-option>
           <ion-option>3</ion-option>
           <ion-option>4</ion-option>
         </ion-select>
       </ion-item>
-      <div class="block-element">
+      <div class="block-element"  >
           <div id="value">1</div>
           <div id="value">1</div>
           <div id="value">1</div>
@@ -62,10 +62,9 @@
           </label>
           <label for="user-transcript">
               <ion-icon ios="ios-attach" md="md-attach" id="attachment-icon"></ion-icon> <br>
-              Transcript
+              ID Document
           </label>
       </div>
-      <button ion-button block id="submitter">SUBMIT</button>
     </div>
   </div>
 </ion-content>

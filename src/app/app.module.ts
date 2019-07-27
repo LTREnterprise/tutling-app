@@ -26,6 +26,7 @@ import { PaymentPage } from '../pages/payment/payment';
 import { TutorRegisterPage } from '../pages/tutor-register/tutor-register';
 import { ProfilePage } from '../pages/profile/profile';
 import { Tutorregister2Page } from '../pages/tutorregister2/tutorregister2';
+import { TutorChatPage } from '../pages/tutor-chat/tutor-chat';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { Tutorregister2Page } from '../pages/tutorregister2/tutorregister2';
     PaymentPage,
     TutorRegisterPage,
     ProfilePage,
-    Tutorregister2Page
+    Tutorregister2Page,
+    TutorChatPage
     
   ],
   imports: [
@@ -71,7 +73,8 @@ import { Tutorregister2Page } from '../pages/tutorregister2/tutorregister2';
     PaymentPage,
     TutorRegisterPage,
     ProfilePage,
-    Tutorregister2Page
+    Tutorregister2Page,
+    TutorChatPage
   ],
   providers: [
     StatusBar,

@@ -46,7 +46,7 @@ export class MethodsProvider {
       this.ngzone.run(() => {
         let loading = this.loadingCtrl.create({
           spinner: "bubbles",
-          content: "Signing in....",
+          content: "Please wait....",
         });
         loading.present();
         return firebase
@@ -54,6 +54,7 @@ export class MethodsProvider {
           .createUserWithEmailAndPassword(email, psswrd)
           .then(newUser => {
             var user = firebase.auth().currentUser;
+            user.sendEmailVerification();
             firebase
               .database()
               .ref("users/" + user.uid)
@@ -69,9 +70,8 @@ export class MethodsProvider {
                 downloadurl: "assets/download.png",
               });
             resolve();
-            setTimeout(() => {
               loading.dismiss();
-            }, 1500);
+              this.checkVerificatiom();
           })
           .catch(error => {
             loading.dismiss();
@@ -91,6 +91,135 @@ export class MethodsProvider {
           });
       });
     });
+  }
+
+
+  signIn(email, pass){
+    let loading = this.loadingCtrl.create({
+      spinner: "bubbles",
+      content: "Signing In....",
+      duration: 4000000
+    });
+    loading.present();
+    return new Promise((resolve, reject) => {
+      this.ngzone.run(() => {
+        firebase.auth().signInWithEmailAndPassword(email, pass).then(() => {
+          var user = firebase.auth().currentUser;
+          if (user.emailVerified == true) {
+            resolve('');
+          }
+          else{
+            this.checkVerificatiom();
+            this.logout();
+            reject('')
+          }
+          setTimeout(() => {
+            loading.dismiss();
+          }, 700);
+        })  .catch(error => {
+          loading.dismiss();
+          const alert = this.alertCtrl.create({
+            subTitle: error.message,
+            buttons: [
+              {
+                text: "OK",
+                handler: data => {
+                  console.log("Cancel clicked");
+                }
+              }
+            ]
+          });
+          alert.present();
+      });
+    });
+  })
+  }
+  
+
+
+  checkVerificatiom() {
+    var user = firebase.auth().currentUser;
+    if (user.emailVerified == false) {
+      let alert = this.alertCtrl.create({
+        title: '',
+        subTitle: "We have sent you a verification Email, Please activate your account with the link in the mail",
+        buttons: ['OK']
+      });
+      alert.present();
+      this.logout();
+      return 0;
+    }
+    else {
+      return 1;
+    }
+  }
+
+
+ 
+  updateProfile(pic){
+    return new Promise((accpt, rej) =>{
+      var user = firebase.auth().currentUser;
+      firebase.database().ref("users/" + user.uid).update({downloadurl:pic})
+      accpt('')
+    })
+  }
+
+  removeQualification(key){
+    return new Promise((accpt, rej) =>{
+      var user = firebase.auth().currentUser;
+      firebase.database().ref("degree/" + user.uid + "/" + key).remove()
+      accpt('')
+    })
+  }
+
+saveQualifications(degree){
+  return new Promise((resolve, reject) => {
+    this.ngzone.run(() => {
+      var user = firebase.auth().currentUser;
+      firebase
+      .database()
+      .ref("degree/" + user.uid)
+      .push({
+        degree:degree
+      });
+      resolve('')
+    })
+  })
+}  
+degree = new Array();
+getQualifications(){
+  return new Promise((resolve, reject) => {
+    this.ngzone.run(() => {
+      var user = firebase.auth().currentUser;
+        firebase.database().ref("degree/" + user.uid).on("value", (data: any) => {
+          this.degree = []
+          if (data.val() != undefined){
+            let details = data.val();
+            var keys = Object.keys(details);
+            for (var x = 0; x < keys.length; x++){
+              var k = keys[x];
+              let obj = {
+                degree :details[k].degree,
+                key : k
+              }
+              this.degree.push(obj)
+            }
+            resolve(this.degree)
+          }
+        })
+    })
+  })
+}
+  getProfile(){
+    return new Promise((resolve, reject) => {
+      this.ngzone.run(() => {
+        var user = firebase.auth().currentUser;
+          firebase.database().ref("users/" + user.uid).on("value", (data: any) => {
+           let details = data.val();
+           resolve(details)
+          })
+      })
+    })
   }
 
   setRequest(type, sub, course){
@@ -131,6 +260,65 @@ export class MethodsProvider {
         resolve(data.val())
       })
     })
+  }
+
+  // registerTutor(name,email,dDate,idNum,cellNum,university,highSchool,primary,eduLevel,pass){
+
+  // }
+
+  registerTutor(name,email,idnum,dbate,cell,eduLevel,hSkul, pSkul, university,psswrd){
+    return new Promise((resolve, reject) => {
+      this.ngzone.run(() => {
+        let loading = this.loadingCtrl.create({
+          spinner: "bubbles",
+          content: "Loading....",
+        });
+        loading.present();
+        return firebase
+          .auth()
+          .createUserWithEmailAndPassword(email, psswrd)
+          .then(newUser => {
+            var user = firebase.auth().currentUser;
+            firebase
+              .database()
+              .ref("users/" + user.uid)
+              .set({
+                name: name,
+                email: email,
+                status: 'pending',
+                contact: cell,
+                bdate : dbate,
+                idnum : idnum,
+                eduLevel : eduLevel,
+                highSchool: hSkul,
+                primary:pSkul,
+                university:university,
+                downloadurl: "assets/download.png",
+                role : 'tutor'
+              });
+            resolve();
+            setTimeout(() => {
+              loading.dismiss();
+            }, 1500);
+          })
+          .catch(error => {
+            loading.dismiss();
+            const alert = this.alertCtrl.create({
+              subTitle: error.message,
+              buttons: [
+                {
+                  text: "OK",
+                  handler: data => {
+                    console.log("Cancel clicked");
+                  }
+                }
+              ]
+            });
+            alert.present();
+            console.log(error);
+          });
+      });
+    });
   }
 
   getOnlineUsers(){
@@ -223,8 +411,36 @@ export class MethodsProvider {
        accpt('')
     })
   }
-
   messagesCounter = 0;
+  getMessages2(path){
+    return new Promise((accpt, rej) =>{
+      firebase.database().ref("Chats/" + path).on("value", (data: any) => {
+        this.messages.length = 0;
+        if (data.val() != null || data.val() != undefined){
+          var msges = data.val();
+          var key = Object.keys(msges);
+          if (this.messagesCounter >= 1)
+          this.messagesCounter = 1;
+          console.log('getting messagessasasas');
+          
+          for (var x = this.messagesCounter; x < key.length; x++){
+            var k = key[x];
+            let msObject = {
+              message : msges[k].message,
+              Date: msges[k].Date,
+              senderID: msges[k].senderID,
+              receiverID : msges[k].receiverID,
+              convo : msges[k].convo
+            } 
+            this.messages.push(msObject) 
+          }
+          this.messagesCounter++;
+          accpt(this.messages)
+        }
+      })
+    })
+  }
+
   getMessages(path){
     return new Promise((accpt, rej) =>{
       firebase.database().ref("Chats/" + path).on("value", (data: any) => {
@@ -248,9 +464,9 @@ export class MethodsProvider {
             this.messages.push(msObject) 
           }
           this.messagesCounter++;
-        // var length =  this.messages.length;
-       //  console.log(this.messages[length - 1].message);
-       //  this.sql.storefavourite(this.messages[length - 1].message,this.messages[length - 1].Date,this.messages[length - 1].senderID,"",this.messages[length - 1].convo)
+        var length =  this.messages.length;
+        console.log(this.messages[length - 1].message);
+        this.sql.storefavourite(this.messages[length - 1].message,this.messages[length - 1].Date,this.messages[length - 1].senderID,"",this.messages[length - 1].convo)
           accpt(this.messages)
         }
       })
@@ -389,6 +605,8 @@ getAppointments(){
 })
 }
 
+
+
 removeAppointment(key){
   return new Promise((accpt, rej) =>{
     var user = firebase.auth().currentUser;
@@ -434,39 +652,24 @@ logout() {
   });
 }
 
-
-signIn(email, pass){
-  let loading = this.loadingCtrl.create({
-    spinner: "bubbles",
-    content: "Signing In....",
-    duration: 4000000
-  });
-  loading.present();
+checkUserType(){
   return new Promise((resolve, reject) => {
     this.ngzone.run(() => {
-      firebase.auth().signInWithEmailAndPassword(email, pass).then(() => {
-        resolve('');
-        setTimeout(() => {
-          loading.dismiss();
-        }, 700);
-      })  .catch(error => {
-        loading.dismiss();
-        const alert = this.alertCtrl.create({
-          subTitle: error.message,
-          buttons: [
-            {
-              text: "OK",
-              handler: data => {
-                console.log("Cancel clicked");
-              }
-            }
-          ]
-        });
-        alert.present();
-    });
-  });
+      var user = firebase.auth().currentUser;
+      firebase.database().ref("users/" + user.uid).on("value", (data: any) => {
+        var details  =  data.val();
+        console.log(details)
+        if (details.role == 'tutor')
+        resolve(1);
+        else
+        resolve(0)
+    })
+  })
 })
+
 }
+
+
 
 }
 
