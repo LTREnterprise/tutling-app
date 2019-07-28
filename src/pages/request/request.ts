@@ -29,7 +29,7 @@ export class RequestPage {
   items2  = [4,8,12]
   modules = ["DSO24T","CGS17AT", "CMK17BT", "TPG117", 
   "Accounting", "Computer", "TLPD", "Business",
-  "Computer", "Business", "Manangement", "Office"];
+  "Computer", "Manangement", "Office"];
   lengthCourse = []
   cources = ["Information Technology", "HR", "Office Management"]
   searchItem;
@@ -41,7 +41,7 @@ export class RequestPage {
   ionViewDidLoad() {
     // this.intializeItems();
 
- this.initializeModules();
+//  this.initializeModules();
   }
 
   initializeModules(){
@@ -63,7 +63,11 @@ export class RequestPage {
 // console.log(this.items[item]);
 
   }
-
+  cancelSearch(event){
+    console.log(event)
+    this.courseSeleted = null;
+    this.itemSelected = null;
+  }
  currentCourse = "";
  courseSearched(item){
    console.log(item);
@@ -72,6 +76,18 @@ export class RequestPage {
    this.tempCourses = [];
    this.selectCourse(event);
    
+ }
+ selectSubject(i,y){
+  this.courseSeleted = i;
+  this.tempModules = [];
+  this.searchItem = i;
+  for (var x = 0; x < this.modules.length; x++){
+    if (i == this.modules[x]){
+      this.itemSelected = x;
+      break;
+    }
+}
+  
  }
   selectCourse(ev){
     this.searchItem = "";
@@ -94,16 +110,17 @@ export class RequestPage {
   }
 
   getItems(ev){
-    this.intializeItems();
+    
+  this.initializeModules()
    var val = this.searchItem
     if (val && val.trim() != '') {
-      this.tempCourses = this.tempCourses.filter((item) => {
+      this.tempModules = this.tempModules.filter((item) => {
         console.log(val);
         return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
     else if (val == "" || val == null) {
-      this.tempCourses = [];
+      this.tempModules = [];
       this.searchItem = "";
     }
   }
@@ -237,7 +254,7 @@ export class RequestPage {
     }
   }else{
     const prompt = this.alertCtrl.create({
-      message: "Please select a Module",
+      message: "Please select a Subject",
       buttons: [
         {
           text: 'Ok',

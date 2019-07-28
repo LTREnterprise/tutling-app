@@ -4,67 +4,49 @@
       <button ion-button clear color="light" id="list">
         <ion-icon name="list"></ion-icon>
       </button>
-      <div id="menu">PAYMENT</div>
+      <div id="menu">PICK SUBJECTS</div>
       <button ion-button clear color="light" id="search">
         <ion-icon ios="ios-search" md="md-search"></ion-icon>
       </button>
     </div>
     <div class="rest-of-content" padding>
-      <ion-searchbar  [(ngModel)]="name2"></ion-searchbar>
-      <ion-item id="the-select-item">
+      <ion-searchbar [(ngModel)]="searchItem" placeholder="Search by Course  name" (ionInput)="getItems($event)" (ionCancel)="cancelSearch($event)" (ionClear) = "cancelSearch($event)">
+      </ion-searchbar>
+      <ion-item *ngFor="let item of tempModules; let i=index" >
+        <p (click)="selectSubject(item,i)">{{item}}</p>
+       </ion-item>
+      <!-- <ion-item id="the-select-item">
         <ion-label>Your Subjects</ion-label>
-        <ion-select  [(ngModel)]="name">
+        <ion-select>
           <ion-option>1</ion-option>
           <ion-option>2</ion-option>
           <ion-option>3</ion-option>
           <ion-option>4</ion-option>
         </ion-select>
-      </ion-item>
-      <div class="block-element"  >
-          <div id="value">1</div>
-          <div id="value">1</div>
-          <div id="value">1</div>
-          <div id="value">1</div>
-          <div id="value">1</div>
-          <div id="value">1</div>
-          <div id="value">1</div>
-          <div id="value">1</div>
-          <div id="value">1</div>
-          <div id="value">1</div>
-          <div id="value">1</div>
-          <div id="value">1</div>
-          <div id="value">1</div>
-          <div id="value">1</div>
-          <div id="value">1</div>
-          <div id="value">1</div>
-          <div id="value">1</div>
+      </ion-item> -->
+      <div class="block-element" >
+          <div id="value" [class.highlight]="itemSelected == i" *ngFor="let item of modules ; let i=index" (click)="selectCP(item,i)">{{item}}</div>
       </div>
-      <div class="stats">
+      <br>
+      <div class="stats" *ngFor="let i of cources; let x = index" (click)="remove(x)">
           <div id="value-item">
-            <div>Financial Reporting 1</div>
-            <div>89%</div>
-          </div>
-          <div id="value-item">
-            <div>Taxation</div>
-            <div>95%</div>
-          </div>
-          <div id="value-item">
-            <div>Management Accounting</div>
-            <div>93%</div>
+            <div>{{i.name}}</div>
+            <div>{{i.mark}}</div>
           </div>
       </div>
       <div class="attachments">
-          <input type="file" id="ID-Doc">
-          <input type="file" id="user-transcript">
+          <input type="file" id="ID-Doc" (change)="id($event)">
+          <input type="file" id="user-transcript" (change)="trans($event)">
           <label for="ID-Doc">
               <ion-icon ios="ios-attach" md="md-attach" id="attachment-icon"></ion-icon> <br>
               ID Document
           </label>
           <label for="user-transcript">
               <ion-icon ios="ios-attach" md="md-attach" id="attachment-icon"></ion-icon> <br>
-              ID Document
+              Transcript
           </label>
       </div>
+      <button ion-button block id="submitter" (click)="submit()" >SUBMIT</button>
     </div>
   </div>
 </ion-content>

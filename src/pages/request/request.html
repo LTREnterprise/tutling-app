@@ -11,11 +11,11 @@
     </div>
 
     <div class="body" padding>
-        <ion-searchbar [(ngModel)]="searchItem" placeholder="Search by Course  name" (ionInput)="getItems($event)">
+        <ion-searchbar [(ngModel)]="searchItem" placeholder="Search by Course  name" (ionInput)="getItems($event)" (ionCancel)="cancelSearch($event)" (ionClear) = "cancelSearch($event)">
           </ion-searchbar>
          
-          <ion-item *ngFor="let item of tempCourses; let i=index" >
-              <p (click)="courseSearched(item)">{{item}}</p>
+          <ion-item *ngFor="let item of tempModules; let i=index" >
+              <p (click)="selectSubject(item,i)">{{item}}</p>
              </ion-item>
             <br>
       <!-- <ion-searchbar class="searchBar" animated></ion-searchbar> -->
@@ -25,17 +25,17 @@
           </ion-label>
           <ion-input type="text" placeholder="search"></ion-input>
         </ion-item> -->
-      <ion-item>
+      <!-- <ion-item>
         <ion-label>Your Courses</ion-label>
         <ion-select placeholder="Select One"  [(ngModel)]="currentCourse" (ionChange)=" selectCourse($event);">
           <div *ngFor="let item of cources; let i=index" >
           <ion-option value="{{item}}" >{{item}}</ion-option>
         </div>
         </ion-select>
-      </ion-item>
+      </ion-item> -->
 
       <div class="list">
-          <ion-item  class="opt" [class.highlight]="itemSelected == i" *ngFor="let item of tempModules ; let i=index" (click)="selectCP(item,i)">
+          <ion-item  class="opt" [class.highlight]="itemSelected == i" *ngFor="let item of modules ; let i=index" (click)="selectCP(item,i)">
               {{item}}
              </ion-item>
       </div>

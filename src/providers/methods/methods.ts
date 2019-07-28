@@ -69,9 +69,11 @@ export class MethodsProvider {
                 university:university,
                 downloadurl: "assets/download.png",
               });
-            resolve();
               loading.dismiss();
               this.checkVerificatiom();
+            resolve('');
+              
+             
           })
           .catch(error => {
             loading.dismiss();
@@ -106,7 +108,10 @@ export class MethodsProvider {
         firebase.auth().signInWithEmailAndPassword(email, pass).then(() => {
           var user = firebase.auth().currentUser;
           if (user.emailVerified == true) {
-            resolve('');
+            this.checkUserType().then((data:any) =>{
+              resolve(data);
+            })
+           
           }
           else{
             this.checkVerificatiom();
@@ -279,6 +284,7 @@ getQualifications(){
           .createUserWithEmailAndPassword(email, psswrd)
           .then(newUser => {
             var user = firebase.auth().currentUser;
+            user.sendEmailVerification();
             firebase
               .database()
               .ref("users/" + user.uid)
@@ -297,9 +303,7 @@ getQualifications(){
                 role : 'tutor'
               });
             resolve();
-            setTimeout(() => {
               loading.dismiss();
-            }, 1500);
           })
           .catch(error => {
             loading.dismiss();
@@ -320,6 +324,24 @@ getQualifications(){
       });
     });
   }
+
+  saveApplication(id,trans,sub){
+    return new Promise((accpt, rej) =>{
+      var user = firebase.auth().currentUser;
+      var date = new Date();
+      var timestamp = date.getTime();
+      firebase.database().ref("Applications/" + user.uid).set({
+        Date: moment().format('l'),
+        convo : timestamp,
+        id : id,
+        trans: trans,
+        sub:sub
+    })
+    this.checkVerificatiom();
+   accpt('')
+})
+  }
+
 
   getOnlineUsers(){
     return new Promise((resolve, reject) => {
@@ -652,6 +674,16 @@ logout() {
   });
 }
 
+userType;
+
+setUserType(x){
+  this.userType = x;
+}
+
+getUserType(){
+  return this.userType
+}
+
 checkUserType(){
   return new Promise((resolve, reject) => {
     this.ngzone.run(() => {
@@ -659,10 +691,15 @@ checkUserType(){
       firebase.database().ref("users/" + user.uid).on("value", (data: any) => {
         var details  =  data.val();
         console.log(details)
-        if (details.role == 'tutor')
-        resolve(1);
-        else
-        resolve(0)
+        if (details.role == 'tutor'){
+          this.setUserType(1)
+          resolve(1);
+        }
+        else{
+          this.setUserType(0)
+          resolve(0)
+        }
+        
     })
   })
 })

@@ -2,14 +2,14 @@ page-tutorregister2 {
     .container {
         height    : 100%;
         width     : 100%;
-        background: white;
+        background: rgb(75, 75, 75);
         overflow-y: scroll;
     }
     .rest-of-content {
-        height    : 90%;
+        height    : calc(100% - 50px);
         width     : 100%;
         background: rgb(75, 75, 75);
-        border    : 1px solid black;
+        // border    : 1px solid black;
     }
     #the-select-item {
         width: 100%;
@@ -18,6 +18,7 @@ page-tutorregister2 {
     .block-element{
         width: 100%;
         margin: 0 auto;
+        margin-top: 20px;
         height: 150px;
         border: 3px solid rgb(231, 193, 69);
         overflow-y: scroll;
@@ -44,7 +45,7 @@ page-tutorregister2 {
     }
     #value-item > div{
         line-height: 35px;
-        font-size: 20px;
+        font-size: 2rem;
         color: white;
         padding: 5px;
         border: 3px solid rgb(231, 193, 69);
@@ -56,11 +57,16 @@ page-tutorregister2 {
         text-align: center;
         width: 20%;
     }
+    .searchbar-input{
+        height: 50px
+    }
     .searchbar{
         padding: 0;
+        margin: 10px auto;
     }
     ion-searchbar{
         width: 100%;
+        height: 40px;
         margin: 0;
     }
     #user-transcript, #ID-Doc{
@@ -68,13 +74,16 @@ page-tutorregister2 {
     }
     .attachments{
         width: 80%;
-        // border: 1px solid red;
         height: 100px;
-        margin-top: 10px;
+        margin-top: 0px;
         text-align: center;
         display: flex;
         label{
             margin: 10px;
+            color: white;
+            ion-icon{
+                color: black;
+            }
         }
     }
     #attachment-icon{
@@ -83,7 +92,7 @@ page-tutorregister2 {
         }
     .head {
         position      : relative;
-        height        : 10%;
+        height        : 50px;
         width         : 100vw;
         background    : rgb(75, 75, 75);
         // padding-top: 5px;
@@ -161,13 +170,12 @@ page-tutorregister2 {
     .payment-choices {
         display: flex;
         div {
-            // border: 2px solid red;
             margin   : 0 auto;
         }
     }
     #submitter {
         width        : 95%;
-        margin       : 50px auto 10px auto;
+        margin       : -10px auto 10px auto;
         border-radius: 40px;
         background   : linear-gradient(rgb(231, 193, 69),
                 rgb(243, 232, 197),
@@ -176,4 +184,7 @@ page-tutorregister2 {
                 rgb(231, 193, 69),
                 rgb(248, 222, 134));
     }
+    .highlight {
+        background-color: rgba(136, 136, 56, 0.719) !important;
+     }
 }

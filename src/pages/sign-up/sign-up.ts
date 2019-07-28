@@ -4,6 +4,7 @@ import { HomePage } from '../home/home';
 import { ThrowStmt } from '@angular/compiler';
 import { MethodsProvider } from '../../providers/methods/methods';
 import { RequestPage } from '../request/request';
+import { SignInPage } from '../sign-in/sign-in';
 
 /**
  * Generated class for the SignUpPage page.
@@ -207,7 +208,8 @@ export class SignUpPage {
     }
     else{
         this.methods.register(this.name, this.email, this.idNum, this.bDate, this.cellNum, this.eduLevel, this.highScll, this.Primary, this.University, this.pass).then(() =>{
-         this.navCtrl.setRoot(SignUpPage)
+          console.log('going back')
+         this.navCtrl.setRoot(SignInPage)
         })
     }
     

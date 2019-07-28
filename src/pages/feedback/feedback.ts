@@ -6,6 +6,7 @@ import { AppointmentsPage } from '../appointments/appointments';
 import { ChattingPage } from '../chatting/chatting';
 import { TutorChatPage } from '../tutor-chat/tutor-chat';
 import { HomePage } from '../home/home';
+import { ProfilePage } from '../profile/profile';
 
 /**
  * Generated class for the FeedbackPage page.
@@ -41,6 +42,9 @@ export class FeedbackPage {
   }
 
   home(){
+    if (this.methods.getUserType() == 1)
+      this.navCtrl.push(ProfilePage)
+    else
     this.navCtrl.push(HomePage)
   }
 
