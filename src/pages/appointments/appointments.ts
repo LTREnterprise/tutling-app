@@ -60,6 +60,9 @@ export class AppointmentsPage {
   secRef =0;
   img = "assets/imgs/personico.png"
   seconds =0;
+  sub;
+  date;
+  time;
   trackNumber = 0;
   constructor(private plt:Platform, public loadingCtrl: LoadingController,public methods:MethodsProvider,public navCtrl: NavController, public navParams: NavParams, public platform: Platform) {
     this.loading = this.loadingCtrl.create({
@@ -67,7 +70,11 @@ export class AppointmentsPage {
       content: "Please wait",
     });
     this.loading.present();
+    console.log(this.sub)
     this.user = this.navParams.get('tutors');
+   this.sub = this.user.sub
+   this.date = this.user.date;
+   this.time = this.user.time;
    console.log(this.user);
     this.incomingCallHandler = this.incomingCallHandler.bind(this);
     this.userMediaErrorHandler = this.userMediaErrorHandler.bind(this);
@@ -102,6 +109,7 @@ export class AppointmentsPage {
     this.canvasElement = this.canvas.nativeElement;
     this.canvasElement.width = this.plt.width() + '';
     this.canvasElement.height = 500;
+    this.updatePosition()
   }
 
 
@@ -112,7 +120,7 @@ export class AppointmentsPage {
       })
       console.log('update position');
       this.updatePosition();
-    }, 4000);
+    }, 2000);
     
   }
 
@@ -155,7 +163,9 @@ export class AppointmentsPage {
   test(data){
     var keys = Object.keys(data)
     console.log(keys);
-    for(var i = this.trackNumber; i < keys.length; i++){
+    if ( keys.length == 0)
+    this.saveCanvasImage()
+    for(var i = 0; i < keys.length; i++){
       var position = data[keys[i]];
       var cordnats = position.position
       var len = cordnats.length;
@@ -164,7 +174,7 @@ export class AppointmentsPage {
       console.log(this.saveX2);
       console.log(this.saveY2);
           
-// console.log(this.trackNumber);
+console.log(this.trackNumber);
     for(var x = 0; x < cordnats.length - 1; x++){
     let ctx = this.canvasElement.getContext('2d');
     let currentX = cordnats[x].x;
@@ -182,7 +192,7 @@ export class AppointmentsPage {
       this.saveX2 = currentX;
       this.saveY2 = currentY;
     }
-    this.trackNumber = data.length + 2;
+    // this.trackNumber = data.length + 2;
     }
   }
 
@@ -245,7 +255,7 @@ export class AppointmentsPage {
     this.saveToCloud();
     let ctx = this.canvasElement.getContext('2d');
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Clears the canvas
-   
+    this.methods.clearCanvas(this.path)
     // let name = new Date().getTime() + '.png';
     console.log(dataUrl);
     
@@ -341,7 +351,6 @@ path;
         console.log(this.path);
         this.distantNumber = data;
         console.log(this.distantNumber);
-        this.getText();
         this.pushCall(event)
       }
       else{

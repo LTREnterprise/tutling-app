@@ -30,6 +30,8 @@ export class TutorChatPage {
   seconds = 0;
   secRef = 0;
   convo;
+  date;
+  time;
     constructor(public sql:SqlProvider,  private keyboard: Keyboard, private localNotifications: LocalNotifications,public loadingCtrl: LoadingController,public methods: MethodsProvider, public navCtrl: NavController, public navParams: NavParams) {
       let loading = this.loadingCtrl.create({
         spinner: "bubbles",
@@ -42,8 +44,10 @@ export class TutorChatPage {
       console.log(this.currentUserId);
       this.user = this.navParams.get('tutors');
   //tutor
-  
+
        this.path =  this.user.path;
+       this.date = this.user.date;
+       this.time =  this.user.time;
       console.log(this.user);
       console.log(this.user.path);
   
@@ -97,39 +101,39 @@ export class TutorChatPage {
   
   
     timer(){
-      setTimeout(() => {
-        if (this.seconds == 0){
-          if (this.minutes != 0){
-          if (this.minutes  <= 9)
-            this.minREf = 0;
-            else 
-            this.minREf = null;
-          this.seconds = 59;
-          this.secRef = null
-          this.minutes--
-          if (this.minutes == 1 ){
-            this.showNotification(2, 'minutes')
-          }
-          else if (this.minutes == 0){
+      // setTimeout(() => {
+      //   if (this.seconds == 0){
+      //     if (this.minutes != 0){
+      //     if (this.minutes  <= 9)
+      //       this.minREf = 0;
+      //       else 
+      //       this.minREf = null;
+      //     this.seconds = 59;
+      //     this.secRef = null
+      //     this.minutes--
+      //     if (this.minutes == 1 ){
+      //       this.showNotification(2, 'minutes')
+      //     }
+      //     else if (this.minutes == 0){
           
-            this.showNotification(60,'seconds')
-          }
-          }
-          else {
-            console.log('time stopped');
+      //       this.showNotification(60,'seconds')
+      //     }
+      //     }
+      //     else {
+      //       console.log('time stopped');
             
-          }
-        }
-        else{
-          if (this.minutes  <= 9)
-          this.minREf = 0;
-          if (this.seconds <= 10){
-            this.secRef = 0
-          }
-          this.seconds--;
-        }
-        this.timer();
-      }, 1000);
+      //     }
+      //   }
+      //   else{
+      //     if (this.minutes  <= 9)
+      //     this.minREf = 0;
+      //     if (this.seconds <= 10){
+      //       this.secRef = 0
+      //     }
+      //     this.seconds--;
+      //   }
+      //   this.timer();
+      // }, 1000);
   
   }
   

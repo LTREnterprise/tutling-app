@@ -29,6 +29,8 @@ minREf = 0;
 seconds = 0;
 secRef = 0;
 convo;
+date;
+time;
   constructor(public sql:SqlProvider,  private keyboard: Keyboard, private localNotifications: LocalNotifications,public loadingCtrl: LoadingController,public methods: MethodsProvider, public navCtrl: NavController, public navParams: NavParams) {
     let loading = this.loadingCtrl.create({
       spinner: "bubbles",
@@ -48,6 +50,8 @@ convo;
 
     //student
     this.path =  this.user[0].path;
+    this.time = this.user[0].time;
+    this.date = this.user[0].date;
 
     this.methods.getMessages(this.path).then((data:any) =>{
       console.log('get messages');

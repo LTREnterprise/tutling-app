@@ -4,6 +4,7 @@ import { dateDataSortValue } from "ionic-angular/umd/util/datetime-util";
 import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 import { SqlProvider } from "../sql/sql";
 import moment from "moment";
+import { LocalNotifications } from "@ionic-native/local-notifications";
 // import { Http } from '@angular/http';
 // import 'rxjs/add/operator/map';
 
@@ -21,7 +22,7 @@ export class MethodsProvider {
   appointmentsArr =  new Array();
   textArea =  new Array();
   messages = new Array();
-  constructor(public sql:SqlProvider, private ngzone: NgZone,public loadingCtrl: LoadingController,  public alertCtrl: AlertController,) {
+  constructor(public localNotifications: LocalNotifications, public sql:SqlProvider, private ngzone: NgZone,public loadingCtrl: LoadingController,  public alertCtrl: AlertController,) {
    
     
   }
@@ -111,7 +112,6 @@ export class MethodsProvider {
             this.checkUserType().then((data:any) =>{
               resolve(data);
             })
-           
           }
           else{
             this.checkVerificatiom();
@@ -234,10 +234,14 @@ getQualifications(){
           firebase.database().ref("users/" + user.uid).on("value", (data: any) => {
            let details = data.val();
            var x = 0;
+           var date = moment().format("MMM Do YYYY");
+           var time = moment().format("h:mm:ss a"); 
             firebase.database().ref("requests/" + user.uid).set({
               name : details.name,
               id : x,
               sub: sub,
+              date: date,
+              time:time,
               course: course,
               img : details. downloadurl,
               contact : details.contact,
@@ -262,8 +266,17 @@ getQualifications(){
     return new Promise((resolve, reject) => {
       var user = firebase.auth().currentUser;
       firebase.database().ref("position/" + path).on("value", (data: any) => {
+        // if (data.val() != undefined)
         resolve(data.val())
       })
+    })
+  }
+
+  clearCanvas(path){
+    return new Promise((accpt, rej) =>{
+      var user = firebase.auth().currentUser;
+      firebase.database().ref("position/" + path).remove()
+      accpt('')
     })
   }
 
@@ -343,12 +356,14 @@ getQualifications(){
   }
 
 
+  studentCounter = 0;
   getOnlineUsers(){
     return new Promise((resolve, reject) => {
       this.ngzone.run(() => {
         firebase.database().ref("requests/").on("value", (data: any) => {
           this.onlineTutors.length = 0;
           var state = false;
+          this.studentCounter++;
           var user = firebase.auth().currentUser;
             if (data.val() != null){
               console.log('getting online tutors');
@@ -360,28 +375,48 @@ getQualifications(){
                 {
                   state = true
                 }
-                let onlineDetails ={
-                  name :  details[k].name,
-                  id : details[k].id,
-                  img : details[k].img,
-                  contact :details[k].contact,
-                  status : details[k].status,
-                  key : k,
-                  path : details[k].path,
-                  user : user.uid,
-                  channel: details[k].channel
-              }
+                  let onlineDetails ={
+                    name :  details[k].name,
+                    id : details[k].id,
+                    img : details[k].img,
+                    contact :details[k].contact,
+                    status : details[k].status,
+                    sub : details[k].sub,
+                    key : k,
+                    date : details[k].date,
+                    time : details[k].time,
+                    path : details[k].path,
+                    user : user.uid,
+                    channel: details[k].channel
+                }
               this.onlineTutors.push(onlineDetails)
             }
+            if (this.studentCounter >= 1)
+            this.showNotification(this.onlineTutors)
             if (state == true){
               this.navigateToClass();
             }
+            console.log(this.onlineTutors)
             resolve(this.onlineTutors)
           }
         })
       })
     })
   }
+
+  showNotification(students){
+    for (var x = 0; x < students.length; x++){
+      this.localNotifications.schedule([{
+        id: x,
+        title: 'Education App',
+        text: students[x].name + ' is requesting a ' + students[x].channel + ' lesson for ' + students[x].sub,
+        icon: students[x].img,
+        vibrate: true
+     }]);
+    }
+
+  }
+
   getOnlineUsers2(){
     return new Promise((resolve, reject) => {
       this.ngzone.run(() => {
@@ -404,6 +439,8 @@ getQualifications(){
                   contact :details.contact,
                   status : details.status,
                   tutorId: " ",
+                  date : details.date,
+                  time : details.time,
                   key : user.uid,
                   path : details.path,
                   channel: details.channel

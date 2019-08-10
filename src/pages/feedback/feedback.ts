@@ -55,6 +55,8 @@ export class FeedbackPage {
         content: "Please wait....",
       });
       loading.present();
+      this.sub = i.sub;
+      console.log(this.sub)
       setTimeout(() => {
         if (i.channel == 'video'){
           loading.dismiss()

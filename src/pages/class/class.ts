@@ -62,12 +62,18 @@ export class ClassPage {
   checkState = 0;
   varTxt = 0;
   sub;
+  user;
+  date;
+  time;
   constructor(private plt:Platform, private localNotifications: LocalNotifications,public loadingCtrl: LoadingController,public methods:MethodsProvider,public navCtrl: NavController, public navParams: NavParams, public platform: Platform, public renderer: Renderer) {
     this.loading = this.loadingCtrl.create({
       spinner: "bubbles",
       content: "Please wait",
     });
+    this.user = this.navParams.get('tutors');
     this.sub =  this.navParams.get('sub');
+    this.time = this.user[0].time;
+    this.date = this.user[0].date;
     this.loading.present();
     this.incomingCallHandler = this.incomingCallHandler.bind(this);
     this.userMediaErrorHandler = this.userMediaErrorHandler.bind(this);
@@ -102,6 +108,7 @@ export class ClassPage {
     this.canvasElement = this.canvas.nativeElement;
     this.canvasElement.width = this.plt.width() + '';
     this.canvasElement.height = 500;
+    // this.updatePosition();
   
   }
  
@@ -113,7 +120,7 @@ export class ClassPage {
   console.log('update position');
   
   this.updatePosition();
-}, 4000);
+}, 2000);
 
 }
 
@@ -134,8 +141,9 @@ test(data){
   var keys = Object.keys(data)
   console.log(this.trackNumber);
   console.log(keys);
-  
-  for(var i = this.trackNumber; i < keys.length; i++){
+  if ( keys.length == 0)
+  this.saveCanvasImage()
+  for(var i = 0; i < keys.length; i++){
     var position = data[keys[i]];
     var cordnats = position.position
     var len = cordnats.length;
@@ -201,20 +209,20 @@ test(data){
     this.methods.setUserId(parseInt(this.infoLabel)).then((data:any) =>{
       console.log(data);
       this.setPath(data.path)
-      this.methods.textAreaChat(data.path).then(() =>{
-        console.log('second hellll');
-        this.getText()
-      })
+      // this.methods.textAreaChat(data.path).then(() =>{
+      //   console.log('second hellll');
+      //   // this.getText()
+      // })
     });
   }
 
-  getText(){
-    this.methods.getTextArea(this.path).then((chat:any) =>{
-      this.message = "";
-      this.message = chat;
-      this.refreshMessages();
-  })
-  }
+  // getText(){
+  //   this.methods.getTextArea(this.path).then((chat:any) =>{
+  //     this.message = "";
+  //     this.message = chat;
+  //     this.refreshMessages();
+  // })
+  // }
 
 setPath(path){
   this.path = path;
@@ -224,7 +232,7 @@ setPath(path){
 
 refreshMessages(){
   setTimeout(() => {
-    this.getText();
+    // this.getText();
   }, 1200);
 }
 
@@ -474,7 +482,7 @@ saveCanvasImage() {
   this.saveToCloud();
   let ctx = this.canvasElement.getContext('2d');
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Clears the canvas
- 
+  this.methods.clearCanvas(this.path)
   // let name = new Date().getTime() + '.png';
   console.log(dataUrl);
   
