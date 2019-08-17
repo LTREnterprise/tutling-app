@@ -128,10 +128,9 @@ export class ClassPage {
 
 setStart(data){
   if (data != null){
-    // var len = data.length;
-    // this.saveY2 = data[len-1].y
-    // this.saveX2 = data[len-1].x;
     this.test(data)
+  }else{
+    this.saveCanvasImage()
   }
   // this.test(data)
 }

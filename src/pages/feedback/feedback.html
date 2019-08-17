@@ -5,7 +5,7 @@
       <button ion-button clear color="light" id="list" (click)="home()">
         <ion-icon ios="ios-list" md="md-list" ></ion-icon>
       </button>
-      <div id="menu">FEEDBACK</div>
+      <div id="menu">Requests List</div>
       <!-- <button ion-button clear color="light" id="search">
         <ion-icon ios="ios-search" md="md-search"></ion-icon>
       </button> -->
@@ -16,16 +16,13 @@
        
           <div id="promt-message">
             <h2>{{i.name}}</h2>
-            <p>Lesson with {{i.name}} will cost R250.00, are you sure you want to continue?</p>
+            <p>is requesting a {{i.channel}} lesson for {{i.sub}}</p>
           </div>
       </div>
       <div class="buttons">
         <button ion-button block id="accept" (click)="accept(i)">
           Confirm
-        </button>
-        <button ion-button block clear color="light" (click)="decline(i)">
-          Decline
-        </button>
+        </button>s
       </div>
   </div>
   </div>

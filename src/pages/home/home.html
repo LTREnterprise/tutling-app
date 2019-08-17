@@ -2,13 +2,13 @@
 
 <ion-content>
   <div class="head">
-    <!-- <button ion-button clear color="light" id="list">
-      <ion-icon ios="ios-list" md="md-list"></ion-icon>
-    </button> -->
-    <div id="menu">MENU</div>
-    <button ion-button clear color="light" id="search">
-      <ion-icon ios="ios-search" md="md-search"></ion-icon>
+    <button ion-button clear color="light" id="list" (click)="back()">
+      <ion-icon style="font-size: 25px" ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
     </button>
+    <div id="menu">MENU</div>
+    <!-- <button ion-button clear color="light" id="search">
+      <ion-icon ios="ios-search" md="md-search"></ion-icon>
+    </button> -->
   </div>
   <div class="body" padding>
 
@@ -16,12 +16,12 @@
 
     <ion-list class="buttons">
 
-      <div class="myBtn" (click)="Payment()">
+      <div id="pay" class="myBtn" (click)="Payment()">
 
-        <div class="words">Payment</div>
+        <div class="words" >Payment</div>
         
       </div>
-      <div class="myBtn" (click)="Recordings()">
+      <div id="rec" class="myBtn" (click)="Recordings()">
 
         <div class="words">Recordings</div>
       </div>

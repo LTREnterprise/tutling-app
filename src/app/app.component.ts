@@ -16,6 +16,7 @@ import { ChatsRecordingsPage } from '../pages/chats-recordings/chats-recordings'
 import { TutorRegisterPage } from '../pages/tutor-register/tutor-register';
 import { ProfilePage } from '../pages/profile/profile';
 import { Tutorregister2Page } from '../pages/tutorregister2/tutorregister2';
+import { PaymentPage } from '../pages/payment/payment';
 
 
 @Component({
@@ -30,9 +31,9 @@ export class MyApp {
         if (results == 1) {
           this.methods.checkUserType().then((data:any) =>{
             if (data == 1)
-               this.rootPage = FeedbackPage;
+               this.rootPage = PaymentPage;
             else
-                this.rootPage = RequestPage;
+                this.rootPage = PaymentPage;
           })
         }
         else {

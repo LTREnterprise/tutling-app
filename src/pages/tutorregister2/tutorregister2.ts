@@ -294,13 +294,18 @@ addsubject(){
     }
     if (state == 0){
       const prompt = this.alertCtrl.create({
-        message: "Please enter the latest mark for " + this.sub,
+        message: "Please enter the latest mark and the year you want tutor for " + this.sub,
         inputs: [
           {
             name: 'title',
             type: 'number',
             placeholder: 'Latest mark for ' + this.courseSeleted
           },
+          {
+            name: 'year',
+            type: 'number',
+            placeholder: 'Year (1,2,3 or 4)'
+          }
         ],
         buttons: [
           {
@@ -315,7 +320,8 @@ addsubject(){
             handler: data => { 
               let obj = {
                 name : this.courseSeleted,
-                mark: data.title
+                mark: data.title,
+                year : data.year
               } 
             this.cources.push(obj);
             this.cancelSearch(event);

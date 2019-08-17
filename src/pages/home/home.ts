@@ -21,9 +21,16 @@ export class HomePage {
   }
 
  
+  ionViewDidLoad(){
+    if (this.methods.getUserType() == 1){
+      document.getElementById("rec").style.display = "none";
+      document.getElementById("pay").style.display = "none";
+    }
+  }
 
-
-
+back(){
+  this.navCtrl.pop();
+}
   Payment(){
       this.navCtrl.push(PaymentPage)
   }

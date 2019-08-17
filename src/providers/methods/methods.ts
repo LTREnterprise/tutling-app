@@ -348,7 +348,7 @@ getQualifications(){
         convo : timestamp,
         id : id,
         trans: trans,
-        sub:sub
+        sub:sub,
     })
     this.checkVerificatiom();
    accpt('')

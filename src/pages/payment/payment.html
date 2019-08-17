@@ -9,12 +9,32 @@
     </div>
     <div class="inputs">
       <ion-list padding>
-        <div class="entries">Add Payment</div>
-        <ion-input type="number" placeholder="Account Number"></ion-input>
-        <ion-input type="text" placeholder="Name"></ion-input>
-        <ion-input type="text" placeholder="Bank"></ion-input>
-        <ion-input type="number" placeholder="Branch Code"></ion-input>
-        <ion-input type="number" placeholder="CVV"></ion-input>
+        <ion-item class="entries">
+          <ion-label>Year</ion-label>
+          <ion-select [(ngModel)]="Year" interface="action-sheet">
+            <ion-option value="1">1st</ion-option>
+            <ion-option value="2">2nd</ion-option>
+            <ion-option value="3">3rd</ion-option>
+            <ion-option value="4">4th</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item class="entries">
+          <ion-label>Channel</ion-label>
+          <ion-select [(ngModel)]="channel" interface="action-sheet">
+            <ion-option value="Texting">Q&A (Texting)</ion-option>
+            <ion-option value="video">Video Lesson</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item class="entries">
+          <ion-label>Minutes</ion-label>
+          <ion-select [(ngModel)]="minutes" interface="action-sheet">
+            <ion-option value="30">30</ion-option>
+            <ion-option value="60">60</ion-option>
+          </ion-select>
+         
+        </ion-item>
+        <br>
+        <br>
       </ion-list>
       <div class="paymentMethods">
         <div class="payment-choices">
@@ -37,7 +57,7 @@
           </div>
         </div>
       </div>
-      <button id="submitter" ion-button block>SUBMIT</button>
+      <button id="submitter" ion-button block (click)="pay()">SUBMIT</button>
     </div>
   </div>
 </ion-content>

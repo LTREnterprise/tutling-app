@@ -42,9 +42,9 @@ export class FeedbackPage {
   }
 
   home(){
-    if (this.methods.getUserType() == 1)
-      this.navCtrl.push(ProfilePage)
-    else
+    // if (this.methods.getUserType() == 1)
+    //   this.navCtrl.push(ProfilePage)
+    // else
     this.navCtrl.push(HomePage)
   }
 

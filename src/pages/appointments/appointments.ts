@@ -152,10 +152,9 @@ export class AppointmentsPage {
 
   setStart(data){
     if (data != null){
-      // var len = data.length;
-      // this.saveY2 = data[len-1].y
-      // this.saveX2 = data[len-1].x;
       this.test(data)
+    }else{
+      this.saveCanvasImage();
     }
     // this.test(data)
   }
@@ -301,6 +300,7 @@ console.log(this.trackNumber);
     if(this.distantNumber && this.state == STATE_WAIT) {
       this.loading.dismiss();
       this.updatePosition();
+      this.timer();
       setTimeout(this.refreshVideoView,4000);
       this.webRTCClient.call(this.distantNumber);
     } else if(this.state == STATE_INCALL) {
@@ -468,6 +468,33 @@ path;
      
     }
     console.log(this.varTxt);
-
   }
+  timer(){
+    setTimeout(() => {
+      if (this.seconds == 0){
+        if (this.minutes != 0){
+        if (this.minutes  <= 9)
+          this.minREf = 0;
+        this.seconds = 59;
+        this.secRef = null
+        this.minutes--;
+        }
+        else {
+          console.log('time stopped');
+          
+        }
+      }
+      else{
+        if (this.minutes  <= 9)
+        this.minREf = 0;
+        if (this.seconds <= 10){
+          this.secRef = 0
+        }
+        this.seconds--;
+      }
+      this.timer();
+    }, 1000);
+
+}
+
 }
